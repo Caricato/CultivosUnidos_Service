@@ -57,6 +57,7 @@ public class SupplyPersistenceAdapter implements RegisterSupplyPort, EditSupplyP
         var supplyJpaEntity = supplyOptionalJpa.get();
 
         supplyJpaEntity.setState(false);
+        springJpaSupplyRepository.save(supplyJpaEntity);
         return supplyId;
     }
 
