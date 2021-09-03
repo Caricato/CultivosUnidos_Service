@@ -8,14 +8,17 @@ import org.sistema.arroz.riceservice.modules.supplies.application.port.in.Supply
 import org.sistema.arroz.riceservice.modules.supplies.application.port.in.SupplyToRegister;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.out.DeleteSupplyPort;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.out.EditSupplyPort;
+import org.sistema.arroz.riceservice.modules.supplies.application.port.out.GetSuppliesPort;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.out.RegisterSupplyPort;
 import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
 import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyNotFoundException;
 import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyStockInconsistencyException;
 
+import java.util.List;
+
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class SupplyPersistenceAdapter implements RegisterSupplyPort, EditSupplyPort, DeleteSupplyPort {
+public class SupplyPersistenceAdapter implements RegisterSupplyPort, EditSupplyPort, DeleteSupplyPort, GetSuppliesPort {
 
     private final SpringJpaSupplyRepository springJpaSupplyRepository;
     private final SupplyMapper supplyMapper;
@@ -55,5 +58,11 @@ public class SupplyPersistenceAdapter implements RegisterSupplyPort, EditSupplyP
 
         supplyJpaEntity.setState(false);
         return supplyId;
+    }
+
+    @Override
+    public List<Supply> getSupplies(Long communityId) {
+        var suppliesJpa = springJpaSupplyRepository.findAllByCommunityJpaEntity_CommunityIdAndStateOrderBySupplyName(communityId, true);
+        return supplyMapper.toSupplies(suppliesJpa);
     }
 }
