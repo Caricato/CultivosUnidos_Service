@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  data:
+    web:
+      pageable:
+        size-parameter: pagesize
+        page-parameter: page
+        default-page-size: 10
+        max-page-size: 50
+
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+
+  datasource:
+    url: jdbc:h2:mem:proof_micro;DB_CLOSE_DELAY=1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    platform: h2
+    username: proof_micro
+    password: proof_micro
+
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: false
+        format_sql: false
+
+logging:
+  level:
+    org.hibernate.SQL: debug
