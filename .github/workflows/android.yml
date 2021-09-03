@@ -1,4 +1,4 @@
-name: Android CI
+name: Sistema Arroz CI
 
 on:
   push
@@ -14,6 +14,8 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+    - name: Change wrapper permissions
+      run: chmod +x ./gradlew
     - name: Validate Gradle wrapper
       uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
     - name: Run the Gradle package task
