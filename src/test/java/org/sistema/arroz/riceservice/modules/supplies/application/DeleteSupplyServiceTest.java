@@ -27,12 +27,12 @@ class DeleteSupplyServiceTest {
 
     @Test
     void deleteSupplyThrowSupplyNotFoundException(){
-        when(deleteSupplyPort.deleteSupply(1L)).thenReturn(1L).thenThrow(new SupplyNotFoundException(1L));
+        when(deleteSupplyPort.deleteSupply(1L)).thenThrow(new SupplyNotFoundException(1L));
 
         SupplyNotFoundException exception = assertThrows(SupplyNotFoundException.class, () ->{
             var testResult = deleteSupplyService.deleteSupply(1L);
         });
-        AssertionsForClassTypes.assertThat(exception.getCode()).isEqualTo("SUP_01");
+        AssertionsForClassTypes.assertThat(exception.getCode()).isEqualTo("SUP_02");
         AssertionsForClassTypes.assertThat(exception.getData()).isEqualTo(1L);
     }
 }
