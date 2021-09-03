@@ -4,13 +4,17 @@ import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.hexagonal.PersistenceAdapter;
 import org.sistema.arroz.riceservice.modules.agricultureCommunity.adapter.port.out.persistence.AgricultureCommunityMapper;
 import org.sistema.arroz.riceservice.modules.agricultureCommunity.domain.AgricultureCommunity;
+import org.sistema.arroz.riceservice.modules.supplies.application.port.in.SupplyToEdit;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.in.SupplyToRegister;
+import org.sistema.arroz.riceservice.modules.supplies.application.port.out.EditSupplyPort;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.out.RegisterSupplyPort;
 import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
+import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyNotFoundException;
+import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyStockInconsistencyException;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class SupplyPersistenceAdapter implements RegisterSupplyPort {
+public class SupplyPersistenceAdapter implements RegisterSupplyPort, EditSupplyPort {
 
     private final SpringJpaSupplyRepository springJpaSupplyRepository;
     private final SupplyMapper supplyMapper;
@@ -22,6 +26,23 @@ public class SupplyPersistenceAdapter implements RegisterSupplyPort {
         supplyJpa.setCommunityJpaEntity(agricultureCommunityMapper.toAgricultureCommunityJpaEntity(agricultureCommunity));
         supplyJpa.setState(true);
         var result = springJpaSupplyRepository.save(supplyJpa);
+        return supplyMapper.toSupply(result);
+    }
+
+    @Override
+    public Supply editSupply(SupplyToEdit supplyToEdit) {
+        var supplyOptionalJpa = springJpaSupplyRepository.findById(supplyToEdit.getSupplyId());
+        if (supplyOptionalJpa.isEmpty()) throw new SupplyNotFoundException(supplyToEdit.getSupplyId());
+        var supplyJpaEntity = supplyOptionalJpa.get();
+        supplyJpaEntity.setSupplyName(supplyToEdit.getSupplyName());
+        supplyJpaEntity.setStockMin(supplyToEdit.getStockMin());
+        supplyJpaEntity.setUnitPricing(supplyToEdit.getUnitPricing());
+        supplyJpaEntity.setSupplyMetricType(supplyToEdit.getSupplyMetricType().getValue());
+
+        if (supplyJpaEntity.getStock() < supplyJpaEntity.getStockMin())
+            throw new SupplyStockInconsistencyException(supplyJpaEntity.getStock(), supplyJpaEntity.getStockMin());
+
+        var result = springJpaSupplyRepository.save(supplyJpaEntity);
         return supplyMapper.toSupply(result);
     }
 }
