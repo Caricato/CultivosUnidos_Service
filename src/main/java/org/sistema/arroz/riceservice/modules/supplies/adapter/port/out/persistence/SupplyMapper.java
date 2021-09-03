@@ -6,6 +6,8 @@ import org.sistema.arroz.riceservice.modules.agricultureCommunity.adapter.port.o
 import org.sistema.arroz.riceservice.modules.supplies.application.port.in.SupplyToRegister;
 import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", uses = {SupplyMetricTypeMapper.class, AgricultureCommunityMapper.class})
 public interface SupplyMapper {
     @Mapping(source = "supplyId", target = "supplyId")
@@ -17,6 +19,7 @@ public interface SupplyMapper {
     @Mapping(source = "state", target = "state")
     @Mapping(source = "communityJpaEntity", target = "community")
     Supply toSupply(SupplyJpaEntity supplyJpaEntity);
+    List<Supply> toSupplies(List<SupplyJpaEntity> supplyJpaEntities);
 
     @Mapping(source = "supplyName", target = "supplyName")
     @Mapping(source = "stock", target = "stock")
