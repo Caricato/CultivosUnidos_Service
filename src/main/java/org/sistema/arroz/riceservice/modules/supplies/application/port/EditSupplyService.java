@@ -14,7 +14,7 @@ public class EditSupplyService implements EditSupplyUseCase {
     private final EditSupplyPort editSupplyPort;
 
     @Override
-    public Supply editSupply(SupplyToEdit supplyToEdit) {
-        return editSupplyPort.editSupply(supplyToEdit);
+    public Supply editSupply(SupplyToEdit supplyToEdit, Long supplyId) {
+        return editSupplyPort.editSupply(supplyToEdit, supplyId);
     }
 }

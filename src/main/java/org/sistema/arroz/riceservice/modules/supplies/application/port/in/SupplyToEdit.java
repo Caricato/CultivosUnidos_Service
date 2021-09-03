@@ -7,9 +7,6 @@ import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyMetricType;
 @Data
 @Builder
 public class SupplyToEdit {
-    //attribute to get the supply
-    Long supplyId;
-
     String supplyName;
     Double unitPricing;
     Integer stockMin;

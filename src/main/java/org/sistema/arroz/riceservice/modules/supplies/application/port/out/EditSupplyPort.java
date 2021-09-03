@@ -4,5 +4,5 @@ import org.sistema.arroz.riceservice.modules.supplies.application.port.in.Supply
 import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
 
 public interface EditSupplyPort {
-    Supply editSupply(SupplyToEdit supplyToEdit);
+    Supply editSupply(SupplyToEdit supplyToEdit, Long supplyId);
 }

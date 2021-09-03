@@ -20,39 +20,39 @@ class EditSupplyServiceTest {
 
     @Test
     void editSupplySuccess(){
-        var supplyToEdit = SupplyToEdit.builder().supplyId(1L)
+        var supplyToEdit = SupplyToEdit.builder()
                 .supplyName("Fertilizantes").stockMin(50).supplyMetricType(SupplyMetricType.LITROS).unitPricing(10.5).build();
         var supply = Supply.builder().supplyId(1L).supplyName("Fertilizantes")
                 .stockMin(50).supplyMetricType(SupplyMetricType.LITROS).unitPricing(10.5).state(true).stock(200).build();
 
-        when(editSupplyPort.editSupply(supplyToEdit)).thenReturn(supply);
-        var testResult = editSupplyService.editSupply(supplyToEdit);
+        when(editSupplyPort.editSupply(supplyToEdit, 1L)).thenReturn(supply);
+        var testResult = editSupplyService.editSupply(supplyToEdit, 1L);
         assertThat(testResult).isNotNull();
         assertThat(testResult.getSupplyName()).isEqualTo(supplyToEdit.getSupplyName());
     }
 
     @Test
     void editSupplyThrowSupplyStockException(){
-        var supplyToEdit = SupplyToEdit.builder().supplyId(1L)
+        var supplyToEdit = SupplyToEdit.builder()
                 .supplyName("Fertilizantes").stockMin(50).supplyMetricType(SupplyMetricType.LITROS).unitPricing(10.5).build();
-        when(editSupplyPort.editSupply(supplyToEdit)).thenThrow(new SupplyStockInconsistencyException(20 ,supplyToEdit.getStockMin()));
+        when(editSupplyPort.editSupply(supplyToEdit, 1L)).thenThrow(new SupplyStockInconsistencyException(20 ,supplyToEdit.getStockMin()));
 
         SupplyStockInconsistencyException exception = assertThrows(SupplyStockInconsistencyException.class, () ->{
-            var testResult = editSupplyService.editSupply(supplyToEdit);
+            var testResult = editSupplyService.editSupply(supplyToEdit, 1L);
         });
         assertThat(exception.getCode()).isEqualTo("SUP_01");
     }
 
     @Test
     void editSupplyThrowSupplyNotFoundException(){
-        var supplyToEdit = SupplyToEdit.builder().supplyId(1L)
+        var supplyToEdit = SupplyToEdit.builder()
                 .supplyName("Fertilizantes").stockMin(50).supplyMetricType(SupplyMetricType.LITROS).unitPricing(10.5).build();
-        when(editSupplyPort.editSupply(supplyToEdit)).thenThrow(new SupplyNotFoundException(supplyToEdit.getSupplyId()));
+        when(editSupplyPort.editSupply(supplyToEdit,1L)).thenThrow(new SupplyNotFoundException(1L));
 
         SupplyNotFoundException exception = assertThrows(SupplyNotFoundException.class, () ->{
-            var testResult = editSupplyService.editSupply(supplyToEdit);
+            var testResult = editSupplyService.editSupply(supplyToEdit, 1L);
         });
         assertThat(exception.getCode()).isEqualTo("SUP_02");
-        assertThat(exception.getData()).isEqualTo(supplyToEdit.getSupplyId());
+        assertThat(exception.getData()).isEqualTo(1L);
     }
 }

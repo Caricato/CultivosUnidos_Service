@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 public class EditSupplyController {
     private final EditSupplyUseCase editSupplyUseCase;
 
-    @PutMapping(value = "")
-    public Supply editSupply(@RequestBody SupplyToEdit supplyToEdit){
-        return editSupplyUseCase.editSupply(supplyToEdit);
+    @PutMapping(value = "/{supplyId}")
+    public Supply editSupply(@RequestBody SupplyToEdit supplyToEdit, @PathVariable Long supplyId){
+        return editSupplyUseCase.editSupply(supplyToEdit, supplyId);
     }
 }
