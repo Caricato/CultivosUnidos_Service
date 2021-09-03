@@ -2,6 +2,8 @@ package org.sistema.arroz.riceservice.modules.supplies.application;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.sistema.arroz.riceservice.hexagonal.queries.Filters;
+import org.sistema.arroz.riceservice.hexagonal.queries.Paginator;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.GetSuppliesService;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.out.GetSuppliesPort;
 import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
@@ -22,12 +24,14 @@ class GetSuppliesServiceTest {
                 .stockMin(50).supplyMetricType(SupplyMetricType.LITROS).unitPricing(10.5).state(true).stock(200).build();
         var supplies = new ArrayList<Supply>();
         supplies.add(supply);
+        var filters = Filters.builder().page(0).pageSize(10).search("").build();
 
-        when(getSuppliesPort.getSupplies(1L)).thenReturn(supplies);
-        var testResult = getSuppliesService.getSupplies(1L);
+        when(getSuppliesPort.getSupplies(filters,1L)).thenReturn(Paginator.<Supply>builder()
+                .total(1L).pageSize(10).page(0).data(supplies).build());
+        var testResult = getSuppliesService.getSupplies(filters, 1L);
 
         assertThat(testResult).isNotNull();
-        assertThat(testResult.size()).isEqualTo(1);
-        assertThat(testResult.get(0).getSupplyId()).isEqualTo(supply.getSupplyId());
+        assertThat(testResult.getTotal()).isEqualTo(1);
+        assertThat(testResult.getData().get(0).getSupplyId()).isEqualTo(supply.getSupplyId());
     }
 }
