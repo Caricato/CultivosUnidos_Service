@@ -34,9 +34,9 @@ public class SupplyPersistenceAdapter implements RegisterSupplyPort, EditSupplyP
     }
 
     @Override
-    public Supply editSupply(SupplyToEdit supplyToEdit) {
-        var supplyOptionalJpa = springJpaSupplyRepository.findById(supplyToEdit.getSupplyId());
-        if (supplyOptionalJpa.isEmpty()) throw new SupplyNotFoundException(supplyToEdit.getSupplyId());
+    public Supply editSupply(SupplyToEdit supplyToEdit, Long supplyId) {
+        var supplyOptionalJpa = springJpaSupplyRepository.findById(supplyId);
+        if (supplyOptionalJpa.isEmpty()) throw new SupplyNotFoundException(supplyId);
         var supplyJpaEntity = supplyOptionalJpa.get();
         supplyJpaEntity.setSupplyName(supplyToEdit.getSupplyName());
         supplyJpaEntity.setStockMin(supplyToEdit.getStockMin());
