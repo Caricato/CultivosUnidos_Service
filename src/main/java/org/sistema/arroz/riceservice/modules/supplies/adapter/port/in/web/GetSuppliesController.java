@@ -2,11 +2,14 @@ package org.sistema.arroz.riceservice.modules.supplies.adapter.port.in.web;
 
 import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.hexagonal.WebAdapter;
+import org.sistema.arroz.riceservice.hexagonal.queries.Filters;
+import org.sistema.arroz.riceservice.hexagonal.queries.Paginator;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.in.GetSuppliesUseCase;
 import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import org.springframework.data.domain.Pageable;
+
 
 @WebAdapter
 @CrossOrigin
@@ -17,7 +20,12 @@ public class GetSuppliesController {
     private final GetSuppliesUseCase getSuppliesUseCase;
 
     @GetMapping(value = "/{communityId}")
-    public List<Supply> getSupplies(@PathVariable Long communityId){
-        return getSuppliesUseCase.getSupplies(communityId);
+    public Paginator<Supply> getSupplies(Pageable pageable, @RequestParam(value = "search", defaultValue = "") String search, @PathVariable Long communityId){
+        var filters = Filters.builder()
+                .page(pageable.getPageNumber())
+                .pageSize(pageable.getPageSize())
+                .search(search)
+                .build();
+        return getSuppliesUseCase.getSupplies(filters, communityId);
     }
 }
