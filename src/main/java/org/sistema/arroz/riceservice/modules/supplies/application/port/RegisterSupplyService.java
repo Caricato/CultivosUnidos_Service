@@ -7,7 +7,7 @@ import org.sistema.arroz.riceservice.modules.agricultureCommunity.domain.Agricul
 import org.sistema.arroz.riceservice.modules.supplies.application.port.in.RegisterSupplyUseCase;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.in.SupplyToRegister;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.out.RegisterSupplyPort;
-import org.sistema.arroz.riceservice.modules.supplies.domain.StockInconsistencyException;
+import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyStockInconsistencyException;
 import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
 
 @UseCase
@@ -19,7 +19,7 @@ public class RegisterSupplyService implements RegisterSupplyUseCase {
     @Override
     public Supply registerSupply(SupplyToRegister supplyToRegister) {
         if (supplyToRegister.getStockMin() > supplyToRegister.getStock())
-            throw new StockInconsistencyException(supplyToRegister.getStock(), supplyToRegister.getStockMin());
+            throw new SupplyStockInconsistencyException(supplyToRegister.getStock(), supplyToRegister.getStockMin());
         var community = getAgricultureCommunityPort.findCommunityById(supplyToRegister.getCommunityId());
         if (community == null)
             throw new AgricultureCommunityNotFoundException(supplyToRegister.getCommunityId());

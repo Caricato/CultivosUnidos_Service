@@ -8,7 +8,7 @@ import org.sistema.arroz.riceservice.modules.agricultureCommunity.domain.Agricul
 import org.sistema.arroz.riceservice.modules.supplies.application.port.RegisterSupplyService;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.in.SupplyToRegister;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.out.RegisterSupplyPort;
-import org.sistema.arroz.riceservice.modules.supplies.domain.StockInconsistencyException;
+import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyStockInconsistencyException;
 import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
 import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyMetricType;
 
@@ -44,12 +44,12 @@ class RegisterSupplyServiceTest {
     }
 
     @Test
-    void registerSupplyStockException(){
+    void registerThrowSupplyStockException(){
         var supplyToRegister = SupplyToRegister.builder()
                 .supplyName("Semillas de arroz seco").stock(10).stockMin(50).unitPricing(5.5).
                 supplyMetricType(SupplyMetricType.GRAMOS).communityId(1L).build();
 
-        StockInconsistencyException exception = assertThrows(StockInconsistencyException.class, () ->{
+        SupplyStockInconsistencyException exception = assertThrows(SupplyStockInconsistencyException.class, () ->{
             var testResult = registerSupplyService.registerSupply(supplyToRegister);
         });
 
@@ -57,7 +57,7 @@ class RegisterSupplyServiceTest {
     }
 
     @Test
-    void registerSupplyCommunityNotFoundException(){
+    void registerThrowSupplyCommunityNotFoundException(){
         var supplyToRegister = SupplyToRegister.builder()
                 .supplyName("Semillas de arroz seco").stock(100).stockMin(50).unitPricing(5.5).
                 supplyMetricType(SupplyMetricType.GRAMOS).communityId(1L).build();
