@@ -11,4 +11,7 @@ import java.util.List;
 public interface SpringJpaSupplyRepository extends JpaRepository<SupplyJpaEntity, Long> {
     @Query("SELECT S FROM SupplyJpaEntity S WHERE S.communityJpaEntity.communityId = :communityId AND S.state = :state AND (UPPER(S.supplyName) LIKE CONCAT('%', UPPER(:search), '%' )) ORDER BY S.supplyName DESC")
     Page<SupplyJpaEntity> searchSupplies(Pageable pageable, @Param("search") String search, @Param("communityId") Long communityId, @Param("state") Boolean state);
+
+    @Query("SELECT S FROM SupplyJpaEntity S WHERE S.communityJpaEntity.communityId = :communityId AND S.state = :state AND (UPPER(S.supplyName) LIKE CONCAT('%', UPPER(:search), '%' )) ORDER BY S.supplyName DESC")
+    List<SupplyJpaEntity> searchAllSupplies(@Param("search") String search, @Param("communityId") Long communityId, @Param("state") Boolean state);
 }
