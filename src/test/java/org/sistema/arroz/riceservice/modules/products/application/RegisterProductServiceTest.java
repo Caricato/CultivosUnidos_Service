@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-public class RegisterProductServiceTest {
+class RegisterProductServiceTest {
     private final RegisterProductPort registerProductPort = Mockito.mock(RegisterProductPort.class);
     private final GetAgricultureCommunityPort getAgricultureCommunityPort = Mockito.mock(GetAgricultureCommunityPort.class);
     private final RegisterProductService registerProductService = new RegisterProductService(registerProductPort, getAgricultureCommunityPort);
