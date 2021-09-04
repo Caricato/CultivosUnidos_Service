@@ -40,7 +40,7 @@ class EditSupplyServiceTest {
         SupplyStockInconsistencyException exception = assertThrows(SupplyStockInconsistencyException.class, () ->{
             var testResult = editSupplyService.editSupply(supplyToEdit, 1L);
         });
-        assertThat(exception.getCode()).isEqualTo("SUP_01");
+        assertThat(exception.getCode()).isEqualTo("SUP_02");
     }
 
     @Test
@@ -52,7 +52,7 @@ class EditSupplyServiceTest {
         SupplyNotFoundException exception = assertThrows(SupplyNotFoundException.class, () ->{
             var testResult = editSupplyService.editSupply(supplyToEdit, 1L);
         });
-        assertThat(exception.getCode()).isEqualTo("SUP_02");
+        assertThat(exception.getCode()).isEqualTo("SUP_01");
         assertThat(exception.getData()).isEqualTo(1L);
     }
 }

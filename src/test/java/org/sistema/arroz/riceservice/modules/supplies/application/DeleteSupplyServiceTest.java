@@ -29,7 +29,7 @@ class DeleteSupplyServiceTest {
         SupplyNotFoundException exception = assertThrows(SupplyNotFoundException.class, () ->{
             var testResult = deleteSupplyService.deleteSupply(1L);
         });
-        assertThat(exception.getCode()).isEqualTo("SUP_02");
+        assertThat(exception.getCode()).isEqualTo("SUP_01");
         assertThat(exception.getData()).isEqualTo(1L);
     }
 }

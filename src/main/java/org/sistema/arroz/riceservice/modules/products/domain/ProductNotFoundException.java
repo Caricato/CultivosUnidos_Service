@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Value;
 import org.sistema.arroz.riceservice.hexagonal.errors.NotFoundException;
 
+import static org.sistema.arroz.riceservice.hexagonal.errors.ErrorMessages.PROD_01_MESSAGE;
+
 @Getter
 public class ProductNotFoundException extends RuntimeException implements NotFoundException {
     private final String code = "PROD_01";
@@ -22,7 +24,7 @@ public class ProductNotFoundException extends RuntimeException implements NotFou
 
     public ProductNotFoundException(Long productId){
         super();
-        this.message = String.format("Product with the id: %d not found", productId);
+        this.message = String.format(PROD_01_MESSAGE, productId);
         this.data = productId;
     }
 }
