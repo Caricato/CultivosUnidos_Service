@@ -1,6 +1,5 @@
 package org.sistema.arroz.riceservice.modules.products.application;
 
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.sistema.arroz.riceservice.modules.products.application.port.EditProductService;
@@ -38,7 +37,7 @@ class EditProductServiceTest {
         var exception = assertThrows(ProductNotFoundException.class, () ->{
             var testResult = editProductService.editProduct(productToEdit, 1L);
         });
-        AssertionsForClassTypes.assertThat(exception.getCode()).isEqualTo("PROD_01");
-        AssertionsForClassTypes.assertThat(exception.getData()).isEqualTo(1L);
+        assertThat(exception.getCode()).isEqualTo("PROD_01");
+        assertThat(exception.getData()).isEqualTo(1L);
     }
 }
