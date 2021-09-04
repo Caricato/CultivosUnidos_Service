@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class EditProductController {
     private final EditProductUseCase editProductUseCase;
 
-    @PutMapping(value = "{/productId}")
+    @PutMapping(value = "/{productId}")
     public Product editProduct(@RequestBody ProductToEdit productToEdit, @PathVariable Long productId){
         return editProductUseCase.editProduct(productToEdit, productId);
     }
