@@ -6,6 +6,7 @@ import org.sistema.arroz.riceservice.modules.agricultureCommunity.adapter.port.o
 import org.sistema.arroz.riceservice.modules.agricultureCommunity.domain.AgricultureCommunity;
 import org.sistema.arroz.riceservice.modules.products.application.port.in.ProductToEdit;
 import org.sistema.arroz.riceservice.modules.products.application.port.in.ProductToRegister;
+import org.sistema.arroz.riceservice.modules.products.application.port.out.DeleteProductPort;
 import org.sistema.arroz.riceservice.modules.products.application.port.out.EditProductPort;
 import org.sistema.arroz.riceservice.modules.products.application.port.out.RegisterProductPort;
 import org.sistema.arroz.riceservice.modules.products.domain.Product;
@@ -13,7 +14,7 @@ import org.sistema.arroz.riceservice.modules.products.domain.ProductNotFoundExce
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class ProductPersistenceAdapter implements RegisterProductPort, EditProductPort {
+public class ProductPersistenceAdapter implements RegisterProductPort, EditProductPort, DeleteProductPort {
     private final SpringJpaProductRepository productRepository;
     private final ProductMapper productMapper;
     private final AgricultureCommunityMapper agricultureCommunityMapper;
@@ -35,5 +36,16 @@ public class ProductPersistenceAdapter implements RegisterProductPort, EditProdu
         productJpa.setProductName(productToEdit.getProductName());
         var result = productRepository.save(productJpa);
         return productMapper.toProduct(result);
+    }
+
+    @Override
+    public Long deleteProduct(Long productId) {
+        var productJpaEntityOptional = productRepository.findById(productId);
+        if (productJpaEntityOptional.isEmpty()) throw new ProductNotFoundException(productId);
+        var productJpa = productJpaEntityOptional.get();
+
+        productJpa.setState(false);
+        var result = productRepository.save(productJpa);
+        return productId;
     }
 }

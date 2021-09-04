@@ -1,12 +1,9 @@
 package org.sistema.arroz.riceservice.modules.supplies.application;
 
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.DeleteSupplyService;
-import org.sistema.arroz.riceservice.modules.supplies.application.port.in.SupplyToEdit;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.out.DeleteSupplyPort;
-import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyMetricType;
 import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyNotFoundException;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,7 +29,7 @@ class DeleteSupplyServiceTest {
         SupplyNotFoundException exception = assertThrows(SupplyNotFoundException.class, () ->{
             var testResult = deleteSupplyService.deleteSupply(1L);
         });
-        AssertionsForClassTypes.assertThat(exception.getCode()).isEqualTo("SUP_02");
-        AssertionsForClassTypes.assertThat(exception.getData()).isEqualTo(1L);
+        assertThat(exception.getCode()).isEqualTo("SUP_02");
+        assertThat(exception.getData()).isEqualTo(1L);
     }
 }
