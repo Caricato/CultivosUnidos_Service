@@ -4,9 +4,11 @@ import lombok.Getter;
 import lombok.Value;
 import org.sistema.arroz.riceservice.hexagonal.errors.UserInputException;
 
+import static org.sistema.arroz.riceservice.hexagonal.errors.ErrorMessages.SUP_02_MESSAGE;
+
 @Getter
 public class SupplyStockInconsistencyException extends RuntimeException implements UserInputException {
-    private final String code = "SUP_01";
+    private final String code = "SUP_02";
     private final String message;
     private final transient Object data;
 
@@ -23,7 +25,7 @@ public class SupplyStockInconsistencyException extends RuntimeException implemen
 
     public SupplyStockInconsistencyException(Integer stock, Integer stockMin){
         super();
-        this.message = String.format("%d is lower than %d. Validate your data please!", stock, stockMin);
+        this.message = String.format(SUP_02_MESSAGE, stock, stockMin);
         this.data = new Data(stock, stockMin);
     }
 }

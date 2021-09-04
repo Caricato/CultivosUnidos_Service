@@ -53,7 +53,7 @@ class RegisterSupplyServiceTest {
             var testResult = registerSupplyService.registerSupply(supplyToRegister);
         });
 
-        assertThat(exception.getCode()).isEqualTo("SUP_01");
+        assertThat(exception.getCode()).isEqualTo("SUP_02");
     }
 
     @Test
