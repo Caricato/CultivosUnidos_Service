@@ -15,12 +15,13 @@ import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyStockInconsis
 import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class SupplyPersistenceAdapter implements RegisterSupplyPort, EditSupplyPort, DeleteSupplyPort, GetSuppliesPort, GetAllSuppliesPort {
+public class SupplyPersistenceAdapter implements RegisterSupplyPort, EditSupplyPort, DeleteSupplyPort, GetSuppliesPort, GetAllSuppliesPort, GetSupplyPort {
 
     private final SpringJpaSupplyRepository springJpaSupplyRepository;
     private final SupplyMapper supplyMapper;
@@ -83,5 +84,11 @@ public class SupplyPersistenceAdapter implements RegisterSupplyPort, EditSupplyP
     public List<Supply> getAllSupplies(String search, Long communityId) {
         var entities = springJpaSupplyRepository.searchAllSupplies(search, communityId, true);
         return supplyMapper.toSupplies(entities);
+    }
+
+    @Override
+    public Optional<Supply> getSupplyById(Long supplyId) {
+        var result = springJpaSupplyRepository.findById(supplyId);
+        return result.map(supplyMapper::toSupply);
     }
 }
