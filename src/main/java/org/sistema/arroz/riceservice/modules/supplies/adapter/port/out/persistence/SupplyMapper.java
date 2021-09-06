@@ -1,5 +1,6 @@
 package org.sistema.arroz.riceservice.modules.supplies.adapter.port.out.persistence;
 
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.sistema.arroz.riceservice.modules.agricultureCommunity.adapter.port.out.persistence.AgricultureCommunityMapper;
@@ -20,6 +21,10 @@ public interface SupplyMapper {
     @Mapping(source = "communityJpaEntity", target = "community")
     Supply toSupply(SupplyJpaEntity supplyJpaEntity);
     List<Supply> toSupplies(List<SupplyJpaEntity> supplyJpaEntities);
+
+    @InheritInverseConfiguration
+    @Mapping(source = "supplyMetricType.value", target = "supplyMetricType")
+    SupplyJpaEntity toSupplyJpaEntity(Supply supply);
 
     @Mapping(source = "supplyName", target = "supplyName")
     @Mapping(source = "stock", target = "stock")
