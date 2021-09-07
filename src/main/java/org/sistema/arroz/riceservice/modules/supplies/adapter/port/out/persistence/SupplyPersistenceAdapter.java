@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class SupplyPersistenceAdapter implements RegisterSupplyPort, EditSupplyPort, DeleteSupplyPort, GetSuppliesPort, GetAllSuppliesPort, GetSupplyPort {
+public class SupplyPersistenceAdapter implements RegisterSupplyPort, EditSupplyPort, DeleteSupplyPort, GetSuppliesPort, GetAllSuppliesPort, GetSupplyPort, UpdateSupplyStockPort {
 
     private final SpringJpaSupplyRepository springJpaSupplyRepository;
     private final SupplyMapper supplyMapper;
@@ -90,5 +90,16 @@ public class SupplyPersistenceAdapter implements RegisterSupplyPort, EditSupplyP
     public Optional<Supply> getSupplyById(Long supplyId) {
         var result = springJpaSupplyRepository.findById(supplyId);
         return result.map(supplyMapper::toSupply);
+    }
+
+    @Override
+    public Supply updateSupplyStock(Integer stockAdded, Long supplyId) {
+        var supplyJpa = springJpaSupplyRepository.findById(supplyId);
+        if (supplyJpa.isEmpty()) throw new SupplyNotFoundException(supplyId);
+
+        var supply = supplyJpa.get();
+        supply.setStock(supply.getStock()+stockAdded);
+        var result = springJpaSupplyRepository.save(supply);
+        return supplyMapper.toSupply(result);
     }
 }

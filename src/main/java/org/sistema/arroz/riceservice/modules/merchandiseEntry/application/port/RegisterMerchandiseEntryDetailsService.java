@@ -9,6 +9,7 @@ import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.o
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseEntry;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseEntryDetail;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.out.GetSupplyPort;
+import org.sistema.arroz.riceservice.modules.supplies.application.port.out.UpdateSupplyStockPort;
 import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyNotFoundException;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.List;
 public class RegisterMerchandiseEntryDetailsService implements RegisterMerchandiseEntryDetailsUseCase {
     private final RegisterMerchandiseEntryDetailsPort registerMerchandiseEntryDetailsPort;
     private final GetSupplyPort getSupplyPort;
+    private final UpdateSupplyStockPort updateSupplyStockPort;
 
     @Override
     public List<MerchandiseEntryDetail> registerMerchandiseEntryDetails(List<MerchandiseEntryDetailToRegister> details, MerchandiseEntry merchandiseEntry) {
@@ -29,8 +31,11 @@ public class RegisterMerchandiseEntryDetailsService implements RegisterMerchandi
             detailToPersist.setMerchandiseEntry(merchandiseEntry);
             var supply = getSupplyPort.getSupplyById(detail.getSupplyId());
             if (supply.isEmpty()) throw new SupplyNotFoundException(detail.getSupplyId());
+            supply.get().setStock(supply.get().getStock()+detailToPersist.getEntryCant());
             detailToPersist.setSupply(supply.get());
             detailsToPersist.add(detailToPersist);
+            
+            updateSupplyStockPort.updateSupplyStock(detail.getEntryCant(), detail.getSupplyId());
         }
         return registerMerchandiseEntryDetailsPort.registerMerchandiseEntryDetails(detailsToPersist);
     }
