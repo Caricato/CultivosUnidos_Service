@@ -11,4 +11,7 @@ public class ErrorMessages {
     //For Products
     public static final String PROD_01_MESSAGE = "Product with the id: %d not found";
 
+    //For Merchandise Entries
+    public static final String MER_01_MESSAGE = "Merchandise Entry with the id: %d not found";
+
 }

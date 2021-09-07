@@ -10,15 +10,17 @@ import org.sistema.arroz.riceservice.modules.merchandiseEntry.adapter.port.out.p
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.adapter.port.out.persistence.repositories.SpringJpaMerchandiseEntryRepository;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.in.MerchandiseEntryToRegister;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.out.GetMerchandiseEntriesPort;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.out.GetMerchandiseEntryPort;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.out.RegisterMerchandiseEntryPort;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseEntry;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class MerchandiseEntryPersistenceAdapter implements RegisterMerchandiseEntryPort, GetMerchandiseEntriesPort {
+public class MerchandiseEntryPersistenceAdapter implements RegisterMerchandiseEntryPort, GetMerchandiseEntriesPort, GetMerchandiseEntryPort {
     private final SpringJpaMerchandiseEntryRepository merchandiseEntryRepository;
     private final MerchandiseEntryMapper merchandiseEntryMapper;
     private final AgricultureCommunityMapper agricultureCommunityMapper;
@@ -46,5 +48,11 @@ public class MerchandiseEntryPersistenceAdapter implements RegisterMerchandiseEn
                 .total(page.getTotalElements())
                 .data(data)
                 .build();
+    }
+
+    @Override
+    public Optional<MerchandiseEntry> getMerchandiseEntryById(Long merchandiseEntryId) {
+        var entity = merchandiseEntryRepository.findById(merchandiseEntryId);
+        return entity.map(merchandiseEntryMapper::toMerchandiseEntry);
     }
 }
