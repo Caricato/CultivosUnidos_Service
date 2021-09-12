@@ -7,5 +7,6 @@ import lombok.Data;
 @Builder
 public class ProductToRegister {
     String productName;
+    Double sacks;
     Long communityId;
 }

@@ -29,7 +29,7 @@ public class ProductPersistenceAdapter implements RegisterProductPort, EditProdu
     public Product registerProduct(ProductToRegister productToRegister, AgricultureCommunity agricultureCommunity) {
         var productJpa = productMapper.toProductJpaEntity(productToRegister);
         productJpa.setCommunityJpaEntity(agricultureCommunityMapper.toAgricultureCommunityJpaEntity(agricultureCommunity));
-        productJpa.setState(true);
+        productJpa.setState(true);  
         var result = productRepository.save(productJpa);
         return productMapper.toProduct(result);
     }
@@ -40,6 +40,7 @@ public class ProductPersistenceAdapter implements RegisterProductPort, EditProdu
         if (productJpaEntityOptional.isEmpty()) throw new ProductNotFoundException(productId);
         var productJpa = productJpaEntityOptional.get();
         productJpa.setProductName(productToEdit.getProductName());
+        productJpa.setSacks(productToEdit.getSacks());
         var result = productRepository.save(productJpa);
         return productMapper.toProduct(result);
     }

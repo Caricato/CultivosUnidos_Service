@@ -13,4 +13,5 @@ public class Product {
     AgricultureCommunity community;
     String productName;
     Boolean state;
+    Double sacks;
 }

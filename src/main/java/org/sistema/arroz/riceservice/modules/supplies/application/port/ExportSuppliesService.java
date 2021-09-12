@@ -25,7 +25,7 @@ public class ExportSuppliesService implements ExportSuppliesUseCase {
         String[][] data = new String[supplies.size()][6];
 
         for (int i = 0; i < supplies.size(); i++) {
-            data[i][0] = supplies.get(i).getSupplyId().toString();
+            data[i][0] = ((Integer)(i+1)).toString();
             data[i][1] = supplies.get(i).getSupplyName();
             data[i][2] = supplies.get(i).getStock().toString();
             data[i][3] = supplies.get(i).getUnitPricing().toString();

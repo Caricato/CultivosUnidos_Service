@@ -23,6 +23,9 @@ public class ProductJpaEntity {
     @Column(name = "nom_producto", length = 100)
     private String productName;
 
+    @Column(name = "hectareas_x_saco")
+    private Double sacks;
+
     @Column(name = "estado")
     private Boolean state;
 

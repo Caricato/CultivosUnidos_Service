@@ -15,6 +15,7 @@ public interface ProductMapper {
     Product toProduct (ProductJpaEntity productJpaEntity);
 
     @Mapping(source = "productName", target = "productName")
+    @Mapping(source = "sacks", target = "sacks")
     @Mapping(target = "productId", ignore = true)
     @Mapping(target = "state", ignore = true)
     @Mapping(target = "communityJpaEntity", ignore = true)
