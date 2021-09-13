@@ -15,7 +15,7 @@ import org.springframework.data.domain.Pageable;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/merchandise_entry")
-public class GetMerchandiseEntryDetailController {
+public class    GetMerchandiseEntryDetailController {
     private final GetMerchandiseEntryUseCase getMerchandiseEntryUseCase;
     private final GetMerchandiseEntryDetailUseCase getMerchandiseEntryDetailUseCase;
 

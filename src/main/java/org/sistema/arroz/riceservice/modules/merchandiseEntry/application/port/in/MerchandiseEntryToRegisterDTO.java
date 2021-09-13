@@ -21,7 +21,6 @@ public class MerchandiseEntryToRegisterDTO {
     LocalDate entryDate;
     MerchandiseEntryType entryType;
 
-    @Nullable
     Long producerId;
     List<MerchandiseEntryDetailToRegister> detailsToRegister;
 }
