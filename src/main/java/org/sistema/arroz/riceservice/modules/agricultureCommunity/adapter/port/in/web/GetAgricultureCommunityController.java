@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 public class GetAgricultureCommunityController {
     private final GetAgricultureCommunityUseCase getAgricultureCommunityUseCase;
 
-    @GetMapping("")
-    public AgricultureCommunity getAgricultureCommunity(@RequestParam Long communityId){
+    @GetMapping("/{communityId}")
+    public AgricultureCommunity getAgricultureCommunity(@PathVariable Long communityId){
         return getAgricultureCommunityUseCase.findCommunityById(communityId);
     }
 }
