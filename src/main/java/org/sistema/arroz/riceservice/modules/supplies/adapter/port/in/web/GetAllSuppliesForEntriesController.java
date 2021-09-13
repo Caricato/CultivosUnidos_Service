@@ -5,7 +5,6 @@ import org.sistema.arroz.riceservice.hexagonal.WebAdapter;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.in.GetAllSuppliesForEntriesDTO;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.in.GetAllSuppliesForEntriesMapper;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.in.GetAllSuppliesUseCase;
-import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
