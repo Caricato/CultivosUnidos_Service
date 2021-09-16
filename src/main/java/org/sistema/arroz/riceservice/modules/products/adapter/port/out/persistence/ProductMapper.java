@@ -10,11 +10,14 @@ import org.sistema.arroz.riceservice.modules.products.domain.Product;
 public interface ProductMapper {
     @Mapping(source = "productId", target = "productId")
     @Mapping(source = "productName", target = "productName")
+    @Mapping(source = "stock", target = "stock")
+    @Mapping(source = "sacks", target = "sacks")
     @Mapping(source = "communityJpaEntity", target = "community")
     @Mapping(source = "state", target = "state")
     Product toProduct (ProductJpaEntity productJpaEntity);
 
     @Mapping(source = "productName", target = "productName")
+    @Mapping(source = "stock", target = "stock")
     @Mapping(source = "sacks", target = "sacks")
     @Mapping(target = "productId", ignore = true)
     @Mapping(target = "state", ignore = true)

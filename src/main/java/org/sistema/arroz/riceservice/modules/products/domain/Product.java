@@ -12,6 +12,7 @@ public class Product {
     Long productId;
     AgricultureCommunity community;
     String productName;
+    Double stock;
     Boolean state;
     Double sacks;
 }

@@ -8,5 +8,6 @@ import lombok.Data;
 public class ProductToRegister {
     String productName;
     Double sacks;
+    Double stock;
     Long communityId;
 }
