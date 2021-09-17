@@ -13,12 +13,13 @@ import org.sistema.arroz.riceservice.modules.products.domain.Product;
 import org.sistema.arroz.riceservice.modules.products.domain.ProductNotFoundException;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class ProductPersistenceAdapter implements RegisterProductPort, EditProductPort, DeleteProductPort, GetProductsPort, GetProductPort {
+public class ProductPersistenceAdapter implements RegisterProductPort, EditProductPort, DeleteProductPort, GetProductsPort, GetProductPort, GetAllProductsPort {
     private final SpringJpaProductRepository productRepository;
     private final ProductMapper productMapper;
     private final AgricultureCommunityMapper agricultureCommunityMapper;
@@ -75,5 +76,11 @@ public class ProductPersistenceAdapter implements RegisterProductPort, EditProdu
     public Optional<Product> getProductById(Long productId) {
         var productJpa = productRepository.findById(productId);
         return productJpa.map(productMapper::toProduct);
+    }
+
+    @Override
+    public List<Product> getAllProducts(Long productId) {
+        var productsJpa = productRepository.findAllByCommunityJpaEntity_CommunityIdAndState(productId, true);
+        return productMapper.toProducts(productsJpa);
     }
 }
