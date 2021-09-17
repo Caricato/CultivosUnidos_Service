@@ -5,5 +5,5 @@ import org.sistema.arroz.riceservice.modules.supplyFormula.domain.SupplyFormula;
 import java.util.List;
 
 public interface RegisterSuppliesFormulasPort {
-    List<SupplyFormula> registerSuppliesFormulas(List<SupplyFormulaToPersist> suppliesFormulas);
+    List<SupplyFormula> registerSuppliesFormulas(Long productId, List<SupplyFormulaToPersist> suppliesFormulas);
 }

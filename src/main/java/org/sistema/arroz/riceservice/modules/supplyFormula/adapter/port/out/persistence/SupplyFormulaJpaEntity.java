@@ -22,7 +22,7 @@ public class SupplyFormulaJpaEntity {
     private Long supplyFormulaId;
 
     @Column(name = "cant_x_hectarea")
-    private Integer cantForHectare;
+    private Double cantForHectare;
 
     @ManyToOne
     @JoinColumn(name = "id_insumo")

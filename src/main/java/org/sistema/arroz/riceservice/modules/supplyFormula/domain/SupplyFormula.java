@@ -13,5 +13,5 @@ public class SupplyFormula {
     Long supplyFormulaId;
     Supply supply;
     Product product;
-    Integer cantForHectare;
+    Double cantForHectare;
 }

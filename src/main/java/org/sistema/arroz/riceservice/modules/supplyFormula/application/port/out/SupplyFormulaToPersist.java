@@ -10,5 +10,5 @@ import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
 public class SupplyFormulaToPersist {
     Supply supply;
     Product product;
-    Long cantForHectare;
+    Double cantForHectare;
 }

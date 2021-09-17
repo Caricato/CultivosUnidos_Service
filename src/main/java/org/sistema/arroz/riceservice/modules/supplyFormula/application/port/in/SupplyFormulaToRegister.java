@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SupplyFormulaToRegister {
     Long supplyId;
-    Long cantForHectare;
+    Double cantForHectare;
 }

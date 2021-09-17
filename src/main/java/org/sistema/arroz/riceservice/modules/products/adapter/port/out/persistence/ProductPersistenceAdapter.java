@@ -8,19 +8,17 @@ import org.sistema.arroz.riceservice.modules.agricultureCommunity.adapter.port.o
 import org.sistema.arroz.riceservice.modules.agricultureCommunity.domain.AgricultureCommunity;
 import org.sistema.arroz.riceservice.modules.products.application.port.in.ProductToEdit;
 import org.sistema.arroz.riceservice.modules.products.application.port.in.ProductToRegister;
-import org.sistema.arroz.riceservice.modules.products.application.port.out.DeleteProductPort;
-import org.sistema.arroz.riceservice.modules.products.application.port.out.EditProductPort;
-import org.sistema.arroz.riceservice.modules.products.application.port.out.GetProductsPort;
-import org.sistema.arroz.riceservice.modules.products.application.port.out.RegisterProductPort;
+import org.sistema.arroz.riceservice.modules.products.application.port.out.*;
 import org.sistema.arroz.riceservice.modules.products.domain.Product;
 import org.sistema.arroz.riceservice.modules.products.domain.ProductNotFoundException;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class ProductPersistenceAdapter implements RegisterProductPort, EditProductPort, DeleteProductPort, GetProductsPort {
+public class ProductPersistenceAdapter implements RegisterProductPort, EditProductPort, DeleteProductPort, GetProductsPort, GetProductPort {
     private final SpringJpaProductRepository productRepository;
     private final ProductMapper productMapper;
     private final AgricultureCommunityMapper agricultureCommunityMapper;
@@ -40,6 +38,7 @@ public class ProductPersistenceAdapter implements RegisterProductPort, EditProdu
         if (productJpaEntityOptional.isEmpty()) throw new ProductNotFoundException(productId);
         var productJpa = productJpaEntityOptional.get();
         productJpa.setProductName(productToEdit.getProductName());
+        productJpa.setStock(productToEdit.getStock());
         productJpa.setSacks(productToEdit.getSacks());
         var result = productRepository.save(productJpa);
         return productMapper.toProduct(result);
@@ -70,5 +69,11 @@ public class ProductPersistenceAdapter implements RegisterProductPort, EditProdu
                 .total(page.getTotalElements())
                 .data(data)
                 .build();
+    }
+
+    @Override
+    public Optional<Product> getProductById(Long productId) {
+        var productJpa = productRepository.findById(productId);
+        return productJpa.map(productMapper::toProduct);
     }
 }
