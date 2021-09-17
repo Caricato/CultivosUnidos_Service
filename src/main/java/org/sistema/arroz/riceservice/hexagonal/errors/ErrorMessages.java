@@ -14,4 +14,7 @@ public class ErrorMessages {
     //For Merchandise Entries
     public static final String MER_01_MESSAGE = "Merchandise Entry with the id: %d not found";
 
+    //For Supply Formulas
+    public static final String SUP_FORM_01_MESSAGE = "Supply Formula with the id: %d not found";
+
 }

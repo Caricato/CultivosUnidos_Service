@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface SpringJpaSupplyFormulaRepository extends JpaRepository<SupplyFormulaJpaEntity, Long> {
     List<SupplyFormulaJpaEntity> findAllByProduct_ProductId(Long productId);
+    void deleteAllByProduct_ProductId(Long productId);
 }

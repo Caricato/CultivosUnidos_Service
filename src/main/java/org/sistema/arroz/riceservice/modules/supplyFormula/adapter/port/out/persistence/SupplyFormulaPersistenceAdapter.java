@@ -7,6 +7,7 @@ import org.sistema.arroz.riceservice.modules.supplyFormula.application.port.out.
 import org.sistema.arroz.riceservice.modules.supplyFormula.application.port.out.SupplyFormulaToPersist;
 import org.sistema.arroz.riceservice.modules.supplyFormula.domain.SupplyFormula;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @PersistenceAdapter
@@ -15,8 +16,11 @@ public class SupplyFormulaPersistenceAdapter implements RegisterSuppliesFormulas
     private final SupplyFormulaMapper supplyFormulaMapper;
     private final SpringJpaSupplyFormulaRepository springJpaSupplyFormulaRepository;
 
+    @Transactional
     @Override
-    public List<SupplyFormula> registerSuppliesFormulas(List<SupplyFormulaToPersist> suppliesFormulas) {
+    public List<SupplyFormula> registerSuppliesFormulas(Long productId,List<SupplyFormulaToPersist> suppliesFormulas) {
+        var list = springJpaSupplyFormulaRepository.findAllByProduct_ProductId(productId);
+        if (!list.isEmpty()) springJpaSupplyFormulaRepository.deleteAllByProduct_ProductId(productId);
         var entities = supplyFormulaMapper.toSuppliesFormulasJpa(suppliesFormulas);
         var result = springJpaSupplyFormulaRepository.saveAll(entities);
         return supplyFormulaMapper.toSuppliesFormulas(result);

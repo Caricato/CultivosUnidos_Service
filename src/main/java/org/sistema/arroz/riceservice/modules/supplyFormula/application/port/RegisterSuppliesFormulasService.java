@@ -32,6 +32,6 @@ public class RegisterSuppliesFormulasService implements RegisterSuppliesFormulas
 
             suppliesToPersist.add(supplyToPersist);
         }
-        return registerSuppliesFormulasPort.registerSuppliesFormulas(suppliesToPersist);
+        return registerSuppliesFormulasPort.registerSuppliesFormulas(product.getProductId(), suppliesToPersist);
     }
 }
