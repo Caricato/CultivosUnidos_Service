@@ -2,7 +2,6 @@ package org.sistema.arroz.riceservice.modules.supplyFormula.adapter.port.out.per
 
 import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.hexagonal.PersistenceAdapter;
-import org.sistema.arroz.riceservice.modules.supplies.adapter.port.out.persistence.SpringJpaSupplyRepository;
 import org.sistema.arroz.riceservice.modules.supplyFormula.application.port.out.GetSuppliesFormulasPort;
 import org.sistema.arroz.riceservice.modules.supplyFormula.application.port.out.RegisterSuppliesFormulasPort;
 import org.sistema.arroz.riceservice.modules.supplyFormula.application.port.out.SupplyFormulaToPersist;
@@ -16,7 +15,6 @@ import java.util.List;
 public class SupplyFormulaPersistenceAdapter implements RegisterSuppliesFormulasPort, GetSuppliesFormulasPort {
     private final SupplyFormulaMapper supplyFormulaMapper;
     private final SpringJpaSupplyFormulaRepository springJpaSupplyFormulaRepository;
-    private final SpringJpaSupplyRepository springJpaSupplyRepository;
 
     @Transactional
     @Override
