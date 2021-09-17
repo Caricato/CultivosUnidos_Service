@@ -6,6 +6,8 @@ import org.sistema.arroz.riceservice.modules.agricultureCommunity.adapter.port.o
 import org.sistema.arroz.riceservice.modules.products.application.port.in.ProductToRegister;
 import org.sistema.arroz.riceservice.modules.products.domain.Product;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", uses = { AgricultureCommunityMapper.class})
 public interface ProductMapper {
     @Mapping(source = "productId", target = "productId")
@@ -15,6 +17,7 @@ public interface ProductMapper {
     @Mapping(source = "communityJpaEntity", target = "community")
     @Mapping(source = "state", target = "state")
     Product toProduct (ProductJpaEntity productJpaEntity);
+    List<Product> toProducts (List<ProductJpaEntity> productJpaEntity);
 
     @Mapping(source = "productName", target = "productName")
     @Mapping(source = "stock", target = "stock")
