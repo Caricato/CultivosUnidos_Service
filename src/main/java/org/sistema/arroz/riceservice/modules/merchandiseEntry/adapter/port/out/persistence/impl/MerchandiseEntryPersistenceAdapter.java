@@ -13,6 +13,7 @@ import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.o
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.out.GetMerchandiseEntryPort;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.out.RegisterMerchandiseEntryPort;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlow;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowSubtype;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.Optional;
@@ -35,9 +36,9 @@ public class MerchandiseEntryPersistenceAdapter implements RegisterMerchandiseEn
     }
 
     @Override
-    public Paginator<MerchandiseFlow> getMerchandiseEntries(FiltersDate filters, Long communityId) {
+    public Paginator<MerchandiseFlow> getMerchandiseEntries(FiltersDate filters, MerchandiseFlowSubtype subtype, Long communityId) {
         var pageable = PageRequest.of(filters.getPage(), filters.getPageSize());
-        var page = merchandiseEntryRepository.searchMerchandiseEntries(pageable, communityId, filters.getStartDate(), filters.getEndDate());
+        var page = merchandiseEntryRepository.searchMerchandiseEntries(pageable, communityId, filters.getStartDate(), filters.getEndDate(), subtype.getValue());
         var data = page.getContent()
                 .stream().map(merchandiseFlowMapper::toMerchandiseEntry)
                 .collect(Collectors.toList());

@@ -10,6 +10,6 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDateTime;
 
 public interface SpringJpaMerchandiseEntryRepository extends JpaRepository<MerchandiseFlowJpaEntity, Long> {
-    @Query("SELECT M FROM MerchandiseFlowJpaEntity M WHERE M.community.communityId = :communityId AND M.entryDate < :endDate AND M.entryDate >= :startDate ORDER BY M.entryDate DESC")
-    Page<MerchandiseFlowJpaEntity> searchMerchandiseEntries(Pageable pageable, @Param("communityId") Long communityId, @Param("startDate")LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+    @Query("SELECT M FROM MerchandiseFlowJpaEntity M WHERE M.community.communityId = :communityId AND M.entryDate < :endDate AND M.entryDate >= :startDate AND M.subtype = :subtype ORDER BY M.entryDate DESC")
+    Page<MerchandiseFlowJpaEntity> searchMerchandiseEntries(Pageable pageable, @Param("communityId") Long communityId, @Param("startDate")LocalDateTime startDate, @Param("endDate") LocalDateTime endDate, @Param("subtype") Integer subtype);
 }

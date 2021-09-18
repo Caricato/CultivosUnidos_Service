@@ -11,4 +11,11 @@ public enum MerchandiseFlowSubtype {
 
     @Getter
     private final Integer value;
+
+    public static boolean checkInEnum(MerchandiseFlowSubtype merchandiseFlowSubtype){
+        for (MerchandiseFlowSubtype item: MerchandiseFlowSubtype.values()){
+            if (merchandiseFlowSubtype == item) return true;
+        }
+        return false;
+    }
 }
