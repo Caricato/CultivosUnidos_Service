@@ -28,4 +28,21 @@ public class ReportDownloader{
         JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
     }
 
+    public static void downloadBudgetPDF(OutputStream outputStream,
+                                         String reportUrl, String filename, String communityName, String productName, String hectares, String total, DefaultTableModel tableModel, Integer cant)
+            throws JRException, IOException {
+        var parameters = new HashMap();
+        parameters.put("Title", filename);
+        parameters.put("Cant", cant);
+        parameters.put("NombreComunidad", communityName);
+        parameters.put("NombreProducto", productName);
+        parameters.put("Hectareas", hectares);
+        parameters.put("Total", total);
+        InputStream in = new URL(reportUrl).openStream();
+        JasperReport jasperReport = JasperCompileManager.compileReport(in);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters,new JRTableModelDataSource(tableModel));
+        JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
+
+    }
+
 }

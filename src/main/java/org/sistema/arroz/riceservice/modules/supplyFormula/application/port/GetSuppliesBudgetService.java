@@ -16,12 +16,12 @@ public class GetSuppliesBudgetService implements GetSuppliesBudgetUseCase {
     private final GetSuppliesFormulasPort getSuppliesFormulasPort;
 
     @Override
-    public List<GetSuppliesBudgetDTO> getSuppliesBudget(Long productId, Integer hectares) {
+    public List<GetSuppliesBudgetDTO> getSuppliesBudget(Long productId, Double hectares) {
         var suppliesFormulas = getSuppliesFormulasPort.getSuppliesFormulas(productId);
         return updateBudget(suppliesFormulas, hectares);
     }
 
-    private List<GetSuppliesBudgetDTO> updateBudget(List<SupplyFormula> formulas, Integer hectares){
+    private List<GetSuppliesBudgetDTO> updateBudget(List<SupplyFormula> formulas, Double hectares){
         var getSuppliesList = new ArrayList<GetSuppliesBudgetDTO>(formulas.size());
         for (var formula: formulas){
             var totalHectares = formula.getCantForHectare()*hectares;
