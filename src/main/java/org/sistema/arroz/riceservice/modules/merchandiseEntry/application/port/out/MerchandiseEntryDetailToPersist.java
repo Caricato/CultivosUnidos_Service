@@ -7,12 +7,11 @@ import lombok.NoArgsConstructor;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlow;
 import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
 
-@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class MerchandiseEntryDetailToPersist {
     MerchandiseFlow merchandiseFlow;
     Supply supply;
-    Integer entryCant;
+    Double entryCant;
 }

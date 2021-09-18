@@ -23,13 +23,13 @@ public class SupplyJpaEntity {
     private String supplyName;
 
     @Column(name = "stock")
-    private Integer stock;
+    private Double stock;
 
     @Column(name = "precio_unitario")
     private Double unitPricing;
 
     @Column(name = "stock_min")
-    private Integer stockMin;
+    private Double stockMin;
 
     @Column(name = "tipo_metrica")
     private Integer supplyMetricType;

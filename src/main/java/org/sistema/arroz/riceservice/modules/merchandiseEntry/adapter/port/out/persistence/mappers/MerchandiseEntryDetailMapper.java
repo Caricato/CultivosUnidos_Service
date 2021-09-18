@@ -12,15 +12,19 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {MerchandiseFlowMapper.class, SupplyMapper.class})
 public interface MerchandiseEntryDetailMapper {
     @Mapping(source = "flowDetailId", target = "entryDetailId")
-    @Mapping(source = "flowEntry", target = "merchandiseFlow")
+    @Mapping(source = "merchandiseFlow", target = "merchandiseFlow")
     @Mapping(source = "supply", target = "supply")
     @Mapping(source = "flowCant", target = "entryCant")
     MerchandiseFlowDetail toMerchandiseEntryDetail(MerchandiseFlowDetailJpaEntity merchandiseFlowDetailJpaEntity);
+
     List<MerchandiseFlowDetail> toMerchandiseEntriesDetail(List<MerchandiseFlowDetailJpaEntity> merchandiseEntryDetailJpaEntities);
 
     @Mapping(source = "entryCant", target = "flowCant")
     @Mapping(target = "flowDetailId", ignore = true)
     @Mapping(source = "supply", target = "supply")
-    @Mapping(source = "merchandiseEntry", target = "flowEntry")
+    @Mapping(target="product", ignore = true)
+    @Mapping(source="merchandiseFlow", target = "merchandiseFlow")
+    MerchandiseFlowDetailJpaEntity toMerchandiseFlowDetailJpa(MerchandiseEntryDetailToPersist detailToPersist);
     List<MerchandiseFlowDetailJpaEntity> toMerchandiseEntriesDetailJpa(List<MerchandiseEntryDetailToPersist> detailsToRegister);
+
 }

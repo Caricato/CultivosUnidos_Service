@@ -9,8 +9,8 @@ import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyMetricType;
 public class SupplyToRegister {
     String supplyName;
     SupplyMetricType supplyMetricType;
-    Integer stock;
+    Double stock;
     Double unitPricing;
-    Integer stockMin;
+    Double stockMin;
     Long communityId;
 }

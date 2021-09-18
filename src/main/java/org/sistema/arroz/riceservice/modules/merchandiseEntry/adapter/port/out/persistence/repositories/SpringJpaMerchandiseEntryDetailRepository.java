@@ -6,5 +6,5 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SpringJpaMerchandiseEntryDetailRepository extends JpaRepository<MerchandiseFlowDetailJpaEntity, Long> {
-    Page<MerchandiseFlowDetailJpaEntity> findByMerchandiseEntry_MerchandiseEntryId(Pageable pageable, Long merchandiseEntryId);
+    Page<MerchandiseFlowDetailJpaEntity> findByMerchandiseFlow_MerchandiseFlowId(Pageable pageable, Long merchandiseEntryId);
 }

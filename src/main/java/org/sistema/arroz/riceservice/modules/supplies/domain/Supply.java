@@ -11,9 +11,9 @@ import org.sistema.arroz.riceservice.modules.agricultureCommunity.domain.Agricul
 public class Supply {
     Long supplyId;
     String supplyName;
-    Integer stock;
+    Double stock;
     Double unitPricing;
-    Integer stockMin;
+    Double stockMin;
     SupplyMetricType supplyMetricType;
     Boolean state;
     AgricultureCommunity community;

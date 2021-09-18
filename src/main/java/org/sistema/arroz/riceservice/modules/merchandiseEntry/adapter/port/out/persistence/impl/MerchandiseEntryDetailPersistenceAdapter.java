@@ -31,7 +31,7 @@ public class MerchandiseEntryDetailPersistenceAdapter implements RegisterMerchan
     @Override
     public Paginator<MerchandiseFlowDetail> getMerchandiseEntryDetails(Filters filters, Long merchandiseEntryId) {
         var pageable = PageRequest.of(filters.getPage(), filters.getPageSize());
-        var page = entryDetailRepository.findByMerchandiseEntry_MerchandiseEntryId(pageable, merchandiseEntryId);
+        var page = entryDetailRepository.findByMerchandiseFlow_MerchandiseFlowId(pageable, merchandiseEntryId);
         var data = page.getContent()
                 .stream().map(entryDetailMapper::toMerchandiseEntryDetail)
                 .collect(Collectors.toList());

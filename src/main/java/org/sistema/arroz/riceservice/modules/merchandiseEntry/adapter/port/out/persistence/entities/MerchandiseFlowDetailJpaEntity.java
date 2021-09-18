@@ -22,8 +22,8 @@ public class MerchandiseFlowDetailJpaEntity {
     @Column(name = "id_detalle_flujo")
     private Long flowDetailId;
 
-    @Column(name = "cant_flow")
-    private Integer flowCant;
+    @Column(name = "cant_flujo")
+    private Double flowCant;
 
     @OneToOne
     @JoinColumn(name = "id_insumo")
@@ -37,5 +37,5 @@ public class MerchandiseFlowDetailJpaEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_entrada_mercancia")
-    private MerchandiseFlowJpaEntity flowEntry;
+    private MerchandiseFlowJpaEntity merchandiseFlow;
 }

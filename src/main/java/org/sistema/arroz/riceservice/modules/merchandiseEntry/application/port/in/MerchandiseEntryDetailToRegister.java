@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MerchandiseEntryDetailToRegister {
     Long supplyId;
-    Integer entryCant;
+    Double entryCant;
 }
