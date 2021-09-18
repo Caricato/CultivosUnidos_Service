@@ -6,7 +6,7 @@ import org.sistema.arroz.riceservice.hexagonal.errors.ErrorMessages;
 import org.sistema.arroz.riceservice.hexagonal.errors.NotFoundException;
 
 @Getter
-public class MerchandiseEntryNotFoundException extends RuntimeException implements NotFoundException {
+public class MerchandiseFlowNotFoundException extends RuntimeException implements NotFoundException {
     private final String code = "MER_01";
     private final String message;
     private final transient Object data;
@@ -21,7 +21,7 @@ public class MerchandiseEntryNotFoundException extends RuntimeException implemen
         Long communityId;
     }
 
-    public MerchandiseEntryNotFoundException(Long merchandiseEntryId){
+    public MerchandiseFlowNotFoundException(Long merchandiseEntryId){
         super();
         this.message = String.format(ErrorMessages.MER_01_MESSAGE, merchandiseEntryId);
         this.data = merchandiseEntryId;

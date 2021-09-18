@@ -1,13 +1,11 @@
 package org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.in;
 
-import io.micrometer.core.lang.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseEntryType;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowType;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,7 +17,7 @@ import java.util.List;
 public class MerchandiseEntryToRegisterDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate entryDate;
-    MerchandiseEntryType entryType;
+    MerchandiseFlowType entryType;
 
     Long producerId;
     List<MerchandiseEntryDetailToRegister> detailsToRegister;

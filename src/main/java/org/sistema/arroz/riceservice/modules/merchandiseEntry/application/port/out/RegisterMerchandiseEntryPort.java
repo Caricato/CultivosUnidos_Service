@@ -2,8 +2,8 @@ package org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.
 
 import org.sistema.arroz.riceservice.modules.agricultureCommunity.domain.AgricultureCommunity;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.in.MerchandiseEntryToRegister;
-import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseEntry;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlow;
 
 public interface RegisterMerchandiseEntryPort {
-    MerchandiseEntry registerMerchandiseEntry(MerchandiseEntryToRegister merchandiseEntryToRegister, AgricultureCommunity community);
+    MerchandiseFlow registerMerchandiseEntry(MerchandiseEntryToRegister merchandiseEntryToRegister, AgricultureCommunity community);
 }

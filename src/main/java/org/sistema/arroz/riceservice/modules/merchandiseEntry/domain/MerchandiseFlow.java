@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MerchandiseEntry {
+public class MerchandiseFlow {
     Long merchandiseEntryId;
     AgricultureCommunity community;
     LocalDateTime entryDate;
-    MerchandiseEntryType entryType;
+    MerchandiseFlowType entryType;
     //TODO: Associate a producer
 }

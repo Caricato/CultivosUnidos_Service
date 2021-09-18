@@ -6,8 +6,8 @@ import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.i
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.in.RegisterMerchandiseEntryDetailsUseCase;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.out.MerchandiseEntryDetailToPersist;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.out.RegisterMerchandiseEntryDetailsPort;
-import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseEntry;
-import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseEntryDetail;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlow;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowDetail;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.out.GetSupplyPort;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.out.UpdateSupplyStockPort;
 import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyNotFoundException;
@@ -23,12 +23,12 @@ public class RegisterMerchandiseEntryDetailsService implements RegisterMerchandi
     private final UpdateSupplyStockPort updateSupplyStockPort;
 
     @Override
-    public List<MerchandiseEntryDetail> registerMerchandiseEntryDetails(List<MerchandiseEntryDetailToRegister> details, MerchandiseEntry merchandiseEntry) {
+    public List<MerchandiseFlowDetail> registerMerchandiseEntryDetails(List<MerchandiseEntryDetailToRegister> details, MerchandiseFlow merchandiseFlow) {
         var detailsToPersist = new ArrayList<MerchandiseEntryDetailToPersist>(details.size());
         for (MerchandiseEntryDetailToRegister detail: details){
             var detailToPersist = new MerchandiseEntryDetailToPersist();
             detailToPersist.setEntryCant(detail.getEntryCant());
-            detailToPersist.setMerchandiseEntry(merchandiseEntry);
+            detailToPersist.setMerchandiseFlow(merchandiseFlow);
             var supply = getSupplyPort.getSupplyById(detail.getSupplyId());
             if (supply.isEmpty()) throw new SupplyNotFoundException(detail.getSupplyId());
             supply.get().setStock(supply.get().getStock()+detailToPersist.getEntryCant());

@@ -3,7 +3,7 @@ package org.sistema.arroz.riceservice.modules.merchandiseEntry.adapter.port.in.w
 import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.hexagonal.WebAdapter;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.in.GetAllMerchandiseEntryTypesUseCase;
-import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseEntryType;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +20,7 @@ public class GetAllMerchandiseEntryTypesController {
     private final GetAllMerchandiseEntryTypesUseCase getAllMerchandiseEntryTypesUseCase;
 
     @GetMapping(value = "/types")
-    public List<MerchandiseEntryType> getAllMerchandiseEntryTypes(){
+    public List<MerchandiseFlowType> getAllMerchandiseEntryTypes(){
         return getAllMerchandiseEntryTypesUseCase.getAllMerchandiseEntryTypes();
     }
 }

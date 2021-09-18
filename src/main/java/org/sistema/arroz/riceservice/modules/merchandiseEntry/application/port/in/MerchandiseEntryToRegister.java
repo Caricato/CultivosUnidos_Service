@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseEntryType;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowType;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class MerchandiseEntryToRegister {
     LocalDateTime entryDate;
-    MerchandiseEntryType entryType;
+    MerchandiseFlowType entryType;
 
     @Nullable
     Long producerId;

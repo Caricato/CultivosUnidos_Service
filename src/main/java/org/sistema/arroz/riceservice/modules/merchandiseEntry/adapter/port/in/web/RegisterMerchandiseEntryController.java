@@ -5,8 +5,6 @@ import org.sistema.arroz.riceservice.hexagonal.WebAdapter;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.in.*;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @WebAdapter
 @CrossOrigin
 @RestController
@@ -26,7 +24,7 @@ public class RegisterMerchandiseEntryController {
         var details = merchandiseEntryDetailsUseCase.registerMerchandiseEntryDetails(merchandiseEntryDTO.getDetailsToRegister(), merchandiseEntry);
 
         return MerchandiseEntryDTO.builder()
-                .merchandiseEntry(merchandiseEntry)
+                .merchandiseFlow(merchandiseEntry)
                 .details(details)
                 .build();
     }

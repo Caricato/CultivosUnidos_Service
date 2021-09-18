@@ -2,8 +2,8 @@ package org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.
 
 import org.sistema.arroz.riceservice.hexagonal.queries.Filters;
 import org.sistema.arroz.riceservice.hexagonal.queries.Paginator;
-import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseEntryDetail;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowDetail;
 
 public interface GetMerchandiseEntryDetailUseCase {
-    Paginator<MerchandiseEntryDetail> getMerchandiseEntryDetails(Filters filters, Long merchandiseEntryId);
+    Paginator<MerchandiseFlowDetail> getMerchandiseEntryDetails(Filters filters, Long merchandiseEntryId);
 }

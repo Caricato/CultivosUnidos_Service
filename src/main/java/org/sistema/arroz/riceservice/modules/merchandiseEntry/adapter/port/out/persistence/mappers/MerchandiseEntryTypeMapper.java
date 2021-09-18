@@ -1,16 +1,16 @@
 package org.sistema.arroz.riceservice.modules.merchandiseEntry.adapter.port.out.persistence.mappers;
 
 import org.mapstruct.Mapper;
-import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseEntryType;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowType;
 
 @Mapper(componentModel = "spring")
 public interface MerchandiseEntryTypeMapper {
-    default MerchandiseEntryType toMerchandiseEntryType(Integer value){
+    default MerchandiseFlowType toMerchandiseEntryType(Integer value){
         switch(value){
             case 0:
-                return MerchandiseEntryType.COMPRA;
+                return MerchandiseFlowType.COMPRA;
             case 1:
-                return MerchandiseEntryType.ASOCIACION;
+                return MerchandiseFlowType.ASOCIACION;
             default:
                 return null;
         }
