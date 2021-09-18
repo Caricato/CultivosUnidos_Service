@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowSubtype;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowType;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,6 +19,7 @@ public class MerchandiseEntryToRegisterDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate entryDate;
     MerchandiseFlowType entryType;
+    MerchandiseFlowSubtype subtype;
 
     Long producerId;
     List<MerchandiseEntryDetailToRegister> detailsToRegister;

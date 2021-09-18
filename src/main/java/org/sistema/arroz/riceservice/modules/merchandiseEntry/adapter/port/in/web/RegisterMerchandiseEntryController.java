@@ -3,6 +3,7 @@ package org.sistema.arroz.riceservice.modules.merchandiseEntry.adapter.port.in.w
 import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.hexagonal.WebAdapter;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.in.*;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowInvalidException;
 import org.springframework.web.bind.annotation.*;
 
 @WebAdapter
@@ -18,14 +19,23 @@ public class RegisterMerchandiseEntryController {
     public MerchandiseEntryDTO registerMerchandiseEntry(@RequestBody MerchandiseEntryToRegisterDTO merchandiseEntryDTO,
                                                         @PathVariable Long communityId){
 
-        var merchandiseEntryToRegister = MerchandiseEntryToRegister.builder().entryDate(merchandiseEntryDTO.getEntryDate().atStartOfDay()).entryType(merchandiseEntryDTO.getEntryType())
-                .producerId(merchandiseEntryDTO.getProducerId()).build();
-        var merchandiseEntry = merchandiseEntryUseCase.registerMerchandiseEntry(merchandiseEntryToRegister, communityId);
-        var details = merchandiseEntryDetailsUseCase.registerMerchandiseEntryDetails(merchandiseEntryDTO.getDetailsToRegister(), merchandiseEntry);
+        switch(merchandiseEntryDTO.getSubtype()){
+            case ENTRADA_INSUMO:
+                var merchandiseEntryToRegister = MerchandiseEntryToRegister.builder().entryDate(merchandiseEntryDTO.getEntryDate().atStartOfDay()).entryType(merchandiseEntryDTO.getEntryType())
+                        .producerId(merchandiseEntryDTO.getProducerId()).subtype(merchandiseEntryDTO.getSubtype()).build();
+                var merchandiseEntry = merchandiseEntryUseCase.registerMerchandiseEntry(merchandiseEntryToRegister, communityId);
+                var details = merchandiseEntryDetailsUseCase.registerMerchandiseEntryDetails(merchandiseEntryDTO.getDetailsToRegister(), merchandiseEntry);
 
-        return MerchandiseEntryDTO.builder()
-                .merchandiseFlow(merchandiseEntry)
-                .details(details)
-                .build();
+                return MerchandiseEntryDTO.builder()
+                        .merchandiseFlow(merchandiseEntry)
+                        .details(details)
+                        .build();
+            case SALIDA_INSUMO:
+                //TODO
+            case ENTRADA_PRODUCTO:
+                //TODO
+            default:
+                throw new MerchandiseFlowInvalidException(merchandiseEntryDTO.getSubtype().toString());
+        }
     }
 }

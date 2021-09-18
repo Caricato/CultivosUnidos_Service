@@ -12,7 +12,8 @@ public class ErrorMessages {
     public static final String PROD_01_MESSAGE = "Product with the id: %d not found";
 
     //For Merchandise Entries
-    public static final String MER_01_MESSAGE = "Merchandise Entry with the id: %d not found";
+    public static final String MER_01_MESSAGE = "Merchandise Flow with the id: %d not found";
+    public static final String MER_02_MESSAGE = "Merchandise Flow with subtype %s not found";
 
     //For Supply Formulas
     public static final String SUP_FORM_01_MESSAGE = "Supply Formula with the id: %d not found";

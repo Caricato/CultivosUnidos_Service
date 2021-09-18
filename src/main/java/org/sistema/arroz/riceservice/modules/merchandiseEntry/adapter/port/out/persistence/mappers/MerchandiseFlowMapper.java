@@ -10,7 +10,7 @@ import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.Merchandise
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = { AgricultureCommunityMapper.class, MerchandiseEntryTypeMapper.class})
+@Mapper(componentModel = "spring", uses = { AgricultureCommunityMapper.class, MerchandiseEntryTypeMapper.class, MerchandiseFlowSubtypeMapper.class})
 public interface MerchandiseFlowMapper {
     @Mapping(source = "merchandiseFlowId", target = "merchandiseEntryId")
     @Mapping(source = "entryDate", target = "entryDate")
@@ -25,6 +25,7 @@ public interface MerchandiseFlowMapper {
 
     @Mapping(source = "entryDate", target = "entryDate")
     @Mapping(source = "entryType.value", target = "flowType")
+    @Mapping(source = "subtype.value", target = "subtype")
     @Mapping(target = "community", ignore = true)
     @Mapping(target = "merchandiseFlowId", ignore = true)
     MerchandiseFlowJpaEntity toMerchandiseEntryJpa(MerchandiseEntryToRegister entryToRegister);
