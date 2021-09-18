@@ -10,6 +10,6 @@ public class GetSuppliesFormulasDTO {
     Long supplyId;
     Long productId;
     String supplyName;
-    Integer cantForHectare;
+    Double cantForHectare;
     SupplyMetricType supplyMetricType;
 }
