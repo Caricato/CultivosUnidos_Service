@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.hexagonal.UseCase;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.in.MerchandiseEntryDetailToRegister;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.in.RegisterMerchandiseOutDetailsUseCase;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.in.ValidateMerchandiseOutUseCase;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.out.MerchandiseEntryDetailToPersist;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.out.RegisterMerchandiseEntryDetailsPort;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlow;
@@ -19,7 +20,7 @@ import java.util.List;
 
 @UseCase
 @RequiredArgsConstructor
-public class RegisterMerchandiseOutDetailsService implements RegisterMerchandiseOutDetailsUseCase {
+public class RegisterMerchandiseOutDetailsService implements RegisterMerchandiseOutDetailsUseCase, ValidateMerchandiseOutUseCase {
     private final GetSupplyPort getSupplyPort;
     private final UpdateSupplyStockPort updateSupplyStockPort;
     private final RegisterMerchandiseEntryDetailsPort registerMerchandiseEntryDetailsPort;
@@ -45,7 +46,20 @@ public class RegisterMerchandiseOutDetailsService implements RegisterMerchandise
     private Double updateStock(Supply supply, Double offset){
         var stockMin = supply.getStockMin();
         var actualStock = supply.getStock();
-        if (actualStock-offset < stockMin) throw new SupplyStockMinBrokenException(supply.getSupplyId(), actualStock, stockMin, offset);
+        if (actualStock-offset < stockMin) throw new SupplyStockMinBrokenException(supply.getSupplyId(), supply.getSupplyName(), actualStock, stockMin, offset);
         return (actualStock-offset);
+    }
+
+    @Override
+    public boolean validateMerchandiseOut(List<MerchandiseEntryDetailToRegister> details) {
+        for (MerchandiseEntryDetailToRegister detail: details){
+            var supplyOptional = getSupplyPort.getSupplyById(detail.getSupplyId());
+            if (supplyOptional.isEmpty()) throw new SupplyNotFoundException(detail.getSupplyId());
+            var supply = supplyOptional.get();
+            var stockMin = supply.getStockMin();
+            var actualStock = supply.getStock();
+            if (actualStock-detail.getEntryCant() < stockMin) throw new SupplyStockMinBrokenException(supply.getSupplyId(), supply.getSupplyName(), actualStock, stockMin, detail.getEntryCant());
+        }
+        return true;
     }
 }

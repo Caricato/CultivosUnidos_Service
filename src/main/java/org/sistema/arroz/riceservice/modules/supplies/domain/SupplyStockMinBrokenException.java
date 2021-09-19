@@ -19,14 +19,15 @@ public class SupplyStockMinBrokenException extends RuntimeException implements U
 
     @Value
     static class Data{
+        String supplyName;
         Double stock;
         Double stockMin;
         Double offset;
     }
 
-    public SupplyStockMinBrokenException(Long supplyId, Double stock, Double stockMin, Double offset){
+    public SupplyStockMinBrokenException(Long supplyId, String supplyName, Double stock, Double stockMin, Double offset){
         super();
         this.message = String.format(SUP_04_MESSAGE, supplyId, stockMin);
-        this.data = new Data(stock, stockMin, offset);
+        this.data = new Data(supplyName, stock, stockMin, offset);
     }
 }

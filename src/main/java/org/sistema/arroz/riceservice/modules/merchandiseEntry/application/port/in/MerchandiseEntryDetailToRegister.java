@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class MerchandiseEntryDetailToRegister {
     Long supplyId;
     Double entryCant;
+    Long productId;
 }

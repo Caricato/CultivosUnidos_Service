@@ -15,6 +15,8 @@ public class RegisterMerchandiseEntryController {
     private final RegisterMerchandiseEntryUseCase merchandiseEntryUseCase;
     private final RegisterMerchandiseEntryDetailsUseCase merchandiseEntryDetailsUseCase;
     private final RegisterMerchandiseOutDetailsUseCase merchandiseOutDetailsUseCase;
+    private final RegisterMerchandiseProductDetailUseCase merchandiseProductDetailUseCase;
+    private final ValidateMerchandiseOutUseCase validateMerchandiseOutUseCase;
 
     @PostMapping(value = "/{communityId}")
     public MerchandiseEntryDTO registerMerchandiseEntry(@RequestBody MerchandiseEntryToRegisterDTO merchandiseEntryDTO,
@@ -32,6 +34,7 @@ public class RegisterMerchandiseEntryController {
                         .details(details)
                         .build();
             case SALIDA_INSUMO:
+                validateMerchandiseOutUseCase.validateMerchandiseOut(merchandiseEntryDTO.getDetailsToRegister());
                 var merchandiseOutToRegister = MerchandiseEntryToRegister.builder().entryDate(merchandiseEntryDTO.getEntryDate().atStartOfDay()).entryType(merchandiseEntryDTO.getEntryType())
                         .producerId(merchandiseEntryDTO.getProducerId()).subtype(merchandiseEntryDTO.getSubtype()).build();
                 var merchandiseOut = merchandiseEntryUseCase.registerMerchandiseEntry(merchandiseOutToRegister, communityId);
@@ -41,7 +44,14 @@ public class RegisterMerchandiseEntryController {
                         .details(detailsOut)
                         .build();
             case ENTRADA_PRODUCTO:
-                //TODO
+                var productToRegister = MerchandiseEntryToRegister.builder().entryDate(merchandiseEntryDTO.getEntryDate().atStartOfDay()).entryType(merchandiseEntryDTO.getEntryType())
+                        .producerId(merchandiseEntryDTO.getProducerId()).subtype(merchandiseEntryDTO.getSubtype()).build();
+                var productIn = merchandiseEntryUseCase.registerMerchandiseEntry(productToRegister, communityId);
+                var detailsProduct = merchandiseProductDetailUseCase.registerMerchandiseOutDetails(merchandiseEntryDTO.getDetailsToRegister(), productIn);
+                return MerchandiseEntryDTO.builder()
+                        .merchandiseFlow(productIn)
+                        .details(detailsProduct)
+                        .build();
             default:
                 throw new MerchandiseFlowInvalidException(merchandiseEntryDTO.getSubtype().toString());
         }

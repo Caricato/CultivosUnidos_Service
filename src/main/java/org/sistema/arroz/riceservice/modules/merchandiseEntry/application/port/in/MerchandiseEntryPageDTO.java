@@ -1,14 +1,11 @@
 package org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.in;
 
-import lombok.Builder;
-import lombok.Data;
-import org.sistema.arroz.riceservice.hexagonal.queries.Paginator;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlow;
-import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowDetail;
 
-@Builder
-@Data
+@Getter
+@AllArgsConstructor
 public class MerchandiseEntryPageDTO {
     MerchandiseFlow merchandiseFlow;
-    Paginator<MerchandiseFlowDetail> detailPage;
 }

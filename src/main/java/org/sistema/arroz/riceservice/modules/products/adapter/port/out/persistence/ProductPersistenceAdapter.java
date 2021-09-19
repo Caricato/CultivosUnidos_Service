@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class ProductPersistenceAdapter implements RegisterProductPort, EditProductPort, DeleteProductPort, GetProductsPort, GetProductPort, GetAllProductsPort {
+public class ProductPersistenceAdapter implements RegisterProductPort, EditProductPort, DeleteProductPort, GetProductsPort, GetProductPort, GetAllProductsPort, UpdateProductStockPort {
     private final SpringJpaProductRepository productRepository;
     private final ProductMapper productMapper;
     private final AgricultureCommunityMapper agricultureCommunityMapper;
@@ -82,5 +82,16 @@ public class ProductPersistenceAdapter implements RegisterProductPort, EditProdu
     public List<Product> getAllProducts(Long productId) {
         var productsJpa = productRepository.findAllByCommunityJpaEntity_CommunityIdAndState(productId, true);
         return productMapper.toProducts(productsJpa);
+    }
+
+    @Override
+    public Product updateProductStock(Double newStock, Long productId) {
+        var supplyJpa = productRepository.findById(productId);
+        if (supplyJpa.isEmpty()) throw new ProductNotFoundException(productId);
+
+        var supply = supplyJpa.get();
+        supply.setStock(newStock);
+        var result = productRepository.save(supply);
+        return productMapper.toProduct(result);
     }
 }
