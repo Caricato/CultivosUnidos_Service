@@ -19,11 +19,11 @@ public class SupplyStockInconsistencyException extends RuntimeException implemen
 
     @Value
     static class Data{
-        Integer stock;
-        Integer stockMin;
+        Double stock;
+        Double stockMin;
     }
 
-    public SupplyStockInconsistencyException(Integer stock, Integer stockMin){
+    public SupplyStockInconsistencyException(Double stock, Double stockMin){
         super();
         this.message = String.format(SUP_02_MESSAGE, stock, stockMin);
         this.data = new Data(stock, stockMin);

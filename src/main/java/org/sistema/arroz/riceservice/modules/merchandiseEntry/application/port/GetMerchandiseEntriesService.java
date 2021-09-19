@@ -8,7 +8,8 @@ import org.sistema.arroz.riceservice.modules.agricultureCommunity.application.po
 import org.sistema.arroz.riceservice.modules.agricultureCommunity.domain.AgricultureCommunityNotFoundException;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.in.GetMerchandiseEntriesUseCase;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.out.GetMerchandiseEntriesPort;
-import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseEntry;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlow;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowSubtype;
 
 @UseCase
 @RequiredArgsConstructor
@@ -17,10 +18,10 @@ public class GetMerchandiseEntriesService implements GetMerchandiseEntriesUseCas
     private final GetAgricultureCommunityPort getAgricultureCommunityPort;
 
     @Override
-    public Paginator<MerchandiseEntry> getMerchandiseEntries(FiltersDate filters, Long communityId) {
+    public Paginator<MerchandiseFlow> getMerchandiseEntries(FiltersDate filters, MerchandiseFlowSubtype subtype, Long communityId) {
         var community = getAgricultureCommunityPort.findCommunityById(communityId);
         if (community == null)
             throw new AgricultureCommunityNotFoundException(communityId);
-        return getMerchandiseEntriesPort.getMerchandiseEntries(filters, communityId);
+        return getMerchandiseEntriesPort.getMerchandiseEntries(filters, subtype, communityId);
     }
 }

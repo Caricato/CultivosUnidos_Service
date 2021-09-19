@@ -25,14 +25,14 @@ class RegisterSupplyServiceTest {
     @Test
     void registerSupplySuccess(){
         var supplyToRegister = SupplyToRegister.builder()
-                .supplyName("Semillas de arroz seco").stock(100).stockMin(50).
+                .supplyName("Semillas de arroz seco").stock(100.0).stockMin(50.0).
                 unitPricing(5.5).communityId(1L).supplyMetricType(SupplyMetricType.GRAMOS).build();
 
         var agricultureCommunity = AgricultureCommunity.builder().communityId(1L)
                 .communityName("Tambo Seco").build();
 
         var supply = Supply.builder().supplyId(1L).supplyName("Semillas de arroz seco")
-                        .stock(100).stockMin(50).unitPricing(5.5).supplyMetricType(SupplyMetricType.GRAMOS).community(agricultureCommunity).build();
+                        .stock(100.0).stockMin(50.0).unitPricing(5.5).supplyMetricType(SupplyMetricType.GRAMOS).community(agricultureCommunity).build();
 
         when(registerSupplyPort.registerSupply(supplyToRegister, agricultureCommunity)).thenReturn(supply);
         when(getAgricultureCommunityPort.findCommunityById(1L)).thenReturn(agricultureCommunity);
@@ -46,7 +46,7 @@ class RegisterSupplyServiceTest {
     @Test
     void registerThrowSupplyStockException(){
         var supplyToRegister = SupplyToRegister.builder()
-                .supplyName("Semillas de arroz seco").stock(10).stockMin(50).unitPricing(5.5).
+                .supplyName("Semillas de arroz seco").stock(10.0).stockMin(50.0).unitPricing(5.5).
                 supplyMetricType(SupplyMetricType.GRAMOS).communityId(1L).build();
 
         SupplyStockInconsistencyException exception = assertThrows(SupplyStockInconsistencyException.class, () ->{
@@ -59,7 +59,7 @@ class RegisterSupplyServiceTest {
     @Test
     void registerThrowSupplyCommunityNotFoundException(){
         var supplyToRegister = SupplyToRegister.builder()
-                .supplyName("Semillas de arroz seco").stock(100).stockMin(50).unitPricing(5.5).
+                .supplyName("Semillas de arroz seco").stock(100.0).stockMin(50.0).unitPricing(5.5).
                 supplyMetricType(SupplyMetricType.GRAMOS).communityId(1L).build();
 
         AgricultureCommunityNotFoundException exception = assertThrows(AgricultureCommunityNotFoundException.class, () ->{

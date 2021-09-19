@@ -9,6 +9,6 @@ import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyMetricType;
 public class SupplyToEdit {
     String supplyName;
     Double unitPricing;
-    Integer stockMin;
+    Double stockMin;
     SupplyMetricType supplyMetricType;
 }

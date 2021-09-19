@@ -5,6 +5,6 @@ import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.Merchandise
 
 import java.util.List;
 
-public interface RegisterMerchandiseEntryDetailsUseCase {
-    List<MerchandiseFlowDetail> registerMerchandiseEntryDetails(List<MerchandiseEntryDetailToRegister> details, MerchandiseFlow merchandiseFlow);
+public interface RegisterMerchandiseOutDetailsUseCase {
+    List<MerchandiseFlowDetail> registerMerchandiseOutDetails(List<MerchandiseEntryDetailToRegister> details, MerchandiseFlow merchandiseFlow);
 }

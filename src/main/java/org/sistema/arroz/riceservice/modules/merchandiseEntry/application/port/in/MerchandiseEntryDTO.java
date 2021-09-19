@@ -2,14 +2,14 @@ package org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.
 
 import lombok.Builder;
 import lombok.Data;
-import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseEntry;
-import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseEntryDetail;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlow;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowDetail;
 
 import java.util.List;
 
 @Builder
 @Data
 public class MerchandiseEntryDTO {
-    MerchandiseEntry merchandiseEntry;
-    List<MerchandiseEntryDetail> details;
+    MerchandiseFlow merchandiseFlow;
+    List<MerchandiseFlowDetail> details;
 }

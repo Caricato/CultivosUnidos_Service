@@ -29,7 +29,7 @@ public class    GetMerchandiseEntryDetailController {
         var details = getMerchandiseEntryDetailUseCase.getMerchandiseEntryDetails(filters, merchandiseEntryId);
 
         return MerchandiseEntryPageDTO.builder()
-                .merchandiseEntry(merchandise)
+                .merchandiseFlow(merchandise)
                 .detailPage(details).build();
     }
 }

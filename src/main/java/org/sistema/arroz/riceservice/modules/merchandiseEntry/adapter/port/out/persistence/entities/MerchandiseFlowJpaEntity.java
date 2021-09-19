@@ -15,18 +15,21 @@ import java.time.LocalDateTime;
 @Setter
 @RequiredArgsConstructor
 @Entity
-@Table(name= "TP_ENTRADA_MERCANCIA")
-public class MerchandiseEntryJpaEntity {
+@Table(name= "TP_FLUJO_MERCANCIA")
+public class MerchandiseFlowJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_entrada_mercancia")
-    private Long merchandiseEntryId;
+    @Column(name = "id_flujo_mercancia")
+    private Long merchandiseFlowId;
 
     @Column(name = "fecha_entrada")
     private LocalDateTime entryDate;
 
-    @Column(name = "tipo_entrada")
-    private Integer entryType;
+    @Column(name = "tipo_flujo")
+    private Integer flowType;
+
+    @Column(name = "subtipo")
+    private Integer subtype;
 
     @ManyToOne
     @JoinColumn(name = "id_comunidad")

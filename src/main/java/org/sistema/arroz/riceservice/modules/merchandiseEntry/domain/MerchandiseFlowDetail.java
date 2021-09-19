@@ -10,9 +10,9 @@ import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MerchandiseEntryDetail {
+public class MerchandiseFlowDetail {
     Long entryDetailId;
-    MerchandiseEntry merchandiseEntry;
+    MerchandiseFlow merchandiseFlow;
     Supply supply;
     Integer entryCant;
 }

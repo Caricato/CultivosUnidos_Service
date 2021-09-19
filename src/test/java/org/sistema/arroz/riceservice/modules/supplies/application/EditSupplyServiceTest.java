@@ -21,9 +21,9 @@ class EditSupplyServiceTest {
     @Test
     void editSupplySuccess(){
         var supplyToEdit = SupplyToEdit.builder()
-                .supplyName("Fertilizantes").stockMin(50).supplyMetricType(SupplyMetricType.LITROS).unitPricing(10.5).build();
+                .supplyName("Fertilizantes").stockMin(50.0).supplyMetricType(SupplyMetricType.LITROS).unitPricing(10.5).build();
         var supply = Supply.builder().supplyId(1L).supplyName("Fertilizantes")
-                .stockMin(50).supplyMetricType(SupplyMetricType.LITROS).unitPricing(10.5).state(true).stock(200).build();
+                .stockMin(50.0).supplyMetricType(SupplyMetricType.LITROS).unitPricing(10.5).state(true).stock(200.0).build();
 
         when(editSupplyPort.editSupply(supplyToEdit, 1L)).thenReturn(supply);
         var testResult = editSupplyService.editSupply(supplyToEdit, 1L);
@@ -34,8 +34,8 @@ class EditSupplyServiceTest {
     @Test
     void editSupplyThrowSupplyStockException(){
         var supplyToEdit = SupplyToEdit.builder()
-                .supplyName("Fertilizantes").stockMin(50).supplyMetricType(SupplyMetricType.LITROS).unitPricing(10.5).build();
-        when(editSupplyPort.editSupply(supplyToEdit, 1L)).thenThrow(new SupplyStockInconsistencyException(20 ,supplyToEdit.getStockMin()));
+                .supplyName("Fertilizantes").stockMin(50.0).supplyMetricType(SupplyMetricType.LITROS).unitPricing(10.5).build();
+        when(editSupplyPort.editSupply(supplyToEdit, 1L)).thenThrow(new SupplyStockInconsistencyException(20.0 ,supplyToEdit.getStockMin()));
 
         SupplyStockInconsistencyException exception = assertThrows(SupplyStockInconsistencyException.class, () ->{
             var testResult = editSupplyService.editSupply(supplyToEdit, 1L);
@@ -46,7 +46,7 @@ class EditSupplyServiceTest {
     @Test
     void editSupplyThrowSupplyNotFoundException(){
         var supplyToEdit = SupplyToEdit.builder()
-                .supplyName("Fertilizantes").stockMin(50).supplyMetricType(SupplyMetricType.LITROS).unitPricing(10.5).build();
+                .supplyName("Fertilizantes").stockMin(50.0).supplyMetricType(SupplyMetricType.LITROS).unitPricing(10.5).build();
         when(editSupplyPort.editSupply(supplyToEdit,1L)).thenThrow(new SupplyNotFoundException(1L));
 
         SupplyNotFoundException exception = assertThrows(SupplyNotFoundException.class, () ->{

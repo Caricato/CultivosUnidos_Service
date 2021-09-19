@@ -21,7 +21,7 @@ class GetSuppliesServiceTest {
     @Test
     void getSuppliesSuccess(){
         var supply = Supply.builder().supplyId(1L).supplyName("Fertilizantes")
-                .stockMin(50).supplyMetricType(SupplyMetricType.LITROS).unitPricing(10.5).state(true).stock(200).build();
+                .stockMin(50.0).supplyMetricType(SupplyMetricType.LITROS).unitPricing(10.5).state(true).stock(200.0).build();
         var supplies = new ArrayList<Supply>();
         supplies.add(supply);
         var filters = Filters.builder().page(0).pageSize(10).search("").build();
