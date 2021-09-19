@@ -6,7 +6,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum MerchandiseFlowType {
     COMPRA(0),
-    ASOCIACION(1);
+    ASOCIACION(1),
+    VENTA(2),
+    DESASOCIACION(3),
+    CADUCADO(4);
 
     @Getter
     private final Integer value;

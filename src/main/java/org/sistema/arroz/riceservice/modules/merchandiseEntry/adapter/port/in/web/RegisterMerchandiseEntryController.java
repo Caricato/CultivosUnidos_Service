@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.*;
 public class RegisterMerchandiseEntryController {
     private final RegisterMerchandiseEntryUseCase merchandiseEntryUseCase;
     private final RegisterMerchandiseEntryDetailsUseCase merchandiseEntryDetailsUseCase;
+    private final RegisterMerchandiseOutDetailsUseCase merchandiseOutDetailsUseCase;
 
     @PostMapping(value = "/{communityId}")
     public MerchandiseEntryDTO registerMerchandiseEntry(@RequestBody MerchandiseEntryToRegisterDTO merchandiseEntryDTO,
                                                         @PathVariable Long communityId){
 
-        switch(merchandiseEntryDTO.getSubtype()){
+        switch(merchandiseEntryDTO.getSubtype()) {
             case ENTRADA_INSUMO:
                 var merchandiseEntryToRegister = MerchandiseEntryToRegister.builder().entryDate(merchandiseEntryDTO.getEntryDate().atStartOfDay()).entryType(merchandiseEntryDTO.getEntryType())
                         .producerId(merchandiseEntryDTO.getProducerId()).subtype(merchandiseEntryDTO.getSubtype()).build();
@@ -31,7 +32,14 @@ public class RegisterMerchandiseEntryController {
                         .details(details)
                         .build();
             case SALIDA_INSUMO:
-                //TODO
+                var merchandiseOutToRegister = MerchandiseEntryToRegister.builder().entryDate(merchandiseEntryDTO.getEntryDate().atStartOfDay()).entryType(merchandiseEntryDTO.getEntryType())
+                        .producerId(merchandiseEntryDTO.getProducerId()).subtype(merchandiseEntryDTO.getSubtype()).build();
+                var merchandiseOut = merchandiseEntryUseCase.registerMerchandiseEntry(merchandiseOutToRegister, communityId);
+                var detailsOut = merchandiseOutDetailsUseCase.registerMerchandiseOutDetails(merchandiseEntryDTO.getDetailsToRegister(), merchandiseOut);
+                return MerchandiseEntryDTO.builder()
+                        .merchandiseFlow(merchandiseOut)
+                        .details(detailsOut)
+                        .build();
             case ENTRADA_PRODUCTO:
                 //TODO
             default:

@@ -11,6 +11,12 @@ public interface MerchandiseEntryTypeMapper {
                 return MerchandiseFlowType.COMPRA;
             case 1:
                 return MerchandiseFlowType.ASOCIACION;
+            case 2:
+                return MerchandiseFlowType.VENTA;
+            case 3:
+                return MerchandiseFlowType.DESASOCIACION;
+            case 4:
+                return MerchandiseFlowType.CADUCADO;
             default:
                 return null;
         }

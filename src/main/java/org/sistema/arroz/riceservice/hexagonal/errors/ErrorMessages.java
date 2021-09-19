@@ -5,6 +5,7 @@ public class ErrorMessages {
     public static final String SUP_01_MESSAGE = "Supply with the id: %d not found";
     public static final String SUP_02_MESSAGE = "Actual stock: %d is lower than the minimum stock: %d. Validate your data please!";
     public static final String SUP_03_MESSAGE = "Supply %d associated with active products. Please remove them first to delete the supply";
+    public static final String SUP_04_MESSAGE = "Supply with %d has a limit of %.2f of stock, cant reduce more than that!";
     //For Communities
     public static final String AGC_01_MESSAGE = "Agriculture community with %d id is not registered!";
 

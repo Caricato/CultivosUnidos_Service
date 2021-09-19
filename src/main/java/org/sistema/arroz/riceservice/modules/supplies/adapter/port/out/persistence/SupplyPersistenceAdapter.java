@@ -93,12 +93,12 @@ public class SupplyPersistenceAdapter implements RegisterSupplyPort, EditSupplyP
     }
 
     @Override
-    public Supply updateSupplyStock(Double stockAdded, Long supplyId) {
+    public Supply updateSupplyStock(Double newStock, Long supplyId) {
         var supplyJpa = springJpaSupplyRepository.findById(supplyId);
         if (supplyJpa.isEmpty()) throw new SupplyNotFoundException(supplyId);
 
         var supply = supplyJpa.get();
-        supply.setStock(supply.getStock()+stockAdded);
+        supply.setStock(newStock);
         var result = springJpaSupplyRepository.save(supply);
         return supplyMapper.toSupply(result);
     }
