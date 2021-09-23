@@ -15,12 +15,14 @@ public interface MerchandiseFlowMapper {
     @Mapping(source = "merchandiseFlowId", target = "merchandiseEntryId")
     @Mapping(source = "entryDate", target = "entryDate")
     @Mapping(source = "flowType", target = "entryType")
+    @Mapping(source = "subtype", target = "subtype")
     @Mapping(source = "community", target = "community")
     MerchandiseFlow toMerchandiseEntry(MerchandiseFlowJpaEntity entryJpaEntity);
     List<MerchandiseFlow> toMerchandiseEntries(List<MerchandiseFlowJpaEntity> entryJpaEntities);
 
     @InheritInverseConfiguration
     @Mapping(source = "entryType.value", target = "flowType")
+    @Mapping(source = "subtype.value", target = "subtype")
     MerchandiseFlowJpaEntity toMerchandiseEntryJpa(MerchandiseFlow merchandiseFlow);
 
     @Mapping(source = "entryDate", target = "entryDate")

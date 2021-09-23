@@ -16,6 +16,7 @@ public class MerchandiseFlow {
     Long merchandiseEntryId;
     AgricultureCommunity community;
     LocalDateTime entryDate;
+    MerchandiseFlowSubtype subtype;
     MerchandiseFlowType entryType;
     //TODO: Associate a producer
 }
