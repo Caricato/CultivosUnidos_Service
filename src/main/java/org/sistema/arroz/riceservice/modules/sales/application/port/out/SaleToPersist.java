@@ -14,7 +14,5 @@ public class SaleToPersist {
     LocalDate saleDate;
     Double saleTotal;
     Double theoreticalTotal;
-    Double theoreticalIndicator;
-    Double realIndicator;
     AgricultureCommunity community;
 }

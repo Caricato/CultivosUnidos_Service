@@ -26,6 +26,9 @@ public class SaleDetailJpaEntity {
     @Column(name = "subtotal")
     private Double subtotal;
 
+    @Column(name = "subtotal_teorico")
+    private Double theoreticalSubtotal;
+
     @OneToOne
     @JoinColumn(name = "id_venta")
     private SaleJpaEntity sale;

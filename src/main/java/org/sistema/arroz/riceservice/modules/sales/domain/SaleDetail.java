@@ -14,6 +14,7 @@ public class SaleDetail {
     Long saleDetailId;
     Integer soldSacks;
     Double subtotal;
+    Double theoreticalSubtotal;
     Sale sale;
     Product product;
 }

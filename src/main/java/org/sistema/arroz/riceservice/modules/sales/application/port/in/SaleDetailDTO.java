@@ -13,5 +13,6 @@ public class SaleDetailDTO {
     Long saleDetailId;
     Integer soldSacks;
     Double subtotal;
+    Double theoreticalSubtotal;
     String productName;
 }

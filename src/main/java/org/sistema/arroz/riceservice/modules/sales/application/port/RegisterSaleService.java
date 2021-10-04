@@ -34,7 +34,6 @@ public class RegisterSaleService implements RegisterSaleUseCase {
         saleToPersist.setCommunity(getAgricultureCommunityPort.findCommunityById(communityId));
         saleToPersist.setSaleTotal(calculateTotal(details));
         saleToPersist.setTheoreticalTotal(calculateTheoreticalTotal(details,saleDate));
-        //TODO CALCULATE HISTORICAL
         return registerSalePort.registerSale(saleToPersist);
     }
 
