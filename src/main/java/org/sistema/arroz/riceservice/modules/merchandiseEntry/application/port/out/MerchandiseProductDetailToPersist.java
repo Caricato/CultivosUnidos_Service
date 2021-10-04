@@ -12,5 +12,5 @@ import org.sistema.arroz.riceservice.modules.products.domain.Product;
 public class MerchandiseProductDetailToPersist {
     MerchandiseFlow merchandiseFlow;
     Product product;
-    Double entryCant;
+    Integer entryCant;
 }

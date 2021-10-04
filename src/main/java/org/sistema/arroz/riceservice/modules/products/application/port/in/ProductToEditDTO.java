@@ -15,4 +15,5 @@ import java.util.List;
 public class ProductToEditDTO {
     ProductToEdit productToEdit;
     List<SupplyFormulaToRegister> suppliesFormulas;
+    List<ProductPriceToRegister> productPriceToRegisters;
 }

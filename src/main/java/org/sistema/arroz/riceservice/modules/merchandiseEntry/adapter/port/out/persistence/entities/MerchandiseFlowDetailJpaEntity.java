@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.ProductJpaEntity;
+import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.entities.ProductJpaEntity;
 import org.sistema.arroz.riceservice.modules.supplies.adapter.port.out.persistence.SupplyJpaEntity;
 
 import javax.persistence.*;
@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Setter
 @RequiredArgsConstructor
 @Entity
-@Table(name= "TS_DETALLE_FLUJO")
+@Table(name= "TR_DETALLE_FLUJO")
 public class MerchandiseFlowDetailJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

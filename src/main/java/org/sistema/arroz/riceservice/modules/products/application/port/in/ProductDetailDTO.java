@@ -3,6 +3,7 @@ package org.sistema.arroz.riceservice.modules.products.application.port.in;
 import lombok.Builder;
 import lombok.Data;
 import org.sistema.arroz.riceservice.modules.products.domain.Product;
+import org.sistema.arroz.riceservice.modules.products.domain.ProductPrice;
 import org.sistema.arroz.riceservice.modules.supplyFormula.application.port.in.GetSuppliesFormulasDTO;
 
 import java.util.List;
@@ -12,4 +13,5 @@ import java.util.List;
 public class ProductDetailDTO {
     Product product;
     List<GetSuppliesFormulasDTO> suppliesFormula;
+    List<ProductPrice> productPrices;
 }

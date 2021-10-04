@@ -15,4 +15,5 @@ import java.util.List;
 public class ProductToRegisterDTO {
     ProductToRegister productToRegister;
     List<SupplyFormulaToRegister> suppliesFormulas;
+    List<ProductPriceToRegister> productPriceToRegisters;
 }

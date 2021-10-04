@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProductToEdit {
     String productName;
-    Double stock;
-    Double sacks;
+    Integer sacks;
+    Double relationSacks;
 }

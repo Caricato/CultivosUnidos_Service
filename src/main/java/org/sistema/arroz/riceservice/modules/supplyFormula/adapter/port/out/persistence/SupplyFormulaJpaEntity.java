@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.ProductJpaEntity;
+import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.entities.ProductJpaEntity;
 import org.sistema.arroz.riceservice.modules.supplies.adapter.port.out.persistence.SupplyJpaEntity;
 
 import javax.persistence.*;
@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Setter
 @RequiredArgsConstructor
 @Entity
-@Table(name= "TS_FORMULA_INSUMO")
+@Table(name= "TR_FORMULA_INSUMO")
 public class SupplyFormulaJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

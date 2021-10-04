@@ -11,6 +11,8 @@ public class ErrorMessages {
 
     //For Products
     public static final String PROD_01_MESSAGE = "Product with the id: %d not found";
+    public static final String PROD_02_MESSAGE = "Product price for the product %d in the month %d not found";
+    public static final String PROD_03_MESSAGE = "Product has %d sacks and you are trying to sell %d sacks. Validate your data please!";
 
     //For Merchandise Entries
     public static final String MER_01_MESSAGE = "Merchandise Flow with the id: %d not found";
@@ -18,5 +20,8 @@ public class ErrorMessages {
 
     //For Supply Formulas
     public static final String SUP_FORM_01_MESSAGE = "Supply Formula with the id: %d not found";
+
+    //For Sales
+    public static final String SALE_01_MESSAGE = "Sale not valid!";
 
 }

@@ -7,7 +7,7 @@ import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.o
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.out.MerchandiseProductDetailToPersist;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowDetail;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowProductDetail;
-import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.ProductMapper;
+import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.mappers.ProductMapper;
 import org.sistema.arroz.riceservice.modules.supplies.adapter.port.out.persistence.SupplyMapper;
 
 import java.util.List;

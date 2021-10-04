@@ -27,15 +27,15 @@ public class RegisterMerchandiseProductDetailService implements RegisterMerchand
         var detailsToPersist = new ArrayList<MerchandiseProductDetailToPersist>(details.size());
         for (MerchandiseEntryDetailToRegister detail: details){
             var detailToPersist = new MerchandiseProductDetailToPersist();
-            detailToPersist.setEntryCant(detail.getEntryCant());
+            detailToPersist.setEntryCant(detail.getEntryCant().intValue());
             detailToPersist.setMerchandiseFlow(merchandiseFlow);
             var product = getProductPort.getProductById(detail.getProductId());
             if (product.isEmpty()) throw new ProductNotFoundException(detail.getProductId());
-            product.get().setStock(product.get().getStock()+detailToPersist.getEntryCant());
+            product.get().setSacks(product.get().getSacks()+detailToPersist.getEntryCant());
             detailToPersist.setProduct(product.get());
             detailsToPersist.add(detailToPersist);
 
-            updateProductStockPort.updateProductStock(product.get().getStock(), detail.getProductId());
+            updateProductStockPort.updateProductStock(product.get().getSacks(), detail.getProductId());
         }
         return registerProductDetailPort.registerProductDetails(detailsToPersist);
     }
