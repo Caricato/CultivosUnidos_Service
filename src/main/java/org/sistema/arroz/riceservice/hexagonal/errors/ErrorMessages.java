@@ -23,5 +23,6 @@ public class ErrorMessages {
 
     //For Sales
     public static final String SALE_01_MESSAGE = "Sale not valid!";
+    public static final String SALE_02_MESSAGE = "Sale with the id: %d not found";
 
 }

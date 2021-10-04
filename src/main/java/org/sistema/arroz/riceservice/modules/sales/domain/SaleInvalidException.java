@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Value;
 import org.sistema.arroz.riceservice.hexagonal.errors.UserInputException;
 import org.sistema.arroz.riceservice.modules.products.application.port.in.ProductStockFailedDTO;
-import org.sistema.arroz.riceservice.modules.products.domain.ProductStockMinBrokenException;
 
 import java.util.List;
 
