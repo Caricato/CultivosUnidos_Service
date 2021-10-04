@@ -1,4 +1,4 @@
-package org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence;
+package org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.hexagonal.PersistenceAdapter;
@@ -6,6 +6,8 @@ import org.sistema.arroz.riceservice.hexagonal.queries.Filters;
 import org.sistema.arroz.riceservice.hexagonal.queries.Paginator;
 import org.sistema.arroz.riceservice.modules.agricultureCommunity.adapter.port.out.persistence.AgricultureCommunityMapper;
 import org.sistema.arroz.riceservice.modules.agricultureCommunity.domain.AgricultureCommunity;
+import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.mappers.ProductMapper;
+import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.repositories.SpringJpaProductRepository;
 import org.sistema.arroz.riceservice.modules.products.application.port.in.ProductToEdit;
 import org.sistema.arroz.riceservice.modules.products.application.port.in.ProductToRegister;
 import org.sistema.arroz.riceservice.modules.products.application.port.out.*;
@@ -39,8 +41,8 @@ public class ProductPersistenceAdapter implements RegisterProductPort, EditProdu
         if (productJpaEntityOptional.isEmpty()) throw new ProductNotFoundException(productId);
         var productJpa = productJpaEntityOptional.get();
         productJpa.setProductName(productToEdit.getProductName());
-        productJpa.setStock(productToEdit.getStock());
         productJpa.setSacks(productToEdit.getSacks());
+        productJpa.setRelationSacks(productToEdit.getRelationSacks());
         var result = productRepository.save(productJpa);
         return productMapper.toProduct(result);
     }
@@ -85,12 +87,23 @@ public class ProductPersistenceAdapter implements RegisterProductPort, EditProdu
     }
 
     @Override
-    public Product updateProductStock(Double newStock, Long productId) {
+    public Product updateProductStock(Integer newStock, Long productId) {
         var supplyJpa = productRepository.findById(productId);
         if (supplyJpa.isEmpty()) throw new ProductNotFoundException(productId);
 
         var supply = supplyJpa.get();
-        supply.setStock(newStock);
+        supply.setSacks(newStock);
+        var result = productRepository.save(supply);
+        return productMapper.toProduct(result);
+    }
+
+    @Override
+    public Product lowerProductStock(Integer reducedStock, Long productId) {
+        var supplyJpa = productRepository.findById(productId);
+        if (supplyJpa.isEmpty()) throw new ProductNotFoundException(productId);
+
+        var supply = supplyJpa.get();
+        supply.setSacks(supply.getSacks()-reducedStock);
         var result = productRepository.save(supply);
         return productMapper.toProduct(result);
     }

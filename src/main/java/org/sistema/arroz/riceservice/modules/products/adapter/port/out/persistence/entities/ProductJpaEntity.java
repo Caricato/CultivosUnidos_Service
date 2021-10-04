@@ -1,4 +1,4 @@
-package org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence;
+package org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.entities;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -24,10 +24,10 @@ public class ProductJpaEntity {
     private String productName;
 
     @Column(name = "stock")
-    private Double stock;
+    private Integer sacks;
 
     @Column(name = "hectareas_x_saco")
-    private Double sacks;
+    private Double relationSacks;
 
     @Column(name = "estado")
     private Boolean state;

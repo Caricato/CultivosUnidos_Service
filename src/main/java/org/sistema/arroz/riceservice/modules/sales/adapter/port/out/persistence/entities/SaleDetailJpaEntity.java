@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.ProductJpaEntity;
+import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.entities.ProductJpaEntity;
 
 import javax.persistence.*;
 

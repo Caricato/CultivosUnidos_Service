@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.sistema.arroz.riceservice.modules.agricultureCommunity.domain.AgricultureCommunity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -14,8 +14,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Sale {
     Long saleId;
-    LocalDateTime saleDate;
+    LocalDate saleDate;
     Double saleTotal;
+    Double theoreticalTotal;
     Double theoreticalIndicator;
     Double realIndicator;
     AgricultureCommunity community;

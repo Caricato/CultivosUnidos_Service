@@ -2,7 +2,7 @@ package org.sistema.arroz.riceservice.modules.supplyFormula.adapter.port.out.per
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.ProductMapper;
+import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.mappers.ProductMapper;
 import org.sistema.arroz.riceservice.modules.supplies.adapter.port.out.persistence.SupplyMapper;
 import org.sistema.arroz.riceservice.modules.supplyFormula.application.port.out.SupplyFormulaToPersist;
 import org.sistema.arroz.riceservice.modules.supplyFormula.domain.SupplyFormula;

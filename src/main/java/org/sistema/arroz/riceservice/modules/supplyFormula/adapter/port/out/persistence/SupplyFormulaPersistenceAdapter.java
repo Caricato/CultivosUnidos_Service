@@ -2,8 +2,8 @@ package org.sistema.arroz.riceservice.modules.supplyFormula.adapter.port.out.per
 
 import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.hexagonal.PersistenceAdapter;
-import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.ProductJpaEntity;
-import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.ProductMapper;
+import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.entities.ProductJpaEntity;
+import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.mappers.ProductMapper;
 import org.sistema.arroz.riceservice.modules.products.domain.Product;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.out.ValidateSupplyDeletionPort;
 import org.sistema.arroz.riceservice.modules.supplyFormula.application.port.out.GetSuppliesFormulasPort;

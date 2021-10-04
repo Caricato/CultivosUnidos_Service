@@ -1,5 +1,6 @@
-package org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence;
+package org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.repositories;
 
+import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.entities.ProductJpaEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

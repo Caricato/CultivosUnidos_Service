@@ -7,7 +7,7 @@ import lombok.ToString;
 import org.sistema.arroz.riceservice.modules.agricultureCommunity.adapter.port.out.persistence.AgricultureCommunityJpaEntity;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @ToString
 @Getter
@@ -22,10 +22,13 @@ public class SaleJpaEntity {
     private Long saleId;
 
     @Column(name = "fecha_venta")
-    private LocalDateTime saleDate;
+    private LocalDate saleDate;
 
     @Column(name = "ganancia_total")
     private Double saleTotal;
+
+    @Column(name = "ganancia_teorica")
+    private Double theoreticalTotal;
 
     @Column(name = "indicador_teorico")
     private Double theoreticalIndicator;
