@@ -17,7 +17,5 @@ public class Sale {
     LocalDate saleDate;
     Double saleTotal;
     Double theoreticalTotal;
-    Double theoreticalIndicator;
-    Double realIndicator;
     AgricultureCommunity community;
 }

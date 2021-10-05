@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.hexagonal.UseCase;
 import org.sistema.arroz.riceservice.modules.products.application.port.in.GetProductUseCase;
 import org.sistema.arroz.riceservice.modules.products.application.port.in.ValidateProductStockUseCase;
+import org.sistema.arroz.riceservice.modules.products.application.port.out.GetProductPricePort;
 import org.sistema.arroz.riceservice.modules.products.application.port.out.UpdateProductStockPort;
 import org.sistema.arroz.riceservice.modules.products.domain.ProductStockMinBrokenException;
 import org.sistema.arroz.riceservice.modules.sales.application.port.in.RegisterSaleDetailUseCase;
@@ -21,7 +22,7 @@ import java.util.List;
 public class RegisterSaleDetailService implements RegisterSaleDetailUseCase {
     private final RegisterSaleDetailPort registerSaleDetailPort;
     private final GetProductUseCase getProductUseCase;
-    private final ValidateProductStockUseCase validateProductStockUseCase;
+    private final GetProductPricePort getProductPricePort;
     private final UpdateProductStockPort updateProductStockPort;
 
     @Override
@@ -39,6 +40,8 @@ public class RegisterSaleDetailService implements RegisterSaleDetailUseCase {
             detailToPersist.setSoldSacks(saleDetail.getSoldSacks());
             detailToPersist.setProduct(getProductUseCase.getProductById(saleDetail.getProductId()));
             updateProductStockPort.lowerProductStock(saleDetail.getSoldSacks(), saleDetail.getProductId());
+            var productPrice = getProductPricePort.getProductPrice(detailToPersist.getProduct().getProductId(), sale.getSaleDate().getMonthValue());
+            detailToPersist.setTheoreticalSubtotal(detailToPersist.getSoldSacks()*productPrice.getUnitPricing());
             details.add(detailToPersist);
         }
         return details;

@@ -12,6 +12,7 @@ public interface SaleDetailDTOMapper {
     @Mapping(source = "soldSacks", target = "soldSacks")
     @Mapping(source = "saleDetailId", target = "saleDetailId")
     @Mapping(source = "subtotal", target = "subtotal")
+    @Mapping(source = "theoreticalSubtotal", target = "theoreticalSubtotal")
     @Mapping(source = "product.productName", target = "productName")
     SaleDetailDTO toSaleDetailDTO(SaleDetail saleDetail);
     List<SaleDetailDTO> toSaleDetailsDTO(List<SaleDetail> saleDetails);

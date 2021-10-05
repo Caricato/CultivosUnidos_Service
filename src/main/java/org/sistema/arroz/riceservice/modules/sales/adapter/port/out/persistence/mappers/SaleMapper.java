@@ -16,8 +16,6 @@ public interface SaleMapper {
     @Mapping(source = "saleDate", target = "saleDate")
     @Mapping(source = "saleTotal", target = "saleTotal")
     @Mapping(source = "theoreticalTotal", target = "theoreticalTotal")
-    @Mapping(source = "theoreticalIndicator", target = "theoreticalIndicator")
-    @Mapping(source = "realIndicator", target = "realIndicator")
     @Mapping(source = "community", target = "community")
     Sale toSale(SaleJpaEntity saleJpaEntity);
     List<Sale> toSales(List<SaleJpaEntity> saleJpaEntity);
@@ -25,8 +23,6 @@ public interface SaleMapper {
     @Mapping(source = "community", target = "community")
     @Mapping(source = "saleDate", target = "saleDate")
     @Mapping(source = "saleTotal", target = "saleTotal")
-    @Mapping(source = "realIndicator", target = "realIndicator")
-    @Mapping(source = "theoreticalIndicator", target = "theoreticalIndicator")
     @Mapping(source = "theoreticalTotal", target = "theoreticalTotal")
     @Mapping(target = "saleId", ignore = true)
     SaleJpaEntity toSaleJpa(SaleToPersist saleToPersist);

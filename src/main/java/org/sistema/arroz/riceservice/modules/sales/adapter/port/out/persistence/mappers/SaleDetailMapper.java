@@ -14,6 +14,7 @@ public interface SaleDetailMapper {
     @Mapping(source = "saleDetailId", target = "saleDetailId")
     @Mapping(source = "soldSacks", target = "soldSacks")
     @Mapping(source = "subtotal", target = "subtotal")
+    @Mapping(source = "theoreticalSubtotal", target = "theoreticalSubtotal")
     @Mapping(source = "sale", target = "sale")
     @Mapping(source = "product", target = "product")
     SaleDetail toSaleDetail(SaleDetailJpaEntity saleDetailJpaEntity);
@@ -23,6 +24,7 @@ public interface SaleDetailMapper {
     @Mapping(source = "product", target = "product")
     @Mapping(source = "soldSacks", target = "soldSacks")
     @Mapping(source = "subtotal", target = "subtotal")
+    @Mapping(source = "theoreticalSubtotal", target = "theoreticalSubtotal")
     @Mapping(target = "saleDetailId", ignore = true)
     SaleDetailJpaEntity toSaleDetailJpa(SaleDetailToPersist saleDetailToPersist);
     List<SaleDetailJpaEntity> toSaleDetailsJpa(List<SaleDetailToPersist> saleDetailToPersist);

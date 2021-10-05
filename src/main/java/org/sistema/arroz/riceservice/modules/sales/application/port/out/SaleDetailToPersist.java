@@ -13,5 +13,6 @@ public class SaleDetailToPersist {
     Sale sale;
     Product product;
     Double subtotal;
+    Double theoreticalSubtotal;
     Integer soldSacks;
 }

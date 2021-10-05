@@ -30,12 +30,6 @@ public class SaleJpaEntity {
     @Column(name = "ganancia_teorica")
     private Double theoreticalTotal;
 
-    @Column(name = "indicador_teorico")
-    private Double theoreticalIndicator;
-
-    @Column(name = "indicador_real")
-    private Double realIndicator;
-
     @ManyToOne
     @JoinColumn(name = "id_comunidad")
     private AgricultureCommunityJpaEntity community;
