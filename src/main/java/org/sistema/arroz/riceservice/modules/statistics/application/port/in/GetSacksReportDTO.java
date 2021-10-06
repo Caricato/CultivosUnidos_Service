@@ -7,8 +7,8 @@ import java.util.List;
 
 @Data
 @Builder
-public class GetMonthlyReportDTO {
-    List<GetMonthlyCantReportDTO> cantReport;
-    List<String> categories;
-    GetSacksReportDTO sacksReportDTO;
+public class GetSacksReportDTO {
+    List<String> products;
+    List<Integer> sacks;
+    List<Double> subtotal;
 }
