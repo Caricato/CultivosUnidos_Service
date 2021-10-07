@@ -23,6 +23,8 @@ public class ProjectCropsService implements ProjectCropsUseCase {
     @Override
     public ProjectionCropsDTO projectCrops(MonthEnum monthEnum, List<ProductsToProject> products) {
         var projection = new ArrayList<ProjectCrops>(products.size());
+        var total=0.0;
+        var totalCrops = 0.0;
         for(var productToProject: products){
             var productPrice = getProductPricePort.getProductPrice(productToProject.getProductId(), monthEnum.getValue());
             var product = getProductUseCase.getProductById(productToProject.getProductId());
@@ -31,9 +33,13 @@ public class ProjectCropsService implements ProjectCropsUseCase {
             crops = Math.floor(crops*100)/100;
 
             var subtotal = productPrice.getUnitPricing()*productToProject.getSoldSacks();
+            total+=subtotal;
+            totalCrops+=crops;
             projection.add(ProjectCrops.builder().relationSacks(product.getRelationSacks()).crops(crops).unitPricing(productPrice.getUnitPricing()).subtotal(subtotal)
-                    .build());
+                    .productSacks(productToProject.getSoldSacks()).productName(product.getProductName()).build());
         }
-        return ProjectionCropsDTO.builder().projectCrops(projection).month(monthEnum).build();
+        total = Math.floor(total*100)/100;
+        totalCrops = Math.floor(totalCrops*100)/100;
+        return ProjectionCropsDTO.builder().projectCrops(projection).month(monthEnum).total(total).totalCrops(totalCrops).build();
     }
 }

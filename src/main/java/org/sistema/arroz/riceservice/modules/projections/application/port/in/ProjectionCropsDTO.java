@@ -11,4 +11,6 @@ import java.util.List;
 public class ProjectionCropsDTO {
     List<ProjectCrops> projectCrops;
     MonthEnum month;
+    Double total;
+    Double totalCrops;
 }

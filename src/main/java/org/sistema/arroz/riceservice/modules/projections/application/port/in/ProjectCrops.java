@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class ProjectCrops {
+    String productName;
     Integer productSacks;
     Double crops;
     Double relationSacks;
