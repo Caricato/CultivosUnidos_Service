@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/projections")
-public class ProjectCropsController {
-    private final ProjectCropsUseCase projectCropsUseCase;
+public class ProjectEarningController {
+    private final ProjectEarningUseCase projectEarningUseCase;
 
-    @PostMapping(value = "/crops")
-    public ProjectionCropsDTO projectCrops(@RequestBody ProjectProductCrops projectCrops){
-        return projectCropsUseCase.projectCrops(projectCrops.getMonth(), projectCrops.getProducts());
+    @PostMapping(value = "/earnings")
+    public ProjectionCropsDTO projectCrops(@RequestBody ProjectEarning projectEarning){
+        return projectEarningUseCase.projectEarning(projectEarning.getMonth(), projectEarning.getProducts());
     }
 }
