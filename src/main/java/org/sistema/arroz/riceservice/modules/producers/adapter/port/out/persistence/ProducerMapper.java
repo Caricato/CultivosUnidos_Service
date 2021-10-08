@@ -7,6 +7,8 @@ import org.sistema.arroz.riceservice.modules.producers.application.port.in.Produ
 import org.sistema.arroz.riceservice.modules.producers.domain.Producer;
 import org.sistema.arroz.riceservice.modules.users.adapter.port.out.persistence.UserMapper;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", uses = {AgricultureCommunityMapper.class, UserMapper.class})
 public interface ProducerMapper {
     @Mapping(source = "community", target = "community")
@@ -22,6 +24,7 @@ public interface ProducerMapper {
     @Mapping(source = "updateDate", target = "updateDate")
     @Mapping(source = "hectares", target = "hectares")
     Producer toProducer(ProducerJpaEntity producerJpaEntity);
+    List<Producer> toProducers(List<ProducerJpaEntity> producerJpaEntity);
 
     @Mapping(source = "hectares", target = "hectares")
     @Mapping(source = "producerName", target = "producerName")
