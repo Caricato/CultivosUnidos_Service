@@ -2,8 +2,9 @@ package org.sistema.arroz.riceservice.modules.producers.adapter.port.in.web;
 
 import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.hexagonal.WebAdapter;
+import org.sistema.arroz.riceservice.modules.producers.application.port.in.GetProducerDTO;
+import org.sistema.arroz.riceservice.modules.producers.application.port.in.GetProducerDTOMapper;
 import org.sistema.arroz.riceservice.modules.producers.application.port.in.GetProducersUseCase;
-import org.sistema.arroz.riceservice.modules.producers.domain.Producer;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,9 +16,11 @@ import java.util.List;
 @RequestMapping(value = "/producer")
 public class GetProducersController {
     private final GetProducersUseCase getProducersUseCase;
+    private final GetProducerDTOMapper getProducerDTOMapper;
 
     @GetMapping(value = "/{communityId}")
-    public List<Producer> getProducers(@PathVariable Long communityId){
-        return getProducersUseCase.getProducers(communityId);
+    public List<GetProducerDTO> getProducers(@PathVariable Long communityId){
+        var producers = getProducersUseCase.getProducers(communityId);
+        return getProducerDTOMapper.toProducersDTO(producers);
     }
 }
