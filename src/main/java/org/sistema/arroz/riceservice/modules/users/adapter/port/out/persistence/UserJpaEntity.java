@@ -20,7 +20,7 @@ public class UserJpaEntity {
     private Long userId;
 
     @Column(name = "nombre_usuario")
-    private String userName;
+    private String username;
 
     @Column(name = "credenciales_acceso")
     private String password;

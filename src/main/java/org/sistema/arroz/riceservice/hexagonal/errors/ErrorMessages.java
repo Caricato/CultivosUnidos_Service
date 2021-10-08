@@ -25,4 +25,7 @@ public class ErrorMessages {
     public static final String SALE_01_MESSAGE = "Sale not valid!";
     public static final String SALE_02_MESSAGE = "Sale with the id: %d not found";
 
+    //For Users
+    public static final String USR_01_MESSAGE = "Producer with DNI: %s already registered!";
+
 }
