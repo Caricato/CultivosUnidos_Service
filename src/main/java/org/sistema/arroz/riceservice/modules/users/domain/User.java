@@ -11,4 +11,5 @@ public class User {
     String password;
     Boolean state;
     Boolean passwordReset;
+    Boolean passwordFirstTime;
 }

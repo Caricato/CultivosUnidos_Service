@@ -10,6 +10,7 @@ public interface UserMapper {
     @Mapping(source = "password", target = "password")
     @Mapping(source = "userName", target = "userName")
     @Mapping(source = "passwordReset", target = "passwordReset")
+    @Mapping(source = "passwordFirstTime", target = "passwordFirstTime")
     @Mapping(source = "state", target = "state")
     User toUser(UserJpaEntity userJpaEntity);
 }
