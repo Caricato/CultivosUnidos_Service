@@ -10,7 +10,7 @@ import org.sistema.arroz.riceservice.modules.users.domain.User;
 public interface UserMapper {
     @Mapping(source = "userId", target = "userId")
     @Mapping(source = "password", target = "password")
-    @Mapping(source = "userName", target = "userName")
+    @Mapping(source = "username", target = "username")
     @Mapping(source = "passwordReset", target = "passwordReset")
     @Mapping(source = "passwordFirstTime", target = "passwordFirstTime")
     @Mapping(source = "state", target = "state")
