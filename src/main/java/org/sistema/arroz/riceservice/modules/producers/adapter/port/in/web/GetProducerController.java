@@ -20,6 +20,6 @@ public class GetProducerController {
     @GetMapping(value = "/detail/{producerId}")
     public GetProducerDTO getProducer(@PathVariable Long producerId){
         var producer = getProducerUseCase.getProducer(producerId);
-        return getProducerDTOMapper.toProducerDTO(producer);
+        return getProducerDTOMapper.getProducerDTO(producer);
     }
 }

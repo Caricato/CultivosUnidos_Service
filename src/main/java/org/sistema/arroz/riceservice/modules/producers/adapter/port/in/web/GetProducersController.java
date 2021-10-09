@@ -21,6 +21,6 @@ public class GetProducersController {
     @GetMapping(value = "/{communityId}")
     public List<GetProducerDTO> getProducers(@PathVariable Long communityId){
         var producers = getProducersUseCase.getProducers(communityId);
-        return getProducerDTOMapper.toProducersDTO(producers);
+        return getProducerDTOMapper.getProducerDTOs(producers);
     }
 }

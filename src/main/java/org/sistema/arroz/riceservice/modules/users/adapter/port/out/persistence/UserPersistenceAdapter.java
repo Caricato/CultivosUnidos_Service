@@ -9,6 +9,7 @@ import org.sistema.arroz.riceservice.modules.users.application.port.out.GetUserP
 import org.sistema.arroz.riceservice.modules.users.application.port.out.RegisterUserPort;
 import org.sistema.arroz.riceservice.modules.users.domain.User;
 import org.sistema.arroz.riceservice.modules.users.domain.UserNotFoundException;
+import org.sistema.arroz.riceservice.modules.users.domain.UsernameNotFoundException;
 
 import javax.transaction.Transactional;
 
@@ -39,6 +40,14 @@ public class UserPersistenceAdapter implements DeleteUserPort, RegisterUserPort,
         var user = userRepository.findById(userId);
         if (user.isEmpty()) throw new UserNotFoundException(userId);
         return userMapper.toUser(user.get());
+    }
+
+    @Override
+    public User getUser(String username) {
+        var user = userRepository.findByUsernameAndState(username, true);
+        if (user.isEmpty()) throw new UsernameNotFoundException(username);
+        return userMapper.toUser(user.get());
+
     }
 
     @Override

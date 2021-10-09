@@ -18,11 +18,12 @@ public interface GetProducerDTOMapper {
     @Mapping(source = "email", target = "email")
     @Mapping(source = "producerFirstLastName", target = "producerFirstLastName")
     @Mapping(source = "hectares", target = "hectares")
-    GetProducerDTO toProducerDTO(Producer producer);
-    List<GetProducerDTO> toProducersDTO(List<Producer> producers);
+    @Mapping(target = "fullName", ignore = true)
+    GetProducerDTO getProducerDTO(Producer producer);
+    List<GetProducerDTO> getProducerDTOs(List<Producer> producers);
 
     @AfterMapping
-    default void setFullName(Producer producer, @MappingTarget GetProducerDTO getProducerDTO){
-        getProducerDTO.setFullName(producer.fullName());
+    default void setProducerDTO(Producer producer, @MappingTarget GetProducerDTO producerDTO){
+        producerDTO.setFullName(producer.fullName());
     }
 }
