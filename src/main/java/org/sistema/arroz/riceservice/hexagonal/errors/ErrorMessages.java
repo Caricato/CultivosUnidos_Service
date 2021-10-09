@@ -28,5 +28,6 @@ public class ErrorMessages {
     //For Users
     public static final String USR_01_MESSAGE = "Producer with DNI: %s already registered!";
     public static final String USR_02_MESSAGE = "Producer with the id: %d not found";
+    public static final String USR_03_MESSAGE = "User with the id: %d not found";
 
 }

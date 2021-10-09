@@ -24,6 +24,12 @@ dependencies {
 
     implementation "net.sf.jasperreports:jasperreports:4.5.1"
 
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.1'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.1'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.1'
+    implementation 'org.mindrot:jbcrypt:0.4'
+
+
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
