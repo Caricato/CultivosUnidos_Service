@@ -54,4 +54,9 @@ public class ProducerPersistenceAdapter implements ValidateProducerToRegisterPor
         if (entity.isEmpty()) throw new ProducerNotFoundException(producerId);
         return producerMapper.toProducer(entity.get());
     }
+
+    @Override
+    public Producer getProducerByUser(Long userId) {
+        return null;
+    }
 }

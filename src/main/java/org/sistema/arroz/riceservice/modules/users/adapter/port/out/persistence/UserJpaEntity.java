@@ -19,7 +19,7 @@ public class UserJpaEntity {
     @Column(name = "id_usuario")
     private Long userId;
 
-    @Column(name = "nombre_usuario")
+    @Column(name = "nombre_usuario", unique = true)
     private String username;
 
     @Column(name = "credenciales_acceso")
@@ -27,6 +27,9 @@ public class UserJpaEntity {
 
     @Column(name = "state")
     private Boolean state;
+
+    @Column(name = "rol")
+    private String role;
 
     @Column(name = "credenciales_reinicio")
     private Boolean passwordReset;

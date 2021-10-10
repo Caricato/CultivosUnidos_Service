@@ -10,6 +10,7 @@ import org.sistema.arroz.riceservice.modules.producers.domain.Producer;
 import org.sistema.arroz.riceservice.modules.users.application.port.in.RegisterUserUseCase;
 import org.sistema.arroz.riceservice.modules.users.application.port.in.UserToRegister;
 import org.sistema.arroz.riceservice.modules.users.application.port.out.DeleteUserPort;
+import org.sistema.arroz.riceservice.modules.users.domain.UserRole;
 
 @UseCase
 @RequiredArgsConstructor
@@ -22,7 +23,7 @@ public class RegisterProducerService implements RegisterProducerUseCase {
     @Override
     public Producer registerProducer(Long communityId, ProducerToRegister producerToRegister) {
         var community = getAgricultureCommunityUseCase.findCommunityById(communityId);
-        var user = registerUserUseCase.registerUser(UserToRegister.builder().username(producerToRegister.getDni()).build());
+        var user = registerUserUseCase.registerUser(UserToRegister.builder().username(producerToRegister.getDni()).role(UserRole.PRODUCER).build());
         var producer =  Producer.builder().build();
         try{
             producer = registerProducerPort.registerProducer(community, user, producerToRegister);
