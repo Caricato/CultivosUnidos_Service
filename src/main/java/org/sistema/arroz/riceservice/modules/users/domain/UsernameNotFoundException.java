@@ -3,11 +3,12 @@ package org.sistema.arroz.riceservice.modules.users.domain;
 import lombok.Getter;
 import lombok.Value;
 import org.sistema.arroz.riceservice.hexagonal.errors.NotFoundException;
+import org.sistema.arroz.riceservice.hexagonal.errors.UserInputException;
 
 import static org.sistema.arroz.riceservice.hexagonal.errors.ErrorMessages.USR_05_MESSAGE;
 
 @Getter
-public class UsernameNotFoundException extends RuntimeException implements NotFoundException {
+public class UsernameNotFoundException extends RuntimeException implements UserInputException {
 
     private final String code = "USR_05";
     private final String message;

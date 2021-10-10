@@ -5,10 +5,7 @@ import org.sistema.arroz.riceservice.hexagonal.WebAdapter;
 import org.sistema.arroz.riceservice.modules.users.application.port.in.GetValidatedUserDTO;
 import org.sistema.arroz.riceservice.modules.users.application.port.in.LoginToValidate;
 import org.sistema.arroz.riceservice.modules.users.application.port.in.ValidateLoginUseCase;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @WebAdapter
 @CrossOrigin
@@ -18,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ValidateLoginController {
     private final ValidateLoginUseCase validateLoginUseCase;
 
-    @GetMapping(value = "/login")
-    public GetValidatedUserDTO validateLogin(LoginToValidate loginToValidate){
+    @PostMapping(value = "/login")
+    public GetValidatedUserDTO validateLogin(@RequestBody LoginToValidate loginToValidate){
         return validateLoginUseCase.validateLogin(loginToValidate);
     }
 }
