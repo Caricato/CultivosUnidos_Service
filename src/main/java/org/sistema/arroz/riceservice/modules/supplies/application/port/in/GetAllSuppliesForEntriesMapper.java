@@ -12,5 +12,6 @@ public interface GetAllSuppliesForEntriesMapper {
     @Mapping(source = "supplyId", target = "supplyId")
     @Mapping(source = "supplyName", target = "supplyName")
     @Mapping(source = "supplyMetricType", target = "supplyMetricType")
-    List<GetAllSuppliesForEntriesDTO> toGetAllSuppliesForEntries(List<Supply> supply);
+    GetAllSuppliesForEntriesDTO toGetAllSupplies(Supply supply);
+    List<GetAllSuppliesForEntriesDTO> toGetAllSuppliesForEntries(List<Supply> supplies);
 }

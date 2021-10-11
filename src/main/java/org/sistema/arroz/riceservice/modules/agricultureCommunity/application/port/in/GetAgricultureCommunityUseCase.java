@@ -4,4 +4,5 @@ import org.sistema.arroz.riceservice.modules.agricultureCommunity.domain.Agricul
 
 public interface GetAgricultureCommunityUseCase {
     AgricultureCommunity findCommunityById(Long communityId);
+    AgricultureCommunity findCommunityBySupervisorDNI(String dni);
 }

@@ -4,4 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SpringJpaAgricultureCommunityRepository extends JpaRepository<AgricultureCommunityJpaEntity, Long> {
     AgricultureCommunityJpaEntity findByCommunityIdEquals(Long communityId);
+    AgricultureCommunityJpaEntity findBySupervisorDni(String dni);
 }

@@ -8,6 +8,7 @@ public class ErrorMessages {
     public static final String SUP_04_MESSAGE = "Supply with %d has a limit of %.2f of stock, cant reduce more than that!";
     //For Communities
     public static final String AGC_01_MESSAGE = "Agriculture community with %d id is not registered!";
+    public static final String AGC_02_MESSAGE = "Agriculture community a supervisor with dni %d not registered!";
 
     //For Products
     public static final String PROD_01_MESSAGE = "Product with the id: %d not found";
@@ -31,5 +32,6 @@ public class ErrorMessages {
     public static final String USR_03_MESSAGE = "User with the id: %d not found";
     public static final String USR_04_MESSAGE = "Login invalid! Check credentials";
     public static final String USR_05_MESSAGE = "User with the username: %s not found";
+    public static final String USR_06_MESSAGE = "Supervisor with DNI: %s already registered!";
 
 }
