@@ -16,6 +16,8 @@ public class GetAgricultureCommunityController {
 
     @GetMapping("/{communityId}")
     public AgricultureCommunity getAgricultureCommunity(@PathVariable Long communityId){
-        return getAgricultureCommunityUseCase.findCommunityById(communityId);
+        var community =  getAgricultureCommunityUseCase.findCommunityById(communityId);
+        community.getSupervisor().getUser().setPassword(null);
+        return community;
     }
 }

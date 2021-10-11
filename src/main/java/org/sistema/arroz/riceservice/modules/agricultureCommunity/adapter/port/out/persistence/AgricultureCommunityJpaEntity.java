@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.sistema.arroz.riceservice.modules.supervisor.adapter.port.out.persistence.SupervisorJpaEntity;
 
 import javax.persistence.*;
 
@@ -21,4 +22,8 @@ public class AgricultureCommunityJpaEntity {
 
     @Column(name = "nom_comunidad", length = 100)
     private String communityName;
+
+    @OneToOne
+    @JoinColumn(name = "id_supervisor")
+    private SupervisorJpaEntity supervisor;
 }
