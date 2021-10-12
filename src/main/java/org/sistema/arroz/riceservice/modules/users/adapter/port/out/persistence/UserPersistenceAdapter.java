@@ -51,9 +51,9 @@ public class UserPersistenceAdapter implements DeleteUserPort, RegisterUserPort,
     }
 
     @Override
-    public void generatePassword(Long userId, String encryptedPassword) {
-        var entityOptional = userRepository.findById(userId);
-        if (entityOptional.isEmpty()) throw new UserNotFoundException(userId);
+    public void generatePassword(String username, String encryptedPassword) {
+        var entityOptional = userRepository.findByUsernameAndState(username, true);
+        if (entityOptional.isEmpty()) throw new UsernameNotFoundException(username);
         var entity = entityOptional.get();
         entity.setPassword(encryptedPassword);
         entity.setPasswordFirstTime(false);
