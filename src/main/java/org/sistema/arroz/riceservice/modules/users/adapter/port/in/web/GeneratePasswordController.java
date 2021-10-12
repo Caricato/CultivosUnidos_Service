@@ -3,6 +3,7 @@ package org.sistema.arroz.riceservice.modules.users.adapter.port.in.web;
 import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.hexagonal.WebAdapter;
 import org.sistema.arroz.riceservice.modules.users.application.port.in.GeneratePasswordUseCase;
+import org.sistema.arroz.riceservice.modules.users.application.port.in.PasswordToGenerate;
 import org.springframework.web.bind.annotation.*;
 
 @WebAdapter
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 public class GeneratePasswordController {
     private final GeneratePasswordUseCase generatePasswordUseCase;
 
-    @PostMapping(value = "/first_login/{userId}")
-    public void validateLogin(@RequestParam String password, @PathVariable Long userId){
-        generatePasswordUseCase.generatePassword(userId, password);
+    @PostMapping(value = "/reset")
+    public void validateLogin(@RequestBody PasswordToGenerate passwordToGenerate){
+        generatePasswordUseCase.generatePassword(passwordToGenerate.getToken(), passwordToGenerate.getPassword());
     }
 }
