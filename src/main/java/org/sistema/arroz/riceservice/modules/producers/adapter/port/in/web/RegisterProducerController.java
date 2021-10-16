@@ -8,6 +8,8 @@ import org.sistema.arroz.riceservice.modules.producers.application.port.in.Valid
 import org.sistema.arroz.riceservice.modules.producers.domain.Producer;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @WebAdapter
 @CrossOrigin
 @RestController
@@ -17,9 +19,9 @@ public class RegisterProducerController {
     private final ValidateProducerToRegisterUseCase validateProducerToRegisterUseCase;
     private final RegisterProducerUseCase registerProducerUseCase;
 
-    @PostMapping(value = "/{communityId}")
-    public Producer registerProducer(@PathVariable Long communityId, @RequestBody ProducerToRegister producerToRegister){
+    @PostMapping(value = "")
+    public Producer registerProducer(@RequestBody ProducerToRegister producerToRegister, HttpServletRequest request){
         validateProducerToRegisterUseCase.validateProducer(producerToRegister.getDni());
-        return registerProducerUseCase.registerProducer(communityId, producerToRegister);
+        return registerProducerUseCase.registerProducer(producerToRegister.getCommunityId(), producerToRegister, request);
     }
 }

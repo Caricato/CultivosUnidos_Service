@@ -17,4 +17,5 @@ public class ProducerToRegister {
     String email;
     String address;
     Double hectares;
+    Long communityId;
 }
