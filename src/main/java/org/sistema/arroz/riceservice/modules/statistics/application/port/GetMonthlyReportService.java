@@ -75,8 +75,8 @@ public class GetMonthlyReportService implements GetMonthlyReportUseCase {
         var totalData = cantReport.get(0).getData();
         var theoreticalData = cantReport.get(1).getData();
         var indicatorData = cantReport.get(2).getData();
-        totalData.add((Math.floor(total/100)*100)/100);
-        theoreticalData.add((Math.floor(theoretical/100)*100)/100);
+        totalData.add(total);
+        theoreticalData.add(theoretical);
         if (theoretical != 0) indicatorData.add((Math.floor((total/theoretical)*100)/100)*100);
         else indicatorData.add(0.0);
         cantReport.get(0).setData(totalData);
