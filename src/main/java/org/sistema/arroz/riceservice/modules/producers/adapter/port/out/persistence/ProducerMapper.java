@@ -3,6 +3,7 @@ package org.sistema.arroz.riceservice.modules.producers.adapter.port.out.persist
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.sistema.arroz.riceservice.modules.agricultureCommunity.adapter.port.out.persistence.AgricultureCommunityMapper;
+import org.sistema.arroz.riceservice.modules.producers.application.port.in.ProducerToEdit;
 import org.sistema.arroz.riceservice.modules.producers.application.port.in.ProducerToRegister;
 import org.sistema.arroz.riceservice.modules.producers.domain.Producer;
 import org.sistema.arroz.riceservice.modules.users.adapter.port.out.persistence.UserMapper;
