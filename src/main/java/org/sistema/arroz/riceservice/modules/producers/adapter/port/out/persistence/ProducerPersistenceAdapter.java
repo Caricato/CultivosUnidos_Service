@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class ProducerPersistenceAdapter implements ValidateProducerToRegisterPort, RegisterProducerPort, GetProducersPort, GetProducerPort, EditProducerPort {
+public class ProducerPersistenceAdapter implements ValidateProducerToRegisterPort, RegisterProducerPort, GetProducersPort, GetProducerPort, EditProducerPort, DeleteProducerPort {
     private final ProducerMapper producerMapper;
     private final AgricultureCommunityMapper communityMapper;
     private final UserMapper userMapper;
@@ -69,5 +69,15 @@ public class ProducerPersistenceAdapter implements ValidateProducerToRegisterPor
         entityJpa.setUpdateDate(LocalDateTimePeruZone.now());
         var result = producerRepository.save(entityJpa);
         return producerMapper.toProducer(result);
+    }
+
+    @Override
+    public void deleteProducer(Long producerId) {
+        var entity = producerRepository.findById(producerId);
+        if (entity.isEmpty()) throw new ProducerNotFoundException(producerId);
+        var entityJpa = entity.get();
+        entityJpa.setUpdateDate(LocalDateTimePeruZone.now());
+        entityJpa.getUser().setState(false);
+        var result = producerRepository.save(entityJpa);
     }
 }
