@@ -22,6 +22,7 @@ public interface ProducerMapper {
     @Mapping(source = "producerFirstLastName", target = "producerFirstLastName")
     @Mapping(source = "user", target = "user")
     @Mapping(source = "email", target = "email")
+    @Mapping(source = "phone", target = "phone")
     @Mapping(source = "updateDate", target = "updateDate")
     @Mapping(source = "hectares", target = "hectares")
     Producer toProducer(ProducerJpaEntity producerJpaEntity);
@@ -34,6 +35,7 @@ public interface ProducerMapper {
     @Mapping(source = "dni", target = "dni")
     @Mapping(source = "address", target = "address")
     @Mapping(source = "email", target = "email")
+    @Mapping(source = "phone", target = "phone")
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "community", ignore = true)
     @Mapping(target = "inscriptionDate", ignore = true)

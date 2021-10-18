@@ -16,6 +16,7 @@ public class GetProducerDTO {
     String producerSecondLastName;
     String dni;
     String email;
+    String phone;
     String address;
     Double hectares;
     String fullName;

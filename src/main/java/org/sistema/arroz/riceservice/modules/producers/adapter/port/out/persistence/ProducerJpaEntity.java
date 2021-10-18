@@ -37,6 +37,9 @@ public class ProducerJpaEntity {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "celular")
+    private String phone;
+
     @Column(name = "hectareas")
     private Double hectares;
 

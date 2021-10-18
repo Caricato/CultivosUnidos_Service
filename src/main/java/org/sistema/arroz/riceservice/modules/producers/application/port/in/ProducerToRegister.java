@@ -15,6 +15,7 @@ public class ProducerToRegister {
     String producerFirstLastName;
     String producerSecondLastName;
     String email;
+    String phone;
     String address;
     Double hectares;
     Long communityId;

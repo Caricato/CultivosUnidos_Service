@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProducerToEdit {
     String email;
+    String phone;
     String address;
     Double hectares;
 }

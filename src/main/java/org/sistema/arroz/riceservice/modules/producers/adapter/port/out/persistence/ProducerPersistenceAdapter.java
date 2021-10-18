@@ -65,6 +65,7 @@ public class ProducerPersistenceAdapter implements ValidateProducerToRegisterPor
         var entityJpa = entity.get();
         entityJpa.setAddress(producerToEdit.getAddress());
         entityJpa.setEmail(producerToEdit.getEmail());
+        entityJpa.setPhone(producerToEdit.getPhone());
         entityJpa.setHectares(producerToEdit.getHectares());
         entityJpa.setUpdateDate(LocalDateTimePeruZone.now());
         var result = producerRepository.save(entityJpa);

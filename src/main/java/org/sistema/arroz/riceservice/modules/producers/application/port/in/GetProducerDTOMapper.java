@@ -15,6 +15,7 @@ public interface GetProducerDTOMapper {
     @Mapping(source = "producerSecondLastName", target = "producerSecondLastName")
     @Mapping(source = "address", target = "address")
     @Mapping(source = "dni", target = "dni")
+    @Mapping(source = "phone", target = "phone")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "producerFirstLastName", target = "producerFirstLastName")
     @Mapping(source = "hectares", target = "hectares")
