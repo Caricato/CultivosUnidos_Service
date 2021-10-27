@@ -2,6 +2,7 @@ package org.sistema.arroz.riceservice.modules.token.domain;
 
 import lombok.Value;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Value
@@ -10,6 +11,9 @@ public class ChangePasswordTokenBody {
     String username;
 
     public Map<String, Object> map() {
-        return Map.of("email", email, "username", username);
+        var map = new HashMap<String, Object>();
+        map.put("email", email);
+        map.put("username", username);
+        return map;
     }
 }
