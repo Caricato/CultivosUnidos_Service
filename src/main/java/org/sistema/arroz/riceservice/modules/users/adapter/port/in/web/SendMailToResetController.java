@@ -21,7 +21,7 @@ public class SendMailToResetController {
 
     @PostMapping(value = "/reset/mail")
     public void sendMailToResetPassword(@RequestBody UserToResetPassword user, HttpServletRequest request) throws MessagingException {
-        //sendSMSToResetUseCase.sendSMSToResetPassword(user.getDni());
+        sendSMSToResetUseCase.sendSMSToResetPassword(user.getDni());
         sendMailToResetUseCase.sendMailToReset(user.getDni(), request.getHeader("referer")+"restaurar");
     }
 }
