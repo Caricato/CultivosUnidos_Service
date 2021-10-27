@@ -35,4 +35,6 @@ public class ErrorMessages {
     public static final String USR_06_MESSAGE = "Supervisor with DNI: %s already registered!";
     public static final String USR_PROD_01_MESSAGE = "Could not register producer!";
 
+    //For Schedule
+    public static final String CRG_01_MESSAGE = "Schedule date is not valid";
 }

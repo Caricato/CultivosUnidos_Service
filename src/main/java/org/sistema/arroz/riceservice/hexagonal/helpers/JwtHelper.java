@@ -5,10 +5,10 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.config.JwtConfig;
+import org.sistema.arroz.riceservice.config.LocalDateTimePeruZone;
 import org.sistema.arroz.riceservice.hexagonal.HelperAdapter;
 
 import java.security.Key;
-import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.Map;
@@ -31,7 +31,7 @@ public class JwtHelper {
 
     public String generateToken(String username, Map<String, Object> claims, Long expirationTimeInMinutes) {
         final var key = getKey();
-        var createdDate = LocalDateTime.now();
+        var createdDate = LocalDateTimePeruZone.now();
         var expirationDate = createdDate.plusMinutes(expirationTimeInMinutes);
 
         return Jwts.builder()

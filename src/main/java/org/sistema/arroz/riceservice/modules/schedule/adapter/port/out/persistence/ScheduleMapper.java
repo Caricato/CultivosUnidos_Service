@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.mappers.ProductMapper;
 import org.sistema.arroz.riceservice.modules.schedule.domain.Schedule;
 
-@Mapper(componentModel = "spring", uses = {ProductMapper.class})
+@Mapper(componentModel = "spring", uses = {ProductMapper.class, ScheduleTypeMapper.class})
 public interface ScheduleMapper {
     @Mapping(source = "scheduleId", target = "scheduleId")
     @Mapping(source = "startDate", target = "startDate")
