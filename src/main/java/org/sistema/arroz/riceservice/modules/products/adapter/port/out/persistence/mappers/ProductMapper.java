@@ -1,5 +1,6 @@
 package org.sistema.arroz.riceservice.modules.products.adapter.port.out.persistence.mappers;
 
+import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.sistema.arroz.riceservice.modules.agricultureCommunity.adapter.port.out.persistence.AgricultureCommunityMapper;
@@ -19,6 +20,9 @@ public interface ProductMapper {
     @Mapping(source = "state", target = "state")
     Product toProduct (ProductJpaEntity productJpaEntity);
     List<Product> toProducts (List<ProductJpaEntity> productJpaEntity);
+
+    @InheritConfiguration
+    ProductJpaEntity toProductJpa(Product product);
 
     @Mapping(source = "productName", target = "productName")
     @Mapping(source = "stock", target = "sacks")

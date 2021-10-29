@@ -20,4 +20,10 @@ public class GetProducersService implements GetProducersUseCase {
         getAgricultureCommunityUseCase.findCommunityById(communityId);
         return getProducersPort.getProducers(communityId);
     }
+
+    @Override
+    public List<Producer> getProducersForSchedule(Long communityId) {
+        getAgricultureCommunityUseCase.findCommunityById(communityId);
+        return getProducersPort.getProducersForSchedule(communityId);
+    }
 }

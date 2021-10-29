@@ -1,4 +1,4 @@
-package org.sistema.arroz.riceservice.modules.schedule.adapter.port.out.persistence;
+package org.sistema.arroz.riceservice.modules.schedule.adapter.port.out.persistence.mappers;
 
 import org.mapstruct.Mapper;
 import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleType;

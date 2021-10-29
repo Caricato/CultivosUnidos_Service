@@ -17,11 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(value = "/user")
 public class SendMailToResetController {
     private final SendMailToResetUseCase sendMailToResetUseCase;
-    private final SendSMSToResetUseCase sendSMSToResetUseCase;
 
     @PostMapping(value = "/reset/mail")
     public void sendMailToResetPassword(@RequestBody UserToResetPassword user, HttpServletRequest request) throws MessagingException {
-        sendSMSToResetUseCase.sendSMSToResetPassword(user.getDni());
         sendMailToResetUseCase.sendMailToReset(user.getDni(), request.getHeader("referer")+"restaurar");
     }
 }
