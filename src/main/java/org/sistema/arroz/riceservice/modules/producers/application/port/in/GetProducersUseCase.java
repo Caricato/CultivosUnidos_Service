@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface GetProducersUseCase {
     List<Producer> getProducers(Long communityId);
+    List<Producer> getProducersForSchedule(Long communityId);
 }

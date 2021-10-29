@@ -37,4 +37,7 @@ public class ErrorMessages {
 
     //For Schedule
     public static final String CRG_01_MESSAGE = "Schedule date is not valid";
+    public static final String CRG_02_MESSAGE = "Hectares and/or producers are not valid!";
+    public static final String CRG_03_MESSAGE = "Actual hectares are %.2f hectares and we need %.2f hectares";
+    public static final String CRG_04_MESSAGE = "Not enough supplies to produce";
 }

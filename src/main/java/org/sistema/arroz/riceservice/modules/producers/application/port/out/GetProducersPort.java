@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface GetProducersPort {
     List<Producer> getProducers(Long communityId);
+    List<Producer> getProducersForSchedule(Long communityId);
 }

@@ -47,6 +47,12 @@ public class ProducerPersistenceAdapter implements ValidateProducerToRegisterPor
     }
 
     @Override
+    public List<Producer> getProducersForSchedule(Long communityId) {
+        var entities = producerRepository.findAllByCommunity_CommunityIdAndUser_StateOrderByHectaresDesc(communityId, true);
+        return producerMapper.toProducers(entities);
+    }
+
+    @Override
     public Producer getProducer(Long producerId) {
         var entity = producerRepository.findById(producerId);
         if (entity.isEmpty()) throw new ProducerNotFoundException(producerId);

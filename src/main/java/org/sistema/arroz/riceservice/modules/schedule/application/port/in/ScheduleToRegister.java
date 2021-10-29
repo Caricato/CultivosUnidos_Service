@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class ScheduleToRegister {
     Long productId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    LocalDate saleDate;
+    LocalDate startDate;
     Integer cantProducers;
     Double hectares;
     ScheduleType scheduleType;

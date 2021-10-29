@@ -1,4 +1,4 @@
-package org.sistema.arroz.riceservice.modules.schedule.adapter.port.out.persistence;
+package org.sistema.arroz.riceservice.modules.schedule.adapter.port.out.persistence.entities;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

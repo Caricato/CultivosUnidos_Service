@@ -15,4 +15,9 @@ public class GetUserService implements GetUserUseCase {
     public User getUser(Long userId) {
         return getUserPort.getUser(userId);
     }
+
+    @Override
+    public User getUserByUsername(String dni) {
+        return getUserPort.getUser(dni);
+    }
 }

@@ -4,4 +4,5 @@ import org.sistema.arroz.riceservice.modules.users.domain.User;
 
 public interface GetUserUseCase {
     User getUser(Long userId);
+    User getUserByUsername(String dni);
 }
