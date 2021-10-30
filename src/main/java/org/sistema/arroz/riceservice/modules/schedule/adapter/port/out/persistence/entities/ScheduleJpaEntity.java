@@ -24,6 +24,9 @@ public class ScheduleJpaEntity {
     @Column(name = "fecha_inicio")
     private LocalDate startDate;
 
+    @Column(name = "fecha_fin")
+    private LocalDate endDate;
+
     @Column(name = "hectareas")
     private Double hectares;
 

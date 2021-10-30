@@ -14,6 +14,7 @@ import java.util.List;
 public interface ScheduleMapper {
     @Mapping(source = "scheduleId", target = "scheduleId")
     @Mapping(source = "startDate", target = "startDate")
+    @Mapping(source = "endDate", target = "endDate")
     @Mapping(source = "hectares", target = "hectares")
     @Mapping(source = "product", target = "product")
     @Mapping(source = "state", target = "state")
@@ -25,6 +26,7 @@ public interface ScheduleMapper {
     ScheduleJpaEntity toScheduleJpa(Schedule schedule);
 
     @Mapping(source = "startDate", target = "startDate")
+    @Mapping(source = "endDate", target = "endDate")
     @Mapping(source = "hectares", target = "hectares")
     @Mapping(source = "scheduleType.value", target = "state")
     @Mapping(target = "scheduleId", ignore = true)
