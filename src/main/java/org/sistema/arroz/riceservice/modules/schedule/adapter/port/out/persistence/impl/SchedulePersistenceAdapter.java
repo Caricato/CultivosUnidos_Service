@@ -8,16 +8,18 @@ import org.sistema.arroz.riceservice.modules.schedule.adapter.port.out.persisten
 import org.sistema.arroz.riceservice.modules.schedule.adapter.port.out.persistence.repositories.SpringJpaScheduleRepository;
 import org.sistema.arroz.riceservice.modules.schedule.application.port.in.ScheduleToRegister;
 import org.sistema.arroz.riceservice.modules.schedule.application.port.out.DeleteSchedulePort;
+import org.sistema.arroz.riceservice.modules.schedule.application.port.out.GetSchedulePort;
 import org.sistema.arroz.riceservice.modules.schedule.application.port.out.GetSchedulesPort;
 import org.sistema.arroz.riceservice.modules.schedule.application.port.out.RegisterSchedulePort;
 import org.sistema.arroz.riceservice.modules.schedule.domain.Schedule;
+import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleNotFoundException;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class SchedulePersistenceAdapter implements RegisterSchedulePort, DeleteSchedulePort, GetSchedulesPort {
+public class SchedulePersistenceAdapter implements RegisterSchedulePort, DeleteSchedulePort, GetSchedulesPort, GetSchedulePort {
     private final ScheduleMapper scheduleMapper;
     private final ProductMapper productMapper;
     private final SpringJpaScheduleRepository scheduleRepository;
@@ -40,5 +42,12 @@ public class SchedulePersistenceAdapter implements RegisterSchedulePort, DeleteS
     public List<Schedule> getSchedules(Long communityId) {
         var entities = scheduleRepository.findAllByProductCommunityJpaEntityCommunityId(communityId);
         return scheduleMapper.toSchedules(entities);
+    }
+
+    @Override
+    public Schedule getSchedule(Long scheduleId) {
+        var entity = scheduleRepository.findById(scheduleId);
+        if (entity.isEmpty()) throw new ScheduleNotFoundException(scheduleId);
+        return scheduleMapper.toSchedule(entity.get());
     }
 }

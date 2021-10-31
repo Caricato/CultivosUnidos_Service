@@ -9,7 +9,8 @@ public enum MerchandiseFlowType {
     ASOCIACION(1),
     VENTA(2),
     DESASOCIACION(3),
-    CADUCADO(4);
+    CADUCADO(4),
+    CRONOGRAMA(5);
 
     @Getter
     private final Integer value;

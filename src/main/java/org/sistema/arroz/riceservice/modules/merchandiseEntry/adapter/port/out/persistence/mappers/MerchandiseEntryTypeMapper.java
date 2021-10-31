@@ -17,6 +17,8 @@ public interface MerchandiseEntryTypeMapper {
                 return MerchandiseFlowType.DESASOCIACION;
             case 4:
                 return MerchandiseFlowType.CADUCADO;
+            case 5:
+                return MerchandiseFlowType.CRONOGRAMA;
             default:
                 return null;
         }
