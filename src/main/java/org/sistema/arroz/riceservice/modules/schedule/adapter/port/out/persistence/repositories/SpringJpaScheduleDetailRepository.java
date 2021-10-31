@@ -7,6 +7,6 @@ import java.util.List;
 
 
 public interface SpringJpaScheduleDetailRepository extends JpaRepository<ScheduleDetailJpaEntity, Long> {
-    Double countAllByProducerProducerIdAndScheduleStateOrScheduleState(Long producerId, Integer state, Integer state2);
+    Double countAllByProducerProducerIdAndScheduleStateOrScheduleStateAndIsFreeHectaresEquals(Long producerId, Integer state, Integer state2, Boolean isFreeHectares);
     List<ScheduleDetailJpaEntity> findAllByScheduleScheduleId(Long scheduleId);
 }
