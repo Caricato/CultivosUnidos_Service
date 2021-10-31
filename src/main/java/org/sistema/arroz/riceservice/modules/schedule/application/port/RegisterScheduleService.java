@@ -3,7 +3,9 @@ package org.sistema.arroz.riceservice.modules.schedule.application.port;
 import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.config.LocalDateTimePeruZone;
 import org.sistema.arroz.riceservice.hexagonal.UseCase;
+import org.sistema.arroz.riceservice.modules.parameters.application.port.in.GetScheduleDurationUseCase;
 import org.sistema.arroz.riceservice.modules.products.application.port.in.GetProductUseCase;
+import org.sistema.arroz.riceservice.modules.products.application.port.out.UpdateProductStockPort;
 import org.sistema.arroz.riceservice.modules.schedule.application.port.in.RegisterScheduleUseCase;
 import org.sistema.arroz.riceservice.modules.schedule.application.port.in.ScheduleToRegister;
 import org.sistema.arroz.riceservice.modules.schedule.application.port.in.ValidateHectaresUseCase;
@@ -14,6 +16,9 @@ import org.sistema.arroz.riceservice.modules.schedule.domain.Schedule;
 import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleDateException;
 import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleHectaresNotValidException;
 import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleType;
+import org.sistema.arroz.riceservice.modules.supplies.application.port.out.UpdateSupplyStockPort;
+
+import java.time.LocalDate;
 
 @UseCase
 @RequiredArgsConstructor
@@ -23,6 +28,7 @@ public class RegisterScheduleService implements RegisterScheduleUseCase {
     private final RegisterSchedulePort registerSchedulePort;
     private final RegisterScheduleDetailsPort registerScheduleDetailsPort;
     private final DeleteSchedulePort deleteSchedulePort;
+    private final GetScheduleDurationUseCase getScheduleDurationUseCase;
 
     @Override
     public Schedule registerSchedule(Long communityId, ScheduleToRegister scheduleToRegister) {
@@ -30,12 +36,16 @@ public class RegisterScheduleService implements RegisterScheduleUseCase {
         if (startDate.compareTo(LocalDateTimePeruZone.now().toLocalDate()) < 0){
             throw new ScheduleDateException(startDate);
         }
-        if (scheduleToRegister.getHectares() <= 0 || scheduleToRegister.getCantProducers() <=0) throw new ScheduleHectaresNotValidException(scheduleToRegister.getHectares(), scheduleToRegister.getCantProducers());
-        else if(startDate.compareTo(LocalDateTimePeruZone.now().toLocalDate()) > 0) scheduleToRegister.setScheduleType(ScheduleType.PENDING);
+        if (scheduleToRegister.getHectares() <= 0 ||(scheduleToRegister.getCantProducers() != null && scheduleToRegister.getCantProducers() <=0))
+            throw new ScheduleHectaresNotValidException(scheduleToRegister.getHectares(), scheduleToRegister.getCantProducers());
+
+        if(startDate.compareTo(LocalDateTimePeruZone.now().toLocalDate()) > 0)
+            scheduleToRegister.setScheduleType(ScheduleType.PENDING);
         else scheduleToRegister.setScheduleType(ScheduleType.IN_PROCESS);
+
         var scheduleDetails = validateHectaresUseCase.validateHectares(communityId, scheduleToRegister);
         scheduleToRegister.setCantProducers(scheduleDetails.size());
-
+        scheduleToRegister.setEndDate(calculateEndDate(scheduleToRegister.getStartDate()));
         var schedule = registerSchedulePort.registerSchedule(scheduleToRegister, getProductUseCase.getProductById(scheduleToRegister.getProductId()));
         try{
             registerScheduleDetailsPort.registerScheduleDetails(scheduleDetails, schedule);
@@ -44,5 +54,10 @@ public class RegisterScheduleService implements RegisterScheduleUseCase {
             throw ex;
         }
         return schedule;
+    }
+
+    private LocalDate calculateEndDate(LocalDate initialDate){
+        var monthsOffset = getScheduleDurationUseCase.getScheduleDuration();
+        return initialDate.plusMonths(monthsOffset);
     }
 }

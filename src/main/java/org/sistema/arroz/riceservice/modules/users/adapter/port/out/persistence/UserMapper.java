@@ -11,8 +11,6 @@ public interface UserMapper {
     @Mapping(source = "userId", target = "userId")
     @Mapping(source = "password", target = "password")
     @Mapping(source = "username", target = "username")
-    @Mapping(source = "passwordReset", target = "passwordReset")
-    @Mapping(source = "passwordFirstTime", target = "passwordFirstTime")
     @Mapping(source = "role", target = "role")
     @Mapping(source = "state", target = "state")
     User toUser(UserJpaEntity userJpaEntity);
@@ -24,8 +22,6 @@ public interface UserMapper {
     @Mapping(source = "role.value", target = "role")
     @Mapping(target = "password", ignore = true)
     @Mapping(target = "userId", ignore = true)
-    @Mapping(target = "passwordFirstTime", ignore = true)
-    @Mapping(target = "passwordReset", ignore = true)
     @Mapping(target = "state", ignore = true)
     UserJpaEntity toUserJpa(UserToRegister userToRegister);
 }

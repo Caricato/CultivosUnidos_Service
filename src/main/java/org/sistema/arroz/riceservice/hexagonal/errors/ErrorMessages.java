@@ -40,4 +40,8 @@ public class ErrorMessages {
     public static final String CRG_02_MESSAGE = "Hectares and/or producers are not valid!";
     public static final String CRG_03_MESSAGE = "Actual hectares are %.2f hectares and we need %.2f hectares";
     public static final String CRG_04_MESSAGE = "Not enough supplies to produce";
+    public static final String CRG_05_MESSAGE = "Schedule with the id %d not found";
+
+    //For Parameters
+    public static final String PARAM_01_MESSAGE = "Parameters not loaded correctly. Please contact the administrator!";
 }

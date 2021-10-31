@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleType;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -13,12 +11,11 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ScheduleToRegister {
-    Long productId;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+public class GetScheduleDTO {
+    Long scheduleId;
     LocalDate startDate;
     LocalDate endDate;
-    Integer cantProducers;
     Double hectares;
-    ScheduleType scheduleType;
+    String state;
+    String productName;
 }

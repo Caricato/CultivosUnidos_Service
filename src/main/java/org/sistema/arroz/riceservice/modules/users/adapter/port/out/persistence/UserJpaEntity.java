@@ -30,10 +30,4 @@ public class UserJpaEntity {
 
     @Column(name = "rol")
     private String role;
-
-    @Column(name = "credenciales_reinicio")
-    private Boolean passwordReset;
-
-    @Column(name = "credenciales_primer_acceso")
-    private Boolean passwordFirstTime;
 }

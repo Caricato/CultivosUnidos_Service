@@ -15,6 +15,7 @@ import java.time.LocalDate;
 public class Schedule {
     Long scheduleId;
     LocalDate startDate;
+    LocalDate endDate;
     Double hectares;
     ScheduleType state;
     Product product;

@@ -15,8 +15,7 @@ public class GenerateChangePasswordTokenService implements GenerateChangePasswor
 
     @Override
     public String generateChangePassword(String username, String email) {
-        var expMinutes = 1440L;
         var claims = new ChangePasswordTokenBody(email, username).map();
-        return jwtHelper.generateToken(username, claims, expMinutes);
+        return jwtHelper.generateToken(username, claims, jwtConfig.getResetPassword().getExpirationInMinutes());
     }
 }
