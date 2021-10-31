@@ -28,8 +28,6 @@ public class UserPersistenceAdapter implements DeleteUserPort, RegisterUserPort,
     @Override
     public User registerUser(UserToRegister userToRegister) {
         var user = userMapper.toUserJpa(userToRegister);
-        user.setPasswordReset(false);
-        user.setPasswordFirstTime(true);
         user.setState(true);
         var result = userRepository.save(user);
         return userMapper.toUser(result);
@@ -56,7 +54,6 @@ public class UserPersistenceAdapter implements DeleteUserPort, RegisterUserPort,
         if (entityOptional.isEmpty()) throw new UsernameNotFoundException(username);
         var entity = entityOptional.get();
         entity.setPassword(encryptedPassword);
-        entity.setPasswordFirstTime(false);
         userRepository.save(entity);
     }
 }

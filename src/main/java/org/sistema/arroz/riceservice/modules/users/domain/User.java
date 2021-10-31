@@ -15,6 +15,4 @@ public class User {
     String password;
     UserRole role;
     Boolean state;
-    Boolean passwordReset;
-    Boolean passwordFirstTime;
 }

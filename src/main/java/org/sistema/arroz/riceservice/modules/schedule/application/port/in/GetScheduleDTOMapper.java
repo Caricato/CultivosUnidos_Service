@@ -14,6 +14,7 @@ public interface GetScheduleDTOMapper {
     @Mapping(source = "scheduleId", target = "scheduleId")
     @Mapping(source = "hectares", target = "hectares")
     @Mapping(source = "startDate", target = "startDate")
+    @Mapping(source = "endDate", target = "endDate")
     @Mapping(source = "product.productName", target = "productName")
     GetScheduleDTO getScheduleDTO(Schedule schedule);
     List<GetScheduleDTO> getSchedulesDTO(List<Schedule> schedules);

@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class GetScheduleDTO {
     Long scheduleId;
     LocalDate startDate;
+    LocalDate endDate;
     Double hectares;
     String state;
     String productName;
