@@ -11,11 +11,12 @@ import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleDetail;
 import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleDetailNotFoundException;
 import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleType;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class ScheduleDetailPersistenceAdapter implements CountTakenHectaresPort, RegisterScheduleDetailsPort, GetScheduleDetailsPort, FreeHectaresPort {
+public class ScheduleDetailPersistenceAdapter implements CountTakenHectaresPort, RegisterScheduleDetailsPort, GetScheduleDetailsPort, FreeHectaresPort, DeleteScheduleDetailsPort {
     private final ScheduleDetailMapper scheduleDetailMapper;
     private final ScheduleMapper scheduleMapper;
     private final SpringJpaScheduleDetailRepository scheduleDetailRepository;
@@ -46,5 +47,11 @@ public class ScheduleDetailPersistenceAdapter implements CountTakenHectaresPort,
         if (scheduleDetail.isEmpty()) throw new ScheduleDetailNotFoundException(scheduleDetailId);
         scheduleDetail.get().setIsFreeHectares(true);
         scheduleDetailRepository.save(scheduleDetail.get());
+    }
+
+    @Transactional
+    @Override
+    public void deleteScheduleDetails(Long scheduleId) {
+        scheduleDetailRepository.deleteAllByScheduleScheduleId(scheduleId);
     }
 }

@@ -42,6 +42,7 @@ public class ErrorMessages {
     public static final String CRG_04_MESSAGE = "Not enough supplies to produce";
     public static final String CRG_05_MESSAGE = "Schedule with the id %d not found";
     public static final String CRG_06_MESSAGE = "Schedule Detail with the id %d not found";
+    public static final String CRG_07_MESSAGE = "Schedule with the id %d not valid for deletion";
 
     //For Parameters
     public static final String PARAM_01_MESSAGE = "Parameters not loaded correctly. Please contact the administrator!";

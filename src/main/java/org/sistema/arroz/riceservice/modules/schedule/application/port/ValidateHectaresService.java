@@ -34,6 +34,7 @@ public class ValidateHectaresService implements ValidateHectaresUseCase {
         var i = 0;
         var scheduleDetails = new ArrayList<ScheduleDetailToRegister>();
         while(i < counter){
+            if (auxHectares == scheduleToRegister.getHectares()) break;
             var hectaresForProducer = producers.get(i).getFreeHectares();
             if (auxHectares+hectaresForProducer > scheduleToRegister.getHectares()) hectaresForProducer = (scheduleToRegister.getHectares()-auxHectares);
             auxHectares+=hectaresForProducer;
