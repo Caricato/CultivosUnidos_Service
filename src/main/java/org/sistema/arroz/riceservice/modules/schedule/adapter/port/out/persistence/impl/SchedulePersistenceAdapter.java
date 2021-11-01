@@ -41,7 +41,7 @@ public class SchedulePersistenceAdapter implements RegisterSchedulePort, DeleteS
 
     @Override
     public List<Schedule> getSchedules(Long communityId) {
-        var entities = scheduleRepository.findAllByProductCommunityJpaEntityCommunityId(communityId);
+        var entities = scheduleRepository.findAllByProductCommunityJpaEntityCommunityIdOrderByStateAsc(communityId);
         return scheduleMapper.toSchedules(entities);
     }
 
