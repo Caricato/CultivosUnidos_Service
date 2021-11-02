@@ -5,5 +5,5 @@ import org.sistema.arroz.riceservice.modules.schedule.domain.Schedule;
 import java.util.List;
 
 public interface GetSchedulesUseCase {
-    List<Schedule> getSchedules(Long communityId);
+    List<Schedule> getSchedules(Long communityId, Integer year, Integer active);
 }

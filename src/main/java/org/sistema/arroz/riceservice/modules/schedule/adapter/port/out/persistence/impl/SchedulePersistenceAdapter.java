@@ -15,6 +15,7 @@ import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleNotFoundExc
 import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleType;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,8 +41,15 @@ public class SchedulePersistenceAdapter implements RegisterSchedulePort, DeleteS
     }
 
     @Override
-    public List<Schedule> getSchedules(Long communityId) {
-        var entities = scheduleRepository.findAllByProductCommunityJpaEntityCommunityIdOrderByStateAsc(communityId);
+    public List<Schedule> getActiveSchedules(Long communityId, LocalDate yearDate, LocalDate yearDate2) {
+        var entities = scheduleRepository.searchActiveSchedules
+                        (communityId, yearDate, yearDate2, yearDate, yearDate2, ScheduleType.PENDING.getValue(), ScheduleType.IN_PROCESS.getValue());
+        return scheduleMapper.toSchedules(entities);
+    }
+
+    @Override
+    public List<Schedule> getFinishedSchedules(Long communityId, LocalDate yearDate, LocalDate endDate) {
+        var entities = scheduleRepository.searchFinishedSchedules(communityId, yearDate, endDate, yearDate, endDate, ScheduleType.FINALIZED.getValue());
         return scheduleMapper.toSchedules(entities);
     }
 

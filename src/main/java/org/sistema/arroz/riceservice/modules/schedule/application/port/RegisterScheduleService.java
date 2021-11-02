@@ -56,15 +56,15 @@ public class RegisterScheduleService implements RegisterScheduleUseCase {
         return schedule;
     }
 
-    private LocalDate calculateEndDate(LocalDate initialDate){
-        var monthsOffset = getScheduleDurationUseCase.getScheduleDuration();
+    private LocalDate calculateEndDate(Long communityId, LocalDate initialDate){
+        var monthsOffset = getScheduleDurationUseCase.getScheduleDuration(communityId);
         return initialDate.plusMonths(monthsOffset);
     }
 
     private Schedule registerScheduleDetails(Long communityId, ScheduleToRegister scheduleToRegister){
         var scheduleDetails = validateHectaresUseCase.validateHectares(communityId, scheduleToRegister);
         scheduleToRegister.setCantProducers(scheduleDetails.size());
-        scheduleToRegister.setEndDate(calculateEndDate(scheduleToRegister.getStartDate()));
+        scheduleToRegister.setEndDate(calculateEndDate(communityId, scheduleToRegister.getStartDate()));
         var schedule = registerSchedulePort.registerSchedule(scheduleToRegister, getProductUseCase.getProductById(scheduleToRegister.getProductId()));
         try{
             registerScheduleDetailsPort.registerScheduleDetails(scheduleDetails, schedule);
