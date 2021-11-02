@@ -12,7 +12,7 @@ import java.util.List;
 
 @UseCase
 @RequiredArgsConstructor
-public class SendSMSToFinishService implements SendSMSToFinishScheduleUseCase {
+public class SendSMSToFinishScheduleService implements SendSMSToFinishScheduleUseCase {
     private final SendSMSPort sendSMSPort;
 
     @Override

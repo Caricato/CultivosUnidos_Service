@@ -48,4 +48,7 @@ public class ErrorMessages {
 
     //For Parameters
     public static final String PARAM_01_MESSAGE = "Parameters not loaded correctly. Please contact the administrator!";
+
+    //For Notifications
+    public static final String SMS_01_MESSAGE= "Error in sending SMS notification. Contact the administrator!. Exception: %s";
 }
