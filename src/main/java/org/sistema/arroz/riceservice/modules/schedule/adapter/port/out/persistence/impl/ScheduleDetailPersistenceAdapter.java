@@ -5,27 +5,26 @@ import org.sistema.arroz.riceservice.hexagonal.PersistenceAdapter;
 import org.sistema.arroz.riceservice.modules.schedule.adapter.port.out.persistence.mappers.ScheduleDetailMapper;
 import org.sistema.arroz.riceservice.modules.schedule.adapter.port.out.persistence.mappers.ScheduleMapper;
 import org.sistema.arroz.riceservice.modules.schedule.adapter.port.out.persistence.repositories.SpringJpaScheduleDetailRepository;
-import org.sistema.arroz.riceservice.modules.schedule.application.port.out.CountTakenHectaresPort;
-import org.sistema.arroz.riceservice.modules.schedule.application.port.out.GetScheduleDetailsPort;
-import org.sistema.arroz.riceservice.modules.schedule.application.port.out.RegisterScheduleDetailsPort;
-import org.sistema.arroz.riceservice.modules.schedule.application.port.out.ScheduleDetailToRegister;
+import org.sistema.arroz.riceservice.modules.schedule.application.port.out.*;
 import org.sistema.arroz.riceservice.modules.schedule.domain.Schedule;
 import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleDetail;
+import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleDetailNotFoundException;
 import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleType;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class ScheduleDetailPersistenceAdapter implements CountTakenHectaresPort, RegisterScheduleDetailsPort, GetScheduleDetailsPort {
+public class ScheduleDetailPersistenceAdapter implements CountTakenHectaresPort, RegisterScheduleDetailsPort, GetScheduleDetailsPort, FreeHectaresPort, DeleteScheduleDetailsPort, FreeAllHectaresPort {
     private final ScheduleDetailMapper scheduleDetailMapper;
     private final ScheduleMapper scheduleMapper;
     private final SpringJpaScheduleDetailRepository scheduleDetailRepository;
 
     @Override
     public Double takenHectares(Long producerId) {
-        return scheduleDetailRepository.countAllByProducerProducerIdAndScheduleStateOrScheduleState(producerId,
-                ScheduleType.PENDING.getValue(), ScheduleType.IN_PROCESS.getValue());
+        return scheduleDetailRepository.countAllByProducerProducerIdAndScheduleStateOrScheduleStateAndIsFreeHectaresEquals(producerId,
+                ScheduleType.PENDING.getValue(), ScheduleType.IN_PROCESS.getValue(), false);
     }
 
     @Override
@@ -40,5 +39,26 @@ public class ScheduleDetailPersistenceAdapter implements CountTakenHectaresPort,
     public List<ScheduleDetail> getScheduleDetails(Long scheduleId) {
         var scheduleDetailsJpa = scheduleDetailRepository.findAllByScheduleScheduleId(scheduleId);
         return scheduleDetailMapper.toScheduleDetails(scheduleDetailsJpa);
+    }
+
+    @Override
+    public void freeHectares(Long scheduleDetailId) {
+        var scheduleDetail = scheduleDetailRepository.findById(scheduleDetailId);
+        if (scheduleDetail.isEmpty()) throw new ScheduleDetailNotFoundException(scheduleDetailId);
+        scheduleDetail.get().setIsFreeHectares(true);
+        scheduleDetailRepository.save(scheduleDetail.get());
+    }
+
+    @Transactional
+    @Override
+    public void deleteScheduleDetails(Long scheduleId) {
+        scheduleDetailRepository.deleteAllByScheduleScheduleId(scheduleId);
+    }
+
+    @Override
+    public void freeAllHectares(Long scheduleId) {
+        var scheduleDetailsJpa = scheduleDetailRepository.findAllByScheduleScheduleId(scheduleId);
+        scheduleDetailsJpa.forEach(scheduleDetailJpaEntity -> scheduleDetailJpaEntity.setIsFreeHectares(true));
+        scheduleDetailRepository.saveAll(scheduleDetailsJpa);
     }
 }

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetScheduleDetailDTO {
+    Long scheduleDetailId;
     String producerName;
     String producerDNI;
     Double producerHectares;

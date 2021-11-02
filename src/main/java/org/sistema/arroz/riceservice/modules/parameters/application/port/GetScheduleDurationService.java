@@ -11,8 +11,8 @@ public class GetScheduleDurationService implements GetScheduleDurationUseCase {
     private final GetParametersPort getParametersPort;
 
     @Override
-    public Integer getScheduleDuration() {
-        var parameters = getParametersPort.getParameters();
+    public Integer getScheduleDuration(Long communityId) {
+        var parameters = getParametersPort.getParameters(communityId);
         return parameters.getDurationSchedule();
     }
 }

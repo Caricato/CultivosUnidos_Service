@@ -19,8 +19,8 @@ public class GetSchedulesController {
     private final GetScheduleDTOMapper getScheduleDTOMapper;
 
     @GetMapping("/{communityId}")
-    public List<GetScheduleDTO> getSchedules(@PathVariable Long communityId){
-        var schedules = getSchedulesUseCase.getSchedules(communityId);
+    public List<GetScheduleDTO> getSchedules(@PathVariable Long communityId, @RequestParam Integer year, @RequestParam Integer active){
+        var schedules = getSchedulesUseCase.getSchedules(communityId, year, active);
         return getScheduleDTOMapper.getSchedulesDTO(schedules);
     }
 }

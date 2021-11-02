@@ -6,20 +6,20 @@ import org.sistema.arroz.riceservice.hexagonal.errors.ErrorMessages;
 import org.sistema.arroz.riceservice.hexagonal.errors.UserInputException;
 
 @Getter
-public class ScheduleHectaresNotValidException extends RuntimeException implements UserInputException {
-    private final String code = "CRG_99";
+public class ScheduleStockException extends RuntimeException implements UserInputException {
+    private final String code = "CRG_02";
     private final String message;
     private final Object data;
 
     @Value
     static class Data{
+        Long productId;
         Double hectares;
-        Integer cantProducers;
     }
 
-    public ScheduleHectaresNotValidException(Double hectares, Integer cantProducers) {
+    public ScheduleStockException(Long productId, Double hectares) {
         super();
-        this.message = ErrorMessages.CRG_99_MESSAGE;
-        this.data = new Data(hectares, cantProducers);
+        this.message = String.format(ErrorMessages.CRG_02_MESSAGE, hectares, productId);
+        this.data = new Data(productId, hectares);
     }
 }

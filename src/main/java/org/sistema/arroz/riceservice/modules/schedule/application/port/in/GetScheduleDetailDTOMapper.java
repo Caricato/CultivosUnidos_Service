@@ -10,6 +10,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface GetScheduleDetailDTOMapper {
+    @Mapping(source = "scheduleDetailId", target = "scheduleDetailId")
     @Mapping(source = "isFreeHectares", target = "isFreeHectares")
     @Mapping(source = "producer.dni", target = "producerDNI")
     @Mapping(source = "hectares", target = "producerHectares")

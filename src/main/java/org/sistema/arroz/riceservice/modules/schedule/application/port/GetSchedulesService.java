@@ -6,6 +6,7 @@ import org.sistema.arroz.riceservice.modules.schedule.application.port.in.GetSch
 import org.sistema.arroz.riceservice.modules.schedule.application.port.out.GetSchedulesPort;
 import org.sistema.arroz.riceservice.modules.schedule.domain.Schedule;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @UseCase
@@ -14,7 +15,10 @@ public class GetSchedulesService implements GetSchedulesUseCase {
     private final GetSchedulesPort getSchedulesPort;
 
     @Override
-    public List<Schedule> getSchedules(Long communityId) {
-        return getSchedulesPort.getSchedules(communityId);
+    public List<Schedule> getSchedules(Long communityId, Integer year, Integer active) {
+        var yearDate = LocalDate.of(year, 1, 1);
+        var nextYear = LocalDate.of(year, 12, 31);
+        if (active == 0) return getSchedulesPort.getFinishedSchedules(communityId, yearDate, nextYear);
+        return getSchedulesPort.getActiveSchedules(communityId, yearDate, nextYear);
     }
 }

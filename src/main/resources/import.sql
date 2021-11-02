@@ -7,5 +7,5 @@ COMMIT;
 INSERT INTO tp_comunidad_agricola(nom_comunidad, id_supervisor) VALUES('Tambo Seco', 1);
 COMMIT;
 
-INSERT INTO ts_parametros_generales(duracion_cronograma) VALUES (6);
+INSERT INTO ts_parametros_generales(duracion_cronograma, id_comunidad) VALUES (6, 1);
 COMMIT;

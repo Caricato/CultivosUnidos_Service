@@ -12,46 +12,23 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping(value = "/merchandise_entry")
 public class RegisterMerchandiseEntryController {
-    private final RegisterMerchandiseEntryUseCase merchandiseEntryUseCase;
-    private final RegisterMerchandiseEntryDetailsUseCase merchandiseEntryDetailsUseCase;
-    private final RegisterMerchandiseOutDetailsUseCase merchandiseOutDetailsUseCase;
-    private final RegisterMerchandiseProductDetailUseCase merchandiseProductDetailUseCase;
-    private final ValidateMerchandiseOutUseCase validateMerchandiseOutUseCase;
+    private final RegisterProductInUseCase registerProductInUseCase;
+    private final RegisterSupplyInUseCase registerSupplyInUseCase;
+    private final RegisterSupplyOutUseCase registerSupplyOutUseCase;
 
     @PostMapping(value = "/{communityId}")
     public MerchandiseEntryDTO registerMerchandiseEntry(@RequestBody MerchandiseEntryToRegisterDTO merchandiseEntryDTO,
                                                         @PathVariable Long communityId){
 
+        var merchandiseEntry = MerchandiseEntryToRegister.builder().entryDate(merchandiseEntryDTO.getEntryDate().atStartOfDay()).entryType(merchandiseEntryDTO.getEntryType())
+                .producerId(merchandiseEntryDTO.getProducerId()).subtype(merchandiseEntryDTO.getSubtype()).build();
         switch(merchandiseEntryDTO.getSubtype()) {
             case ENTRADA_INSUMO:
-                var merchandiseEntryToRegister = MerchandiseEntryToRegister.builder().entryDate(merchandiseEntryDTO.getEntryDate().atStartOfDay()).entryType(merchandiseEntryDTO.getEntryType())
-                        .producerId(merchandiseEntryDTO.getProducerId()).subtype(merchandiseEntryDTO.getSubtype()).build();
-                var merchandiseEntry = merchandiseEntryUseCase.registerMerchandiseEntry(merchandiseEntryToRegister, communityId);
-                var details = merchandiseEntryDetailsUseCase.registerMerchandiseEntryDetails(merchandiseEntryDTO.getDetailsToRegister(), merchandiseEntry);
-
-                return MerchandiseEntryDTO.builder()
-                        .merchandiseFlow(merchandiseEntry)
-                        .details(details)
-                        .build();
+                return registerSupplyInUseCase.registerSupplyIn(merchandiseEntry, merchandiseEntryDTO.getDetailsToRegister(), communityId);
             case SALIDA_INSUMO:
-                validateMerchandiseOutUseCase.validateMerchandiseOut(merchandiseEntryDTO.getDetailsToRegister());
-                var merchandiseOutToRegister = MerchandiseEntryToRegister.builder().entryDate(merchandiseEntryDTO.getEntryDate().atStartOfDay()).entryType(merchandiseEntryDTO.getEntryType())
-                        .producerId(merchandiseEntryDTO.getProducerId()).subtype(merchandiseEntryDTO.getSubtype()).build();
-                var merchandiseOut = merchandiseEntryUseCase.registerMerchandiseEntry(merchandiseOutToRegister, communityId);
-                var detailsOut = merchandiseOutDetailsUseCase.registerMerchandiseOutDetails(merchandiseEntryDTO.getDetailsToRegister(), merchandiseOut);
-                return MerchandiseEntryDTO.builder()
-                        .merchandiseFlow(merchandiseOut)
-                        .details(detailsOut)
-                        .build();
+                return registerSupplyOutUseCase.registerSupplyOut(merchandiseEntry, merchandiseEntryDTO.getDetailsToRegister(), communityId);
             case ENTRADA_PRODUCTO:
-                var productToRegister = MerchandiseEntryToRegister.builder().entryDate(merchandiseEntryDTO.getEntryDate().atStartOfDay()).entryType(merchandiseEntryDTO.getEntryType())
-                        .producerId(merchandiseEntryDTO.getProducerId()).subtype(merchandiseEntryDTO.getSubtype()).build();
-                var productIn = merchandiseEntryUseCase.registerMerchandiseEntry(productToRegister, communityId);
-                var detailsProduct = merchandiseProductDetailUseCase.registerMerchandiseOutDetails(merchandiseEntryDTO.getDetailsToRegister(), productIn);
-                return MerchandiseEntryDTO.builder()
-                        .merchandiseFlow(productIn)
-                        .details(detailsProduct)
-                        .build();
+                return registerProductInUseCase.registerProductIn(merchandiseEntry, merchandiseEntryDTO.getDetailsToRegister(), communityId);
             default:
                 throw new MerchandiseFlowInvalidException(merchandiseEntryDTO.getSubtype().toString());
         }
