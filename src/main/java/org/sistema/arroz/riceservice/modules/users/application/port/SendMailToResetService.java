@@ -2,12 +2,13 @@ package org.sistema.arroz.riceservice.modules.users.application.port;
 
 import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.hexagonal.UseCase;
+import org.sistema.arroz.riceservice.hexagonal.sms.Messages;
 import org.sistema.arroz.riceservice.modules.producers.application.port.in.GetProducerUseCase;
 import org.sistema.arroz.riceservice.modules.supervisor.application.port.in.GetSupervisorUseCase;
 import org.sistema.arroz.riceservice.modules.token.application.port.in.GenerateChangePasswordTokenUseCase;
 import org.sistema.arroz.riceservice.modules.users.application.port.in.GetUserUseCase;
 import org.sistema.arroz.riceservice.modules.users.application.port.in.SendMailToResetUseCase;
-import org.sistema.arroz.riceservice.modules.users.application.port.in.SendSMSToResetUseCase;
+import org.sistema.arroz.riceservice.modules.notifications.application.port.in.SendSMSToResetUseCase;
 import org.sistema.arroz.riceservice.modules.users.application.port.out.SendMailToResetPort;
 import org.sistema.arroz.riceservice.modules.users.domain.UserRole;
 
@@ -30,7 +31,8 @@ public class SendMailToResetService implements SendMailToResetUseCase {
             var producer = getProducerUseCase.getProducer(dni);
             var token = generateChangePasswordTokenUseCase.generateChangePassword(producer.getDni(), producer.getEmail());
             sendMailToResetPort.sendMailToReset(producer.getEmail(), url, token);
-            sendSMSToResetUseCase.sendSMSToResetPassword(dni);
+            var message = String.format(Messages.SMS_TO_RESET, producer.getProducerName(), producer.getProducerFirstLastName());
+            sendSMSToResetUseCase.sendSMSToReset(dni, message);
         }
         else{
             var supervisor = getSupervisorUseCase.getSupervisorByDNI(dni);
