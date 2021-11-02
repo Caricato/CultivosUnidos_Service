@@ -5,8 +5,8 @@ import org.sistema.arroz.riceservice.hexagonal.UseCase;
 import org.sistema.arroz.riceservice.hexagonal.sms.Messages;
 import org.sistema.arroz.riceservice.modules.notifications.application.port.in.SendSMSToPendScheduleUseCase;
 import org.sistema.arroz.riceservice.modules.notifications.application.port.out.SendSMSPort;
+import org.sistema.arroz.riceservice.modules.schedule.application.port.out.ScheduleDetailToRegister;
 import org.sistema.arroz.riceservice.modules.schedule.domain.Schedule;
-import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleDetail;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class SendSMStoPendScheduleService implements SendSMSToPendScheduleUseCas
     private final SendSMSPort sendSMSPort;
 
     @Override
-    public void sendSMSToPend(Schedule schedule, List<ScheduleDetail> scheduleDetails) {
+    public void sendSMSToPend(Schedule schedule, List<ScheduleDetailToRegister> scheduleDetails) {
         var pendingDate = schedule.getStartDate().toString();
         var productName = schedule.getProduct().getProductName();
         for (var scheduleDetail: scheduleDetails){
