@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class RoutingScheduler {
     private final UpdateScheduleStateUseCase updateScheduleStateUseCase;
 
-    @Scheduled(cron = "0 0 0 ? * * *")
+    @Scheduled(cron = "0 0 5 * * ?")
     public void generateSchedule(){
         updateScheduleStateUseCase.updateScheduleState();
     }
