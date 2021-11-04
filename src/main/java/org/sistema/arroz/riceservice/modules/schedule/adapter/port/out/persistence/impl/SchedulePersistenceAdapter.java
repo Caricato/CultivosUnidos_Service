@@ -86,8 +86,6 @@ public class SchedulePersistenceAdapter implements RegisterSchedulePort, DeleteS
     public List<Schedule> finishSchedules() {
         var nowDate = LocalDate.now();
         var schedulesJpa = scheduleRepository.findAllByStateEqualsAndEndDateBetween(ScheduleType.IN_PROCESS.getValue(), nowDate, nowDate);
-        schedulesJpa.forEach(scheduleJpaEntity -> scheduleJpaEntity.setState(ScheduleType.FINALIZED.getValue()));
-        var result = scheduleRepository.saveAll(schedulesJpa);
-        return scheduleMapper.toSchedules(result);
+        return scheduleMapper.toSchedules(schedulesJpa);
     }
 }

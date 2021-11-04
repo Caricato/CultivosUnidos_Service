@@ -5,6 +5,7 @@ import org.sistema.arroz.riceservice.hexagonal.UseCase;
 import org.sistema.arroz.riceservice.modules.notifications.application.port.in.SendSMSToFinishScheduleUseCase;
 import org.sistema.arroz.riceservice.modules.notifications.application.port.in.SendSMSToStartScheduleUseCase;
 import org.sistema.arroz.riceservice.modules.notifications.domain.SendSMSException;
+import org.sistema.arroz.riceservice.modules.schedule.application.port.in.FinishScheduleUseCase;
 import org.sistema.arroz.riceservice.modules.schedule.application.port.in.GetScheduleDetailsUseCase;
 import org.sistema.arroz.riceservice.modules.schedule.application.port.in.UpdateScheduleStateUseCase;
 import org.sistema.arroz.riceservice.modules.schedule.application.port.out.UpdateScheduleStatePort;
@@ -20,15 +21,17 @@ public class UpdateScheduleStateService implements UpdateScheduleStateUseCase {
     private final GetScheduleDetailsUseCase getScheduleDetailsUseCase;
     private final SendSMSToStartScheduleUseCase sendSMSToStartScheduleUseCase;
     private final SendSMSToFinishScheduleUseCase sendSMSToFinishScheduleUseCase;
+    private final FinishScheduleUseCase finishScheduleUseCase;
 
     @Override
     public List<Schedule> updateScheduleState() {
         var schedulesActivated = updateScheduleStatePort.activateSchedules();
         var schedulesFinished = updateScheduleStatePort.finishSchedules();
+
+        schedulesFinished.forEach(schedule -> finishScheduleUseCase.finishSchedule(schedule.getScheduleId()));
         var schedulesUpdated = new ArrayList<Schedule>();
         try{
             sendNotificationsToStart(schedulesActivated);
-            sendNotificationsToFinish(schedulesFinished);
         }catch(Exception ex){
             throw new SendSMSException(ex.getMessage());
         }
@@ -41,13 +44,6 @@ public class UpdateScheduleStateService implements UpdateScheduleStateUseCase {
         for(var schedule: schedules){
             var scheduleDetails = getScheduleDetailsUseCase.getScheduleDetails(schedule.getScheduleId());
             sendSMSToStartScheduleUseCase.sendSMSToPend(schedule, scheduleDetails);
-        }
-    }
-
-    private void sendNotificationsToFinish(List<Schedule> schedules){
-        for(var schedule: schedules){
-            var scheduleDetails = getScheduleDetailsUseCase.getScheduleDetails(schedule.getScheduleId());
-            sendSMSToFinishScheduleUseCase.sendSMSToFinish(schedule, scheduleDetails);
         }
     }
 }
