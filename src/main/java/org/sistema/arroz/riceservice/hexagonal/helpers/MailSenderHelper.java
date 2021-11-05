@@ -29,7 +29,7 @@ public class MailSenderHelper {
         var mailSender = new JavaMailSenderImpl();
         mailSender.setHost(mailConfig.getHost());
         mailSender.setPort(mailConfig.getPort());
-        mailSender.setUsername("0e441273968808");
+        mailSender.setUsername(mailConfig.getUsername());
         mailSender.setPassword(mailConfig.getPassword());
         return mailSender;
     }
