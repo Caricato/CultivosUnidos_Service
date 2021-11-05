@@ -3,7 +3,6 @@ package org.sistema.arroz.riceservice.modules.users.adapter.port.in.web;
 import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.hexagonal.WebAdapter;
 import org.sistema.arroz.riceservice.modules.users.application.port.in.SendMailToResetUseCase;
-import org.sistema.arroz.riceservice.modules.users.application.port.in.SendSMSToResetUseCase;
 import org.sistema.arroz.riceservice.modules.users.application.port.in.UserToResetPassword;
 import org.springframework.web.bind.annotation.*;
 

@@ -7,6 +7,8 @@ import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.i
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.in.RegisterSupplyOutUseCase;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowSubtype;
 import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowType;
+import org.sistema.arroz.riceservice.modules.notifications.application.port.in.SendSMSToPendScheduleUseCase;
+import org.sistema.arroz.riceservice.modules.notifications.domain.SendSMSException;
 import org.sistema.arroz.riceservice.modules.parameters.application.port.in.GetScheduleDurationUseCase;
 import org.sistema.arroz.riceservice.modules.products.application.port.in.GetProductUseCase;
 import org.sistema.arroz.riceservice.modules.schedule.application.port.in.RegisterScheduleUseCase;
@@ -16,12 +18,14 @@ import org.sistema.arroz.riceservice.modules.schedule.application.port.in.Valida
 import org.sistema.arroz.riceservice.modules.schedule.application.port.out.DeleteSchedulePort;
 import org.sistema.arroz.riceservice.modules.schedule.application.port.out.RegisterScheduleDetailsPort;
 import org.sistema.arroz.riceservice.modules.schedule.application.port.out.RegisterSchedulePort;
+import org.sistema.arroz.riceservice.modules.schedule.application.port.out.ScheduleDetailToRegister;
 import org.sistema.arroz.riceservice.modules.schedule.domain.Schedule;
 import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleDateException;
 import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleHectaresNotValidException;
 import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleType;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @UseCase
 @RequiredArgsConstructor
@@ -34,6 +38,7 @@ public class RegisterScheduleService implements RegisterScheduleUseCase {
     private final DeleteSchedulePort deleteSchedulePort;
     private final GetScheduleDurationUseCase getScheduleDurationUseCase;
     private final RegisterSupplyOutUseCase registerSupplyOutUseCase;
+    private final SendSMSToPendScheduleUseCase sendSMSToPendScheduleUseCase;
 
     @Override
     public Schedule registerSchedule(Long communityId, ScheduleToRegister scheduleToRegister) {
@@ -72,6 +77,15 @@ public class RegisterScheduleService implements RegisterScheduleUseCase {
             deleteSchedulePort.deleteSchedule(schedule.getScheduleId());
             throw ex;
         }
+        sendNotificationsToProducers(schedule, scheduleDetails);
         return schedule;
+    }
+
+    private void sendNotificationsToProducers(Schedule schedule, List<ScheduleDetailToRegister> scheduleDetails){
+        try{
+            sendSMSToPendScheduleUseCase.sendSMSToPend(schedule, scheduleDetails);
+        }catch(Exception ex){
+            throw new SendSMSException(ex.getMessage());
+        }
     }
 }

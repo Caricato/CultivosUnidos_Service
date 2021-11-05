@@ -21,7 +21,7 @@ import java.util.Objects;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class SchedulePersistenceAdapter implements RegisterSchedulePort, DeleteSchedulePort, GetSchedulesPort, GetSchedulePort, FinishSchedulePort {
+public class SchedulePersistenceAdapter implements RegisterSchedulePort, DeleteSchedulePort, GetSchedulesPort, GetSchedulePort, FinishSchedulePort, UpdateScheduleStatePort {
     private final ScheduleMapper scheduleMapper;
     private final ProductMapper productMapper;
     private final SpringJpaScheduleRepository scheduleRepository;
@@ -71,5 +71,21 @@ public class SchedulePersistenceAdapter implements RegisterSchedulePort, DeleteS
             entity.get().setEndDate(LocalDateTimePeruZone.now().toLocalDate());
         var result = scheduleRepository.save(entity.get());
         return scheduleMapper.toSchedule(result);
+    }
+
+    @Override
+    public List<Schedule> activateSchedules() {
+        var nowDate = LocalDate.now();
+        var schedulesJpa = scheduleRepository.findAllByStateEqualsAndStartDateBetween(ScheduleType.PENDING.getValue(), nowDate, nowDate);
+        schedulesJpa.forEach(scheduleJpaEntity -> scheduleJpaEntity.setState(ScheduleType.IN_PROCESS.getValue()));
+        var result = scheduleRepository.saveAll(schedulesJpa);
+        return scheduleMapper.toSchedules(result);
+    }
+
+    @Override
+    public List<Schedule> finishSchedules() {
+        var nowDate = LocalDate.now();
+        var schedulesJpa = scheduleRepository.findAllByStateEqualsAndEndDateBetween(ScheduleType.IN_PROCESS.getValue(), nowDate, nowDate);
+        return scheduleMapper.toSchedules(schedulesJpa);
     }
 }
