@@ -51,4 +51,5 @@ public class ErrorMessages {
 
     //For Notifications
     public static final String SMS_01_MESSAGE= "Error in sending SMS notification. Contact the administrator!. Exception: %s";
+    public static final String MAIL_01_MESSAGE= "Error in sending Mail message. Contact the administrator!. Exception: %s";
 }
