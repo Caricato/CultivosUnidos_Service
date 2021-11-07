@@ -21,7 +21,7 @@ import java.util.Objects;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class SchedulePersistenceAdapter implements RegisterSchedulePort, DeleteSchedulePort, GetSchedulesPort, GetSchedulePort, FinishSchedulePort, UpdateScheduleStatePort {
+public class SchedulePersistenceAdapter implements RegisterSchedulePort, DeleteSchedulePort, GetSchedulesPort, GetSchedulePort, FinishSchedulePort, UpdateScheduleStatePort, ValidateProductSchedulesPort {
     private final ScheduleMapper scheduleMapper;
     private final ProductMapper productMapper;
     private final SpringJpaScheduleRepository scheduleRepository;
@@ -86,6 +86,12 @@ public class SchedulePersistenceAdapter implements RegisterSchedulePort, DeleteS
     public List<Schedule> finishSchedules() {
         var nowDate = LocalDate.now();
         var schedulesJpa = scheduleRepository.findAllByStateEqualsAndEndDateBetween(ScheduleType.IN_PROCESS.getValue(), nowDate, nowDate);
+        return scheduleMapper.toSchedules(schedulesJpa);
+    }
+
+    @Override
+    public List<Schedule> validateProductSchedules(Long productId) {
+        var schedulesJpa = scheduleRepository.searchSchedulesActiveByProducer(productId, ScheduleType.IN_PROCESS.getValue(), ScheduleType.PENDING.getValue());
         return scheduleMapper.toSchedules(schedulesJpa);
     }
 }

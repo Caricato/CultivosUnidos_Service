@@ -18,4 +18,7 @@ public interface SpringJpaScheduleRepository extends JpaRepository<ScheduleJpaEn
     List<ScheduleJpaEntity> findAllByStateEqualsAndStartDateBetween(Integer state, LocalDate startDate, LocalDate endDate);
 
     List<ScheduleJpaEntity> findAllByStateEqualsAndEndDateBetween(Integer state, LocalDate startDate, LocalDate endDate);
+
+    @Query("SELECT S FROM ScheduleJpaEntity S WHERE S.product.productId =:productId AND (S.state = :state1 OR S.state = :state2)")
+    List<ScheduleJpaEntity> searchSchedulesActiveByProducer(@Param("productId") Long productId, @Param("state1") Integer state1, @Param("state2") Integer state2);
 }

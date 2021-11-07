@@ -18,15 +18,27 @@ import java.util.Optional;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class ProducerPersistenceAdapter implements ValidateProducerToRegisterPort, RegisterProducerPort, GetProducersPort, GetProducerPort, EditProducerPort, DeleteProducerPort {
+public class ProducerPersistenceAdapter implements ValidateProducerToRegisterPort, RegisterProducerPort, GetProducersPort, GetProducerPort, EditProducerPort, DeleteProducerPort, ValidateProducerToEditPort{
     private final ProducerMapper producerMapper;
     private final AgricultureCommunityMapper communityMapper;
     private final UserMapper userMapper;
     private final SpringJpaProducerRepository producerRepository;
 
     @Override
-    public Optional<Producer> validateProducer(String dni) {
+    public Optional<Producer> validateProducerByDNI(String dni) {
         var result = producerRepository.findByDni(dni);
+        return result.map(producerMapper::toProducer);
+    }
+
+    @Override
+    public Optional<Producer> validateProducerByEmail(String email) {
+        var result = producerRepository.findByEmail(email);
+        return result.map(producerMapper::toProducer);
+    }
+
+    @Override
+    public Optional<Producer> validateProducerByPhone(String number) {
+        var result = producerRepository.findByPhone(number);
         return result.map(producerMapper::toProducer);
     }
 
@@ -86,5 +98,17 @@ public class ProducerPersistenceAdapter implements ValidateProducerToRegisterPor
         entityJpa.setUpdateDate(LocalDateTimePeruZone.now());
         entityJpa.getUser().setState(false);
         var result = producerRepository.save(entityJpa);
+    }
+
+    @Override
+    public Optional<Producer> validateProducerByEmail(String email, Long producerId) {
+        var result = producerRepository.findByEmailAndProducerIdNot(email, producerId);
+        return result.map(producerMapper::toProducer);
+    }
+
+    @Override
+    public Optional<Producer> validateProducerByPhone(String number, Long producerId) {
+        var result = producerRepository.findByPhoneAndProducerIdNot(number, producerId);
+        return result.map(producerMapper::toProducer);
     }
 }
