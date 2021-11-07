@@ -6,6 +6,8 @@ public class ErrorMessages {
     public static final String SUP_02_MESSAGE = "Actual stock: %.2f is lower than the minimum stock: %.2f. Validate your data please!";
     public static final String SUP_03_MESSAGE = "Supply %d associated with active products. Please remove them first to delete the supply";
     public static final String SUP_04_MESSAGE = "Supply with %d has a limit of %.2f of stock, cant reduce more than that!";
+    public static final String SUP_05_MESSAGE = "Unit metric with id: %d not found";
+    public static final String SUP_06_MESSAGE = "Unit metric with id: %d not valid to delete";
     //For Communities
     public static final String AGC_01_MESSAGE = "Agriculture community with %d id is not registered!";
     public static final String AGC_02_MESSAGE = "Agriculture community a supervisor with dni %d not registered!";
