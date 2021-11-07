@@ -11,4 +11,5 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "custom.values")
 public class CustomConfig {
     private Boolean sendSMS;
+    private Boolean sendMail;
 }

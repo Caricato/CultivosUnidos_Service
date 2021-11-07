@@ -14,9 +14,8 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import javax.mail.MessagingException;
 
 import java.util.HashMap;
+import java.util.Map;
 
-import static org.sistema.arroz.riceservice.hexagonal.reports.Templates.TEMPLATE_EMAIL_RESET;
-import static org.sistema.arroz.riceservice.hexagonal.reports.Templates.TEMPLATE_WELCOME_RESET;
 
 @Data
 @Component
@@ -29,34 +28,28 @@ public class MailSenderHelper {
         var mailSender = new JavaMailSenderImpl();
         mailSender.setHost(mailConfig.getHost());
         mailSender.setPort(mailConfig.getPort());
-        mailSender.setUsername("0e441273968808");
+        mailSender.setUsername(mailConfig.getUsername());
         mailSender.setPassword(mailConfig.getPassword());
         return mailSender;
     }
 
-    public void sendMail(JavaMailSenderImpl mailSender, String emailFrom, String emailTo, MailType type, String completeUrl, HashMap map) throws MessagingException {
+    public void sendMail(String emailTo, String templateMail, String subject, Map<String, ?> map) throws MessagingException {
+        var mailSender = this.getMailSenderHelper();
         var mimeMessage = mailSender.createMimeMessage();
         var mailMessage = new MimeMessageHelper(mimeMessage);
-        mailMessage.setFrom(emailFrom);
+        mailMessage.setFrom("juandiegovd99@gmail.com");
         mailMessage.setTo(emailTo);
-        if (type.equals(MailType.RESET)){
-            var context = new Context();
-            context.setVariable("url", completeUrl);
-            var html = templateEngine.process(TEMPLATE_EMAIL_RESET, context);
-            mailMessage.setSubject("Cultivos Unidos - Restablecer contraseña");
-            mailMessage.setText(html, true);
-            mailSender.send(mimeMessage);
-        }
-        if (type.equals(MailType.FIRST_LOGIN)) {
-            var context = new Context();
+        var context = new Context();
+        if (map != null && map.size() > 0){
             var newMap = new HashMap<String, Object>();
-            newMap.put("url", completeUrl);
-            newMap.put("communityName", map.get("communityName"));
+            for (var key: map.keySet()){
+                newMap.put(key, map.get(key));
+            }
             context.setVariables(newMap);
-            var html = templateEngine.process(TEMPLATE_WELCOME_RESET, context);
-            mailMessage.setSubject("Cultivos Unidos - Bienvenido productor!");
-            mailMessage.setText(html, true);
-            mailSender.send(mimeMessage);
         }
+        var html = templateEngine.process(templateMail, context);
+        mailMessage.setSubject(subject);
+        mailMessage.setText(html, true);
+        mailSender.send(mimeMessage);
     }
 }

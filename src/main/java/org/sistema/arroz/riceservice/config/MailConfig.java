@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
 public class MailConfig {
     private String host;
     private int port;
-    @Value("${spring.mail.username}")
     private String username;
     private String password;
 }
