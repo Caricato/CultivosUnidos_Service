@@ -14,6 +14,7 @@ public class ErrorMessages {
     public static final String PROD_01_MESSAGE = "Product with the id: %d not found";
     public static final String PROD_02_MESSAGE = "Product price for the product %d in the month %d not found";
     public static final String PROD_03_MESSAGE = "Product has %d sacks and you are trying to sell %d sacks. Validate your data please!";
+    public static final String PROD_04_MESSAGE = "Product with the id: %d not valid to delete!";
 
     //For Merchandise Entries
     public static final String MER_01_MESSAGE = "Merchandise Flow with the id: %d not found";
