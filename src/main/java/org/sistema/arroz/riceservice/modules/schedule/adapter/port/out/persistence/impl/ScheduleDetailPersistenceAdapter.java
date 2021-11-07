@@ -16,7 +16,7 @@ import java.util.List;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class ScheduleDetailPersistenceAdapter implements CountTakenHectaresPort, RegisterScheduleDetailsPort, GetScheduleDetailsPort, FreeHectaresPort, DeleteScheduleDetailsPort, FreeAllHectaresPort {
+public class ScheduleDetailPersistenceAdapter implements CountTakenHectaresPort, RegisterScheduleDetailsPort, GetScheduleDetailsPort, FreeHectaresPort, DeleteScheduleDetailsPort, FreeAllHectaresPort, ValidateProducerSchedulesPort {
     private final ScheduleDetailMapper scheduleDetailMapper;
     private final ScheduleMapper scheduleMapper;
     private final SpringJpaScheduleDetailRepository scheduleDetailRepository;
@@ -60,5 +60,11 @@ public class ScheduleDetailPersistenceAdapter implements CountTakenHectaresPort,
         var scheduleDetailsJpa = scheduleDetailRepository.findAllByScheduleScheduleId(scheduleId);
         scheduleDetailsJpa.forEach(scheduleDetailJpaEntity -> scheduleDetailJpaEntity.setIsFreeHectares(true));
         scheduleDetailRepository.saveAll(scheduleDetailsJpa);
+    }
+
+    @Override
+    public List<ScheduleDetail> validateProducerSchedules(Long producerId) {
+        var schedulesDetailsJpa = scheduleDetailRepository.searchActiveSchedulesForProducer(producerId, ScheduleType.IN_PROCESS.getValue(), ScheduleType.PENDING.getValue());
+        return scheduleDetailMapper.toScheduleDetails(schedulesDetailsJpa);
     }
 }
