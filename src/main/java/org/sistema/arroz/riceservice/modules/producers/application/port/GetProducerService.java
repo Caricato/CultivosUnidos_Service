@@ -21,7 +21,7 @@ public class GetProducerService implements GetProducerUseCase {
 
     @Override
     public Producer getProducer(String dni) {
-        var producer = validateProducerToRegisterPort.validateProducer(dni);
+        var producer = validateProducerToRegisterPort.validateProducerByDNI(dni);
         if (producer.isEmpty()) throw new ProducerNotFoundException(-1L);
         return producer.get();
     }

@@ -33,6 +33,8 @@ public class ErrorMessages {
     public static final String USR_04_MESSAGE = "Login invalid! Check credentials";
     public static final String USR_05_MESSAGE = "User with the username: %s not found";
     public static final String USR_06_MESSAGE = "Supervisor with DNI: %s already registered!";
+    public static final String USR_07_MESSAGE = "Producer with Email: %s already registered!";
+    public static final String USR_08_MESSAGE = "Producer with Phone Number: %s already registered!";
     public static final String USR_PROD_01_MESSAGE = "Could not register producer!";
 
     //For Schedule

@@ -25,8 +25,20 @@ public class ProducerPersistenceAdapter implements ValidateProducerToRegisterPor
     private final SpringJpaProducerRepository producerRepository;
 
     @Override
-    public Optional<Producer> validateProducer(String dni) {
+    public Optional<Producer> validateProducerByDNI(String dni) {
         var result = producerRepository.findByDni(dni);
+        return result.map(producerMapper::toProducer);
+    }
+
+    @Override
+    public Optional<Producer> validateProducerByEmail(String email) {
+        var result = producerRepository.findByEmail(email);
+        return result.map(producerMapper::toProducer);
+    }
+
+    @Override
+    public Optional<Producer> validateProducerByPhone(String number) {
+        var result = producerRepository.findByPhone(number);
         return result.map(producerMapper::toProducer);
     }
 

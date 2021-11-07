@@ -21,7 +21,7 @@ public class RegisterProducerController {
 
     @PostMapping(value = "")
     public Producer registerProducer(@RequestBody ProducerToRegister producerToRegister, HttpServletRequest request){
-        validateProducerToRegisterUseCase.validateProducer(producerToRegister.getDni());
+        validateProducerToRegisterUseCase.validateProducer(producerToRegister);
         return registerProducerUseCase.registerProducer(producerToRegister.getCommunityId(), producerToRegister, request);
     }
 }
