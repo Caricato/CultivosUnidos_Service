@@ -2,7 +2,6 @@ package org.sistema.arroz.riceservice.modules.supplies.application.port;
 
 import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.hexagonal.UseCase;
-import org.sistema.arroz.riceservice.modules.agricultureCommunity.application.port.out.GetAgricultureCommunityPort;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.in.ExportSuppliesUseCase;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.out.ExportSuppliesPort;
 import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
@@ -30,7 +29,7 @@ public class ExportSuppliesService implements ExportSuppliesUseCase {
             data[i][2] = supplies.get(i).getStock().toString();
             data[i][3] = supplies.get(i).getUnitPricing().toString();
             data[i][4] = supplies.get(i).getStockMin().toString();
-            data[i][5] = supplies.get(i).getSupplyMetricType().toString();
+            data[i][5] = supplies.get(i).getSupplyMetricType().getName();
         }
         return data;
     }

@@ -7,7 +7,7 @@ import org.sistema.arroz.riceservice.hexagonal.queries.Paginator;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.GetSuppliesService;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.out.GetSuppliesPort;
 import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
-import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyMetricType;
+import org.sistema.arroz.riceservice.modules.supplies.domain.UnitMetric;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ class GetSuppliesServiceTest {
     @Test
     void getSuppliesSuccess(){
         var supply = Supply.builder().supplyId(1L).supplyName("Fertilizantes")
-                .stockMin(50.0).supplyMetricType(SupplyMetricType.LITROS).unitPricing(10.5).state(true).stock(200.0).build();
+                .stockMin(50.0).supplyMetricType(UnitMetric.builder().build()).unitPricing(10.5).state(true).stock(200.0).build();
         var supplies = new ArrayList<Supply>();
         supplies.add(supply);
         var filters = Filters.builder().page(0).pageSize(10).search("").build();

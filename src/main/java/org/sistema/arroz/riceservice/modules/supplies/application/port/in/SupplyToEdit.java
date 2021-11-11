@@ -10,5 +10,5 @@ public class SupplyToEdit {
     String supplyName;
     Double unitPricing;
     Double stockMin;
-    SupplyMetricType supplyMetricType;
+    Long supplyMetricType;
 }

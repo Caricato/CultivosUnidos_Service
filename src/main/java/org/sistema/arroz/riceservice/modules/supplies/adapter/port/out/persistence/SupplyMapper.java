@@ -9,30 +9,29 @@ import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {SupplyMetricTypeMapper.class, AgricultureCommunityMapper.class})
+@Mapper(componentModel = "spring", uses = {UnitMetricMapper.class, AgricultureCommunityMapper.class})
 public interface SupplyMapper {
     @Mapping(source = "supplyId", target = "supplyId")
     @Mapping(source = "supplyName", target = "supplyName")
     @Mapping(source = "stock", target = "stock")
     @Mapping(source = "unitPricing", target = "unitPricing")
     @Mapping(source = "stockMin", target = "stockMin")
-    @Mapping(source = "supplyMetricType", target = "supplyMetricType")
+    @Mapping(source = "unitMetric", target = "supplyMetricType")
     @Mapping(source = "state", target = "state")
     @Mapping(source = "communityJpaEntity", target = "community")
     Supply toSupply(SupplyJpaEntity supplyJpaEntity);
     List<Supply> toSupplies(List<SupplyJpaEntity> supplyJpaEntities);
 
     @InheritInverseConfiguration
-    @Mapping(source = "supplyMetricType.value", target = "supplyMetricType")
     SupplyJpaEntity toSupplyJpaEntity(Supply supply);
 
     @Mapping(source = "supplyName", target = "supplyName")
     @Mapping(source = "stock", target = "stock")
     @Mapping(source = "unitPricing", target = "unitPricing")
     @Mapping(source = "stockMin", target = "stockMin")
-    @Mapping(source = "supplyMetricType.value", target = "supplyMetricType")
     @Mapping(target = "supplyId", ignore = true)
     @Mapping(target = "state", ignore = true)
     @Mapping(target = "communityJpaEntity", ignore = true)
+    @Mapping(target = "unitMetric", ignore = true)
     SupplyJpaEntity toSupplyJpaEntity(SupplyToRegister supplyToRegister);
 }

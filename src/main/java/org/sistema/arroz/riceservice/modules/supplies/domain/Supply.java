@@ -14,7 +14,7 @@ public class Supply {
     Double stock;
     Double unitPricing;
     Double stockMin;
-    SupplyMetricType supplyMetricType;
+    UnitMetric supplyMetricType;
     Boolean state;
     AgricultureCommunity community;
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public interface GetAllSuppliesForEntriesMapper {
     @Mapping(source = "supplyId", target = "supplyId")
     @Mapping(source = "supplyName", target = "supplyName")
-    @Mapping(source = "supplyMetricType", target = "supplyMetricType")
+    @Mapping(source = "getSupplyMetricType.name", target = "supplyMetricType")
     GetAllSuppliesForEntriesDTO toGetAllSupplies(Supply supply);
     List<GetAllSuppliesForEntriesDTO> toGetAllSuppliesForEntries(List<Supply> supplies);
 }

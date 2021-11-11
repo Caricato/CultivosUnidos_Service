@@ -1,5 +1,6 @@
 package org.sistema.arroz.riceservice.modules.supplies.adapter.port.out.persistence;
 
+import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.sistema.arroz.riceservice.modules.agricultureCommunity.adapter.port.out.persistence.AgricultureCommunityMapper;
@@ -16,6 +17,9 @@ public interface UnitMetricMapper {
     @Mapping(source = "unitMetricId", target = "unitMetricId")
     UnitMetric toUnitMetric(UnitMetricJpaEntity unitMetricJpaEntity);
     List<UnitMetric> toUnitMetrics(List<UnitMetricJpaEntity> unitMetricJpaEntities);
+
+    @InheritConfiguration
+    UnitMetricJpaEntity toUnitMetricJpa(UnitMetricJpaEntity unitMetricJpaEntity);
 
     @Mapping(source = "name", target = "name")
     @Mapping(target = "state", ignore = true)

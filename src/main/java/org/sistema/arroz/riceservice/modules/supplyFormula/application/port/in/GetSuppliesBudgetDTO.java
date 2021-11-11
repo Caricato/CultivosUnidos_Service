@@ -9,7 +9,7 @@ import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyMetricType;
 public class GetSuppliesBudgetDTO {
     String supplyName;
     Double totalCant;
-    SupplyMetricType metricType;
+    String metricType;
     Double unitPricing;
     Double subtotal;
 }
