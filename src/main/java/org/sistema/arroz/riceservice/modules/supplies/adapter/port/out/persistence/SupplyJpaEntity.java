@@ -31,8 +31,9 @@ public class SupplyJpaEntity {
     @Column(name = "stock_min")
     private Double stockMin;
 
-    @Column(name = "tipo_metrica")
-    private Integer supplyMetricType;
+    @ManyToOne
+    @JoinColumn (name = "id_unidad_metrica")
+    private UnitMetricJpaEntity unitMetric;
 
     @Column(name = "state")
     private Boolean state;

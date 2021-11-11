@@ -12,6 +12,7 @@ import org.sistema.arroz.riceservice.modules.supplies.application.port.out.*;
 import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
 import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyNotFoundException;
 import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyStockInconsistencyException;
+import org.sistema.arroz.riceservice.modules.supplies.domain.UnitMetricNotFoundException;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
@@ -26,10 +27,16 @@ public class SupplyPersistenceAdapter implements RegisterSupplyPort, EditSupplyP
     private final SpringJpaSupplyRepository springJpaSupplyRepository;
     private final SupplyMapper supplyMapper;
     private final AgricultureCommunityMapper agricultureCommunityMapper;
+    private final SpringJpaUnitMetricRepository unitMetricRepository;
+    private final UnitMetricMapper unitMetricMapper;
 
     @Override
     public Supply registerSupply(SupplyToRegister supplyToRegister, AgricultureCommunity agricultureCommunity) {
         var supplyJpa = supplyMapper.toSupplyJpaEntity(supplyToRegister);
+
+        var unitMetric = unitMetricRepository.findById(supplyToRegister.getSupplyMetricType());
+        if (unitMetric.isEmpty()) throw new UnitMetricNotFoundException(supplyToRegister.getSupplyMetricType());
+        supplyJpa.setUnitMetric(unitMetricMapper.toUnitMetricJpa(unitMetric.get()));
         supplyJpa.setCommunityJpaEntity(agricultureCommunityMapper.toAgricultureCommunityJpaEntity(agricultureCommunity));
         supplyJpa.setState(true);
         var result = springJpaSupplyRepository.save(supplyJpa);
@@ -44,7 +51,9 @@ public class SupplyPersistenceAdapter implements RegisterSupplyPort, EditSupplyP
         supplyJpaEntity.setSupplyName(supplyToEdit.getSupplyName());
         supplyJpaEntity.setStockMin(supplyToEdit.getStockMin());
         supplyJpaEntity.setUnitPricing(supplyToEdit.getUnitPricing());
-        supplyJpaEntity.setSupplyMetricType(supplyToEdit.getSupplyMetricType().getValue());
+        var unitMetric = unitMetricRepository.findById(supplyToEdit.getSupplyMetricType());
+        if (unitMetric.isEmpty()) throw new UnitMetricNotFoundException(supplyToEdit.getSupplyMetricType());
+        supplyJpaEntity.setUnitMetric(unitMetricMapper.toUnitMetricJpa(unitMetric.get()));
 
         if (supplyJpaEntity.getStock() < supplyJpaEntity.getStockMin())
             throw new SupplyStockInconsistencyException(supplyJpaEntity.getStock(), supplyJpaEntity.getStockMin());

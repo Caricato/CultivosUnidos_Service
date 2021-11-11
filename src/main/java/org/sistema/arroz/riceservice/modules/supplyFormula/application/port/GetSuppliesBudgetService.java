@@ -27,7 +27,7 @@ public class GetSuppliesBudgetService implements GetSuppliesBudgetUseCase {
             var totalHectares = formula.getCantForHectare()*hectares;
             var supplyDTO = GetSuppliesBudgetDTO.builder()
                     .supplyName(formula.getSupply().getSupplyName())
-                    .metricType(formula.getSupply().getSupplyMetricType())
+                    .metricType(formula.getSupply().getSupplyMetricType().getName())
                     .unitPricing(formula.getSupply().getUnitPricing())
                     .totalCant(totalHectares).subtotal(totalHectares*formula.getSupply().getUnitPricing()).build();
 

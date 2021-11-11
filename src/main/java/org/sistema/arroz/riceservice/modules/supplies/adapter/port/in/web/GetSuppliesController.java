@@ -4,11 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.hexagonal.WebAdapter;
 import org.sistema.arroz.riceservice.hexagonal.queries.Filters;
 import org.sistema.arroz.riceservice.hexagonal.queries.Paginator;
+import org.sistema.arroz.riceservice.modules.supplies.application.port.in.GetSuppliesDTO;
+import org.sistema.arroz.riceservice.modules.supplies.application.port.in.GetSuppliesDTOMapper;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.in.GetSuppliesUseCase;
 import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.data.domain.Pageable;
+
+import java.util.Collections;
 
 
 @WebAdapter
@@ -18,14 +22,21 @@ import org.springframework.data.domain.Pageable;
 @RequestMapping(value = "/supplies")
 public class GetSuppliesController {
     private final GetSuppliesUseCase getSuppliesUseCase;
+    private final GetSuppliesDTOMapper getSuppliesDTOMapper;
 
     @GetMapping(value = "/{communityId}")
-    public Paginator<Supply> getSupplies(Pageable pageable, @RequestParam(value = "search", defaultValue = "") String search, @PathVariable Long communityId){
+    public Paginator<GetSuppliesDTO> getSupplies(Pageable pageable, @RequestParam(value = "search", defaultValue = "") String search, @PathVariable Long communityId){
         var filters = Filters.builder()
                 .page(pageable.getPageNumber())
                 .pageSize(pageable.getPageSize())
                 .search(search)
                 .build();
-        return getSuppliesUseCase.getSupplies(filters, communityId);
+        var page =   getSuppliesUseCase.getSupplies(filters, communityId);
+        return Paginator.<GetSuppliesDTO>builder()
+                .page(page.getPage())
+                .pageSize(page.getPageSize())
+                .total(page.getTotal())
+                .data(getSuppliesDTOMapper.toSuppliesDTO(page.getData()))
+                .build();
     }
 }

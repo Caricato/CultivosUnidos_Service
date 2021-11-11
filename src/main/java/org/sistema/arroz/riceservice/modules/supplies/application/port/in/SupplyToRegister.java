@@ -8,7 +8,7 @@ import org.sistema.arroz.riceservice.modules.supplies.domain.SupplyMetricType;
 @Builder
 public class SupplyToRegister {
     String supplyName;
-    SupplyMetricType supplyMetricType;
+    Long supplyMetricType;
     Double stock;
     Double unitPricing;
     Double stockMin;

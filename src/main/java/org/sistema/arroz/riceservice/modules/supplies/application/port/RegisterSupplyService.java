@@ -18,6 +18,7 @@ public class RegisterSupplyService implements RegisterSupplyUseCase {
 
     @Override
     public Supply registerSupply(SupplyToRegister supplyToRegister) {
+        System.out.println(supplyToRegister);
         if (supplyToRegister.getStockMin() > supplyToRegister.getStock())
             throw new SupplyStockInconsistencyException(supplyToRegister.getStock(), supplyToRegister.getStockMin());
         var community = getAgricultureCommunityPort.findCommunityById(supplyToRegister.getCommunityId());
