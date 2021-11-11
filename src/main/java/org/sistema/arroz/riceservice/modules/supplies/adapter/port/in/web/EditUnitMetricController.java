@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class EditUnitMetricController {
     private final EditUnitMetricUseCase editUnitMetricUseCase;
 
-    @PostMapping(value = "/{unitMetricId}")
+    @PutMapping(value = "/{unitMetricId}")
     public UnitMetric editUnitMetric(@RequestBody UnitMetricToEdit unitMetricToEdit, @PathVariable Long unitMetricId){
         return editUnitMetricUseCase.editUnitMetric(unitMetricId, unitMetricToEdit);
     }
