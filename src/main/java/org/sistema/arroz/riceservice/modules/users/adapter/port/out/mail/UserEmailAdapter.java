@@ -31,6 +31,6 @@ public class UserEmailAdapter implements SendMailToResetPort, SendMailToWelcomeP
         var map = new HashMap<String,String>();
         map.put("url", completeUrl);
         map.put("communityName", producer.getCommunity().getCommunityName());
-        sendMailPort.sendMail(producer.getEmail(), TEMPLATE_EMAIL_RESET, "Cultivos Unidos - Restablecer contraseña", map);
+        sendMailPort.sendMail(producer.getEmail(), TEMPLATE_WELCOME_RESET, "Cultivos Unidos - Bienvenido a la comunidad!", map);
     }
 }

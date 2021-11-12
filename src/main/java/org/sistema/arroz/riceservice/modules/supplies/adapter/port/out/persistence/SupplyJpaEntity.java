@@ -35,7 +35,7 @@ public class SupplyJpaEntity {
     @JoinColumn (name = "id_unidad_metrica")
     private UnitMetricJpaEntity unitMetric;
 
-    @Column(name = "state")
+    @Column(name = "estado")
     private Boolean state;
 
     @ManyToOne
