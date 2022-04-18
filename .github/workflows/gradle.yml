@@ -38,3 +38,15 @@ jobs:
         run: chmod +x gradlew
       - name: Test with Gradle
         run: ./gradlew test
+
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: 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
+          SONAR_TOKEN: 84f55f9c9f0e118c44cf6dc52427609041de59c0
