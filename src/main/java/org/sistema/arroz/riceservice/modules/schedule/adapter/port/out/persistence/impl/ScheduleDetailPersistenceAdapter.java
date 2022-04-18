@@ -12,6 +12,7 @@ import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleDetailNotFo
 import org.sistema.arroz.riceservice.modules.schedule.domain.ScheduleType;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @PersistenceAdapter
@@ -23,16 +24,18 @@ public class ScheduleDetailPersistenceAdapter implements CountTakenHectaresPort,
 
     @Override
     public Double takenHectares(Long producerId) {
-        return scheduleDetailRepository.countAllByProducerProducerIdAndScheduleStateOrScheduleStateAndIsFreeHectaresEquals(producerId,
+        var hectares =  scheduleDetailRepository.countTakenHectares(producerId,
                 ScheduleType.PENDING.getValue(), ScheduleType.IN_PROCESS.getValue(), false);
+        if (hectares == null) return 0.0;
+        return hectares;
     }
 
     @Override
     public List<ScheduleDetail> registerScheduleDetails(List<ScheduleDetailToRegister> scheduleDetailsToRegister, Schedule schedule) {
         var scheduleDetailsJpa = scheduleDetailMapper.toScheduleDetailsJpa(scheduleDetailsToRegister);
         scheduleDetailsJpa.forEach(scheduleDetailJpaEntity -> scheduleDetailJpaEntity.setSchedule(scheduleMapper.toScheduleJpa(schedule)));
-        var result = scheduleDetailRepository.saveAll(scheduleDetailsJpa);
-        return scheduleDetailMapper.toScheduleDetails(result);
+        scheduleDetailRepository.saveAll(scheduleDetailsJpa);
+        return new ArrayList<>(0);
     }
 
     @Override
