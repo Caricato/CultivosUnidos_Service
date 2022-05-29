@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build
+
     runs-on: ubuntu-latest
 
     steps:
@@ -39,7 +39,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
-        run: ./gradlew build sonarqube --info
+        run: ./gradlew assemble sonarqube --info
 
   test:
     runs-on: ubuntu-latest
