@@ -25,7 +25,4 @@ public class SMSConfig {
                 new PhoneNumber(sms.getTo()), new PhoneNumber(phone), sms.getMessage()).create();
         System.out.println("here is my id:"+message.getSid());
     }
-
-    public void receive(MultiValueMap<String, String> SMSCallback) {
-    }
 }
