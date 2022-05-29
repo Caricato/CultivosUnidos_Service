@@ -75,6 +75,5 @@ sonarqube {
         property "sonar.projectKey", "Caricato_CultivosUnidos_Service"
         property "sonar.organization", "cultivosunidos"
         property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.login", "d7d13ea241fe8a78c94964621bc1a12035c40805"
     }
 }
