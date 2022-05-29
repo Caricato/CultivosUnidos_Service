@@ -73,7 +73,9 @@ test {
 sonarqube {
     properties {
         property "sonar.projectKey", "CultivosUnidosBackend"
+        property "sonar.host.url", "http://localhost:9000"
         property "sonar.login", "admin"
         property "sonar.password", "Admin1"
+        property 'sonar.java.coveragePlugin', 'jacoco'
     }
 }
