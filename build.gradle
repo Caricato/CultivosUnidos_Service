@@ -69,3 +69,9 @@ jacocoTestReport {
 test {
     useJUnitPlatform()
 }
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "CultivosUnidosBackend"
+    }
+}
