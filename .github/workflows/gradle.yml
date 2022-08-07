@@ -22,7 +22,7 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew assemble
+      run: docker build . --file Dockerfile --tag cultivosunidos_service:$(date +%s)
 
   test:
     runs-on: ubuntu-latest

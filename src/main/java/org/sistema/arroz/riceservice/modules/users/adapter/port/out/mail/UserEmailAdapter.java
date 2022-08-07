@@ -1,6 +1,7 @@
 package org.sistema.arroz.riceservice.modules.users.adapter.port.out.mail;
 
 import lombok.RequiredArgsConstructor;
+import org.sistema.arroz.riceservice.config.CustomConfig;
 import org.sistema.arroz.riceservice.hexagonal.PersistenceAdapter;
 import org.sistema.arroz.riceservice.hexagonal.helpers.MailSenderHelper;
 import org.sistema.arroz.riceservice.hexagonal.helpers.MailType;
@@ -16,13 +17,19 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 public class UserEmailAdapter implements SendMailToResetPort, SendMailToWelcomePort {
     private final SendMailPort sendMailPort;
+    private final CustomConfig customConfig;
 
     @Override
     public void sendMailToReset(String emailTo, String url, String token) {
-        var completeUrl = url+"/"+token;
-        var map = new HashMap<String,String>();
-        map.put("url", completeUrl);
-        sendMailPort.sendMail(emailTo, TEMPLATE_EMAIL_RESET, "Cultivos Unidos - Restablecer contraseña", map);
+        if (customConfig.getSendMail()){
+            var completeUrl = url+"/"+token;
+            var map = new HashMap<String,String>();
+            map.put("url", completeUrl);
+            sendMailPort.sendMail(emailTo, TEMPLATE_EMAIL_RESET, "Cultivos Unidos - Restablecer contraseña", map);
+        }
+        else{
+            System.out.println(token);
+        }
     }
 
     @Override

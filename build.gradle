@@ -57,6 +57,12 @@ dependencies {
 }
 
 jar{
+    manifest {
+        attributes(
+            'Main-Class': 'org.sistema.arroz.riceservice.RiceServiceApplication',
+            'Class-Path': configurations.runtimeClasspath.files.collect { it.getName() }.join(' ')
+        )
+    }
     enabled = true
 }
 

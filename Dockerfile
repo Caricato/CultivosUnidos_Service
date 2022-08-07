@@ -1,20 +1,21 @@
-## API jar builder
+## builder
 FROM adoptopenjdk:11-jdk-hotspot as builder
-WORKDIR /app
+ENV APP_HOME=/apps/CultivosUnidos
+WORKDIR ${APP_HOME}/service/app
 COPY . .
 
-RUN ./gradlew build
+RUN ./gradlew bootJar
 
 
-## API jar Release
+## target
 FROM adoptopenjdk:11-jre-hotspot as release
-WORKDIR /app
+ENV APP_HOME=/apps/CultivosUnidos
+WORKDIR ${APP_HOME}/service/app
 
-COPY --from=builder /app/build/libs/*.jar app.jar
+COPY --from=builder ${APP_HOME}/service/app/build/libs/*.jar cultivosunidoservice.jar
 
-EXPOSE 8080
-EXPOSE 5432
+EXPOSE 8080 5432
 
 VOLUME /app/logs
 
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java","-jar","cultivosunidoservice.jar"]
