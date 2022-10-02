@@ -1,0 +1,19 @@
+{
+  "communityId": 1,
+  "communityName": "Tambo Seco",
+  "supervisor": {
+    "supervisorId": 1,
+    "supervisorName": "DAVID",
+    "supervisorFirstLastName": "ALLASI",
+    "supervisorSecondLastName": "BARDALES",
+    "dni": "12345678",
+    "email": "juandiegovd18@gmail.com",
+    "user": {
+      "userId": 1,
+      "username": "12345678",
+      "password": null,
+      "role": "SUPERVISOR",
+      "state": true
+    }
+  }
+}
