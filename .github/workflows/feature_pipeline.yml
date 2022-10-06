@@ -1,8 +1,10 @@
 name: Default Pipeline
 
 on:
-  push
-
+  push:
+    branches:
+      - '**'
+      - '!master'
 jobs:
   test:
     runs-on: ubuntu-latest
