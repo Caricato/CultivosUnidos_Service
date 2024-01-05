@@ -29,7 +29,8 @@ class RegisterUnitMetricServiceTest {
                         .name("Metros").communityId(1L).build();
         when(findAgricultureCommunityPort.findCommunityById(1L)).thenReturn(agricultureCommunity);
         when(getAgricultureCommunityUseCase.findCommunityById(1L)).thenReturn(agricultureCommunity);
-        when(registerUnitMetricPort.registerUnitMetric(unitMetricToRegister, agricultureCommunity)).thenReturn(UnitMetric.builder().unitMetricId(1L).community(agricultureCommunity).name("Metros").state(true).build());
+        when(registerUnitMetricPort.registerUnitMetric(unitMetricToRegister, agricultureCommunity))
+                .thenReturn(UnitMetric.builder().unitMetricId(1L).community(agricultureCommunity).name("Metros").state(true).build());
 
         var unitMetric = registerUnitMetricService.registerUnitMetric(1L, unitMetricToRegister);
         assertThat(unitMetric.getCommunity().getCommunityName()).isEqualTo(agricultureCommunity.getCommunityName());

@@ -2,10 +2,8 @@ package org.sistema.arroz.riceservice.hexagonal.reports;
 
 import javax.swing.table.DefaultTableModel;
 
-import lombok.RequiredArgsConstructor;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
-import org.sistema.arroz.riceservice.hexagonal.PersistenceAdapter;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -3,8 +3,6 @@ package org.sistema.arroz.riceservice.modules.users.adapter.port.out.mail;
 import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.config.CustomConfig;
 import org.sistema.arroz.riceservice.hexagonal.PersistenceAdapter;
-import org.sistema.arroz.riceservice.hexagonal.helpers.MailSenderHelper;
-import org.sistema.arroz.riceservice.hexagonal.helpers.MailType;
 import org.sistema.arroz.riceservice.modules.notifications.application.port.out.SendMailPort;
 import org.sistema.arroz.riceservice.modules.producers.domain.Producer;
 import org.sistema.arroz.riceservice.modules.users.application.port.out.SendMailToResetPort;

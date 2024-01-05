@@ -51,6 +51,6 @@ public class ProductPricePersistenceAdapter implements RegisterProductPricesPort
     @Override
     public void deleteProductPrices(Long productId) {
         var entities = productPriceRepository.findByProduct_ProductId(productId);
-        if (entities.size() != 0) productPriceRepository.deleteAllByProduct_ProductId(productId);
+        if (!entities.isEmpty()) productPriceRepository.deleteAllByProduct_ProductId(productId);
     }
 }

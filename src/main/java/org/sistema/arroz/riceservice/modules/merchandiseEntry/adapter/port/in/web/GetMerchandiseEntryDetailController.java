@@ -3,8 +3,8 @@ package org.sistema.arroz.riceservice.modules.merchandiseEntry.adapter.port.in.w
 import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.hexagonal.WebAdapter;
 import org.sistema.arroz.riceservice.hexagonal.queries.Filters;
-import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.in.*;
-import org.sistema.arroz.riceservice.modules.merchandiseEntry.domain.MerchandiseFlowSubtype;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.MerchandiseEntryFacade;
+import org.sistema.arroz.riceservice.modules.merchandiseEntry.application.port.in.MerchandiseEntryPageDTO;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.data.domain.Pageable;
@@ -14,10 +14,8 @@ import org.springframework.data.domain.Pageable;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/merchandise_entry")
-public class    GetMerchandiseEntryDetailController {
-    private final GetMerchandiseEntryUseCase getMerchandiseEntryUseCase;
-    private final GetMerchandiseEntryDetailUseCase getMerchandiseEntryDetailUseCase;
-    private final GetMerchandiseProductDetailUseCase getMerchandiseProductDetailUseCase;
+public class GetMerchandiseEntryDetailController {
+    private final MerchandiseEntryFacade merchandiseEntryFacade;
 
     @GetMapping(value = "/detail/{merchandiseEntryId}")
     public MerchandiseEntryPageDTO getMerchandiseEntryDetail(Pageable pageable, @PathVariable Long merchandiseEntryId){
@@ -25,20 +23,7 @@ public class    GetMerchandiseEntryDetailController {
                 .page(pageable.getPageNumber())
                 .pageSize(pageable.getPageSize())
                 .build();
-        var merchandise = getMerchandiseEntryUseCase.getMerchandiseEntryById(merchandiseEntryId);
-        if (!merchandise.getSubtype().equals(MerchandiseFlowSubtype.ENTRADA_PRODUCTO)){
-            var details = getMerchandiseEntryDetailUseCase.getMerchandiseEntryDetails(filters, merchandiseEntryId);
-
-            return MerchandiseSupplyPageDTO.builder()
-                    .merchandiseFlow(merchandise)
-                    .detailPage(details).build();
-        }
-        else{
-            var detailsProduct = getMerchandiseProductDetailUseCase.getMerchandiseProductDetails(filters, merchandiseEntryId);
-            return MerchandiseProductPageDTO.builder()
-                    .merchandiseFlow(merchandise)
-                    .detailPage(detailsProduct).build();
-        }
+        return merchandiseEntryFacade.getMerchandiseEntryDetail(filters, merchandiseEntryId);
 
     }
 }

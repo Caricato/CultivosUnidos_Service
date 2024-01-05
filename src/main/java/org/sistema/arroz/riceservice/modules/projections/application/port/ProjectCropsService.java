@@ -3,7 +3,6 @@ package org.sistema.arroz.riceservice.modules.projections.application.port;
 import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.hexagonal.UseCase;
 import org.sistema.arroz.riceservice.modules.products.application.port.in.GetProductUseCase;
-import org.sistema.arroz.riceservice.modules.products.application.port.out.GetProductPort;
 import org.sistema.arroz.riceservice.modules.products.application.port.out.GetProductPricePort;
 import org.sistema.arroz.riceservice.modules.products.domain.MonthEnum;
 import org.sistema.arroz.riceservice.modules.projections.application.port.in.ProductsToProject;

@@ -35,7 +35,7 @@ class EditProductServiceTest {
         when(editProductPort.editProduct(productToEdit,1L)).thenThrow(new ProductNotFoundException(1L));
 
         var exception = assertThrows(ProductNotFoundException.class, () ->{
-            var testResult = editProductService.editProduct(productToEdit, 1L);
+            editProductService.editProduct(productToEdit, 1L);
         });
         assertThat(exception.getCode()).isEqualTo("PROD_01");
         assertThat(exception.getData()).isEqualTo(1L);

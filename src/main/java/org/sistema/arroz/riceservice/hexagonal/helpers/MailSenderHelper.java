@@ -3,7 +3,6 @@ package org.sistema.arroz.riceservice.hexagonal.helpers;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.sistema.arroz.riceservice.config.MailConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -40,7 +39,7 @@ public class MailSenderHelper {
         mailMessage.setFrom("juandiegovd99@gmail.com");
         mailMessage.setTo(emailTo);
         var context = new Context();
-        if (map != null && map.size() > 0){
+        if (map != null && !map.isEmpty()){
             var newMap = new HashMap<String, Object>();
             for (var key: map.keySet()){
                 newMap.put(key, map.get(key));

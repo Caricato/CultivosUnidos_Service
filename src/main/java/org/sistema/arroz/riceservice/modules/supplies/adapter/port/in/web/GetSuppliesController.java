@@ -7,12 +7,10 @@ import org.sistema.arroz.riceservice.hexagonal.queries.Paginator;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.in.GetSuppliesDTO;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.in.GetSuppliesDTOMapper;
 import org.sistema.arroz.riceservice.modules.supplies.application.port.in.GetSuppliesUseCase;
-import org.sistema.arroz.riceservice.modules.supplies.domain.Supply;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.data.domain.Pageable;
 
-import java.util.Collections;
 
 
 @WebAdapter

@@ -24,6 +24,5 @@ public class MailToSendAdapter implements SendMailPort {
                 throw new SendMailException(ex.getMessage());
             }
         }
-        else System.out.println("Mail workaround successful!");
     }
 }

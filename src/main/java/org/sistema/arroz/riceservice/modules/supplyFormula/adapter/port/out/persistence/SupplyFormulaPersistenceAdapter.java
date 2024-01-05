@@ -13,6 +13,7 @@ import org.sistema.arroz.riceservice.modules.supplyFormula.domain.SupplyFormula;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @PersistenceAdapter
@@ -41,7 +42,7 @@ public class SupplyFormulaPersistenceAdapter implements RegisterSuppliesFormulas
     @Override
     public List<Product> validateSupplyDeletion(Long supplyId) {
         var result = springJpaSupplyFormulaRepository.findAllBySupply_SupplyIdAndProductState(supplyId, true);
-        if (result.size() == 0) return null;
+        if (result.isEmpty()) return Collections.emptyList();
         var products = new ArrayList<ProductJpaEntity>();
         for(SupplyFormulaJpaEntity aux: result){
             products.add(aux.getProduct());

@@ -39,7 +39,7 @@ class RegisterProductServiceTest {
         var productToRegister = ProductToRegister.builder().productName("Arroz seco").communityId(1L).build();
 
         AgricultureCommunityNotFoundException exception = assertThrows(AgricultureCommunityNotFoundException.class, () ->{
-            var testResult = registerProductService.registerProduct(productToRegister);
+            registerProductService.registerProduct(productToRegister);
         });
 
         assertThat(exception.getCode()).isEqualTo("AGC_01");

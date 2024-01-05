@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.sistema.arroz.riceservice.hexagonal.sms.SMS;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.MultiValueMap;
 
 @Configuration
 @Getter
