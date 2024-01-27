@@ -17,14 +17,16 @@ public class MerchandiseEntryFacade {
     private final GetMerchandiseProductDetailUseCase getMerchandiseProductDetailUseCase;
 
     public MerchandiseEntryDTO registerMerchandiseEntry(MerchandiseEntryToRegisterDTO merchandiseEntryDTO, Long communityId, MerchandiseEntryToRegister merchandiseEntry){
-        return switch (merchandiseEntryDTO.getSubtype()) {
-            case ENTRADA_INSUMO ->
-                    registerSupplyInUseCase.registerSupplyIn(merchandiseEntry, merchandiseEntryDTO.getDetailsToRegister(), communityId);
-            case SALIDA_INSUMO ->
-                    registerSupplyOutUseCase.registerSupplyOut(merchandiseEntry, merchandiseEntryDTO.getDetailsToRegister(), communityId);
-            case ENTRADA_PRODUCTO ->
-                    registerProductInUseCase.registerProductIn(merchandiseEntry, merchandiseEntryDTO.getDetailsToRegister(), communityId);
-        };
+        switch (merchandiseEntryDTO.getSubtype()) {
+            case ENTRADA_INSUMO:
+                    return registerSupplyInUseCase.registerSupplyIn(merchandiseEntry, merchandiseEntryDTO.getDetailsToRegister(), communityId);
+            case SALIDA_INSUMO:
+                    return registerSupplyOutUseCase.registerSupplyOut(merchandiseEntry, merchandiseEntryDTO.getDetailsToRegister(), communityId);
+            case ENTRADA_PRODUCTO:
+                    return registerProductInUseCase.registerProductIn(merchandiseEntry, merchandiseEntryDTO.getDetailsToRegister(), communityId);
+            default:
+                return null;
+        }
     }
 
     public MerchandiseEntryPageDTO getMerchandiseEntryDetail(Filters filters, Long merchandiseEntryId){
